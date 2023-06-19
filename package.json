@@ -1,0 +1,35 @@
+{
+    "devDependencies": {
+        "@types/express": "^4.17.17",
+        "@types/lodash": "^4.14.195",
+        "@types/node": "^20.3.1",
+        "concurrently": "^8.2.0",
+        "nodemon": "^2.0.22",
+        "tsc-alias": "^1.8.6",
+        "typescript": "^5.1.3"
+    },
+    "name": "trollcallquick",
+    "version": "0.1.0",
+    "main": "dist/index.js",
+    "scripts": {
+        "build": "npx tsc",
+        "start": "node dist/index.js",
+        "dev": "trap \"rm -rf dist/*;fuser -k 3000/tcp\" SIGINT;concurrently \"npx tsc --watch\" \"tsc-alias -w\" \"nodemon -q dist/index.js\"",
+        "devonce": "npx tsc && tsc-alias -p tsconfig.json;trap \"rm -rf dist/*;fuser -k 3000/tcp\" SIGINT;node dist/index.js"
+    },
+    "author": "MeowcaTheoRange",
+    "license": "ISC",
+    "description": "",
+    "dependencies": {
+        "@types/cookie-parser": "^1.4.3",
+        "body-parser": "^1.20.2",
+        "cookie-parser": "^1.4.6",
+        "dotenv": "^16.3.0",
+        "express": "^4.18.2",
+        "lodash": "^4.17.21",
+        "mongodb": "^5.6.0",
+        "nanoid": "^3.3.6",
+        "tsconfig-paths": "^4.2.0",
+        "yup": "^1.2.0"
+    }
+}
