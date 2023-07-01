@@ -37,9 +37,9 @@ export default async function handler(
     } else if (method === "PUT") {
         let validatedTroll: Partial<SubmitTroll>;
         try {
-            validatedTroll = (await PartialUserSchema.validate(
-                body
-            )) as Partial<SubmitTroll>;
+            validatedTroll = (await PartialUserSchema.validate(body, {
+                stripUnknown: true
+            })) as Partial<SubmitTroll>;
         } catch (err) {
             return res.status(400).send(err);
         }
@@ -49,7 +49,7 @@ export default async function handler(
         if (checkUser == null) return res.status(404).end();
         if (!compareCredentials(checkUser, cookies)) {
             const thisUser = await getSingleUser({
-                name: query.user
+                name: cookies.TROLLCALL_NAME
             });
             if (thisUser == null || !compareCredentials(thisUser, cookies))
                 return res.status(403).end();

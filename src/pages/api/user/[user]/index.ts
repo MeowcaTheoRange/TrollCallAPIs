@@ -11,6 +11,7 @@ import {
 import { changeUser, getSingleUser } from "@/lib/trollcall/user";
 import { PartialUserSchema, SubmitUser } from "@/types/client/user";
 import { serialize } from "cookie";
+import { nanoid } from "nanoid";
 import { NextApiRequest, NextApiResponse } from "next";
 
 export default async function handler(
@@ -28,9 +29,9 @@ export default async function handler(
     } else if (method === "PUT") {
         let validatedUser: Partial<SubmitUser>;
         try {
-            validatedUser = (await PartialUserSchema.validate(
-                body
-            )) as Partial<SubmitUser>;
+            validatedUser = (await PartialUserSchema.validate(body, {
+                stripUnknown: true
+            })) as Partial<SubmitUser>;
         } catch (err) {
             return res.status(400).send(err);
         }
@@ -40,7 +41,7 @@ export default async function handler(
         if (checkExistingUser == null) return res.status(404).end();
         if (!compareCredentials(checkExistingUser, cookies)) {
             const thisUser = await getSingleUser({
-                name: query.user
+                name: cookies.TROLLCALL_NAME
             });
             if (thisUser == null || !compareCredentials(thisUser, cookies))
                 return res.status(403).end();
@@ -48,6 +49,8 @@ export default async function handler(
                 return res.status(403).end();
         }
         const serverUser = SubmitUserToServerUser(validatedUser);
+        if (serverUser.code === "")
+            serverUser.code = checkExistingUser.code || nanoid(16);
         const bothUsers = MergeServerUsers(checkExistingUser, serverUser);
         const newUser = await changeUser(bothUsers);
         if (newUser == null) return res.status(503).end();

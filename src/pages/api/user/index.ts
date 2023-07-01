@@ -3,6 +3,7 @@ import { createUser, getSingleUser } from "@/lib/trollcall/user";
 import { SubmitUserSchema } from "@/types/client/user";
 import { ServerUser } from "@/types/user";
 import { serialize } from "cookie";
+import { nanoid } from "nanoid";
 import { NextApiRequest, NextApiResponse } from "next";
 
 export default async function handler(
@@ -13,7 +14,9 @@ export default async function handler(
     if (method === "POST") {
         let validatedUser;
         try {
-            validatedUser = await SubmitUserSchema.validate(body);
+            validatedUser = await SubmitUserSchema.validate(body, {
+                stripUnknown: true
+            });
         } catch (err) {
             return res.status(400).send(err);
         }
@@ -26,6 +29,7 @@ export default async function handler(
             ServerUser,
             "_id"
         >;
+        if (serverUser.code === "") serverUser.code = nanoid(16);
         const newUser = await createUser(serverUser);
         if (newUser == null) return res.status(503).end();
         // Give cookies

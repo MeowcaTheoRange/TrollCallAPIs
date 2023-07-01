@@ -14,7 +14,9 @@ export default async function handler(
     if (method === "POST") {
         let validatedTroll;
         try {
-            validatedTroll = await SubmitTrollSchema.validate(body);
+            validatedTroll = await SubmitTrollSchema.validate(body, {
+                stripUnknown: true
+            });
         } catch (err) {
             return res.status(400).send(err);
         }

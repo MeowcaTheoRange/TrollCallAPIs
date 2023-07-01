@@ -1,7 +1,6 @@
 import { TrueSign } from "@/types/assist/extended_zodiac";
 import { SubmitUser } from "@/types/client/user";
 import { ClientUser, ServerUser } from "@/types/user";
-import { nanoid } from "nanoid";
 import { getManyFlairs } from "../flair";
 import { cutArray, cutObject, removeCode, sanitize } from "../utility/merge";
 import { ServerFlairToClientFlair } from "./flair";
@@ -29,7 +28,7 @@ export function SubmitUserToServerUser(
     let serverUser: Omit<Partial<ServerUser>, "_id"> = {
         ...submitUser,
         flairs: [],
-        code: submitUser.code || nanoid(16),
+        code: submitUser.code || "",
         updatedDate: new Date()
     };
     return serverUser;
