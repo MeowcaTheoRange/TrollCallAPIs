@@ -25,13 +25,17 @@ export function cutObject<T extends { [key: string]: any }>(object: T) {
     return cut as T;
 }
 
-export function sanitize<Type extends WithId<{}>>(serverType: Type): Omit<Type, "_id"> {
+export function sanitize<Type extends WithId<{}>>(
+    serverType: Type
+): Omit<Type, "_id"> {
     const sanitized: Partial<Type> = serverType;
     delete sanitized._id;
     return sanitized as Omit<Type, "_id">;
 }
 
-export function removeCode<Type extends { code: string }>(serverType: Type): Omit<Type, "code"> {
+export function removeCode<Type extends { code: string }>(
+    serverType: Type
+): Omit<Type, "code"> {
     const sanitized: Partial<Type> = serverType;
     delete sanitized.code;
     return sanitized as Omit<Type, "code">;

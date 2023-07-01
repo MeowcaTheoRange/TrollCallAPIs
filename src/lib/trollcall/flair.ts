@@ -1,5 +1,8 @@
 import { ServerFlair } from "@/types/flair";
+import { Sort } from "mongodb";
 import { Filter, cursorToArray, readMany, readOne } from "../db/crud";
+
+const FlairSort: Sort = { updatedDate: -1, _id: -1 };
 
 /**
  * A function that returns one ServerFlairs from the database.
@@ -7,7 +10,9 @@ import { Filter, cursorToArray, readMany, readOne } from "../db/crud";
  * @returns A ServerFlair.
  */
 
-export async function getSingleFlair(query: Filter<ServerFlair>): Promise<ServerFlair | null> {
+export async function getSingleFlair(
+    query: Filter<ServerFlair>
+): Promise<ServerFlair | null> {
     const flair = (await readOne("flairs", query)) as ServerFlair | null;
     return flair;
 }
@@ -23,6 +28,9 @@ export async function getManyFlairs(
     query: Filter<ServerFlair>,
     func?: (input: any) => any
 ): Promise<(ServerFlair | null)[]> {
-    const flair = (await cursorToArray(readMany("flairs", query), func)) as (ServerFlair | null)[];
+    const flair = (await cursorToArray(
+        readMany("flairs", query, FlairSort),
+        func
+    )) as (ServerFlair | null)[];
     return flair;
 }

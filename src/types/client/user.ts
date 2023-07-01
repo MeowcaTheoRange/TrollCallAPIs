@@ -40,7 +40,11 @@ export const PartialUserSchema = yup
                 return v === "" ? null : v;
             })
             .oneOf(TrueSignKeys),
-        color: yup.tuple([yup.number().min(0).max(255), yup.number().min(0).max(255), yup.number().min(0).max(255)]),
+        color: yup.tuple([
+            yup.number().min(0).max(255),
+            yup.number().min(0).max(255),
+            yup.number().min(0).max(255)
+        ]),
         pfp: yup.string().url(),
         code: yup.string().max(256, "Too secure!!")
         // flairs: yup.array().of(ClientFlairSchema).required(),

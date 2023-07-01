@@ -6,9 +6,14 @@ import { getManyFlairs } from "../flair";
 import { cutArray, cutObject, removeCode, sanitize } from "../utility/merge";
 import { ServerFlairToClientFlair } from "./flair";
 
-export async function ServerUserToClientUser(serverUser: ServerUser): Promise<ClientUser> {
+export async function ServerUserToClientUser(
+    serverUser: ServerUser
+): Promise<ClientUser> {
     const sanitizedUser = removeCode(sanitize(serverUser));
-    const flairs = await getManyFlairs({ _id: { $in: serverUser.flairs } }, ServerFlairToClientFlair);
+    const flairs = await getManyFlairs(
+        { _id: { $in: serverUser.flairs } },
+        ServerFlairToClientFlair
+    );
     let clientUser: ClientUser = {
         ...sanitizedUser,
         trueSign: TrueSign[serverUser.trueSign],
@@ -18,7 +23,9 @@ export async function ServerUserToClientUser(serverUser: ServerUser): Promise<Cl
     return clientUser;
 }
 
-export function SubmitUserToServerUser(submitUser: Partial<SubmitUser>): Omit<Partial<ServerUser>, "_id"> {
+export function SubmitUserToServerUser(
+    submitUser: Partial<SubmitUser>
+): Omit<Partial<ServerUser>, "_id"> {
     let serverUser: Omit<Partial<ServerUser>, "_id"> = {
         ...submitUser,
         flairs: [],
@@ -28,7 +35,10 @@ export function SubmitUserToServerUser(submitUser: Partial<SubmitUser>): Omit<Pa
     return serverUser;
 }
 
-export function MergeServerUsers(submitUser: ServerUser, merge: Partial<Omit<ServerUser, "_id">>): ServerUser {
+export function MergeServerUsers(
+    submitUser: ServerUser,
+    merge: Partial<Omit<ServerUser, "_id">>
+): ServerUser {
     let serverUser: ServerUser = {
         ...submitUser,
         ...cutObject(merge),

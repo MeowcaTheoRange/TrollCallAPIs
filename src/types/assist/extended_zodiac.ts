@@ -316,7 +316,9 @@ export const SignColorSchema = yup.object({
     description: yup.string().required(),
     sign: yup.string().required(),
     color: ColorSchema.required(),
-    dates: yup.tuple([yup.string().required(), yup.string().required()]).required()
+    dates: yup
+        .tuple([yup.string().required(), yup.string().required()])
+        .required()
 });
 
 export type SignColorType = {

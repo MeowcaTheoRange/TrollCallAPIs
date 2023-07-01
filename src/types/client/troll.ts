@@ -79,11 +79,26 @@ export const SubmitTrollSchema = yup
         // Personal
         preferences: yup
             .object({
-                love: yup.array().of(yup.string().required().min(5).max(100)).required().min(3).max(10),
-                hate: yup.array().of(yup.string().required().min(5).max(100)).required().min(3).max(10)
+                love: yup
+                    .array()
+                    .of(yup.string().required().min(5).max(100))
+                    .required()
+                    .min(3)
+                    .max(10),
+                hate: yup
+                    .array()
+                    .of(yup.string().required().min(5).max(100))
+                    .required()
+                    .min(3)
+                    .max(10)
             })
             .required(),
-        facts: yup.array().of(yup.string().required().min(5).max(100)).required().min(3).max(10),
+        facts: yup
+            .array()
+            .of(yup.string().required().min(5).max(100))
+            .required()
+            .min(3)
+            .max(10),
 
         // Hiveswap identity
         trueSign: yup.string().required().oneOf(TrueSignKeys),
@@ -100,7 +115,10 @@ export const SubmitTrollSchema = yup
         username: yup
             .string()
             .required()
-            .matches(/^(([a-z])[a-z]+)(([A-Z])[a-z]+)$/, "Username must match Pesterchum formatting."),
+            .matches(
+                /^(([a-z])[a-z]+)(([A-Z])[a-z]+)$/,
+                "Username must match Pesterchum formatting."
+            ),
         textColor: ColorSchema.notRequired(), // default to trueSign color if undefined,
         quirks: SubmitQuirkHolderSchema.required(), // DO NOT HANDLE RIGHT NOW.
         // Handled! :D
@@ -208,7 +226,10 @@ export const PartialTrollSchema = yup
         // Trollian
         username: yup
             .string()
-            .matches(/^(([a-z])[a-z]+)(([A-Z])[a-z]+)$/, "Username must match Pesterchum formatting."),
+            .matches(
+                /^(([a-z])[a-z]+)(([A-Z])[a-z]+)$/,
+                "Username must match Pesterchum formatting."
+            ),
         textColor: yup.tuple([
             yup.number().min(0).max(255),
             yup.number().min(0).max(255),

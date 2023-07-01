@@ -70,7 +70,8 @@ export const QuirkReplacementTypes: {
     },
     case: {
         find: null,
-        replace: 'Change the case of all text. "lower" for lowercase. "upper" for uppercase.'
+        replace:
+            'Change the case of all text. "lower" for lowercase. "upper" for uppercase.'
     },
     case_simple: {
         find: "Text to find what you want to change the case of.",
