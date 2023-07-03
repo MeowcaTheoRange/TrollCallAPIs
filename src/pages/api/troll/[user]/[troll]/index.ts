@@ -46,6 +46,7 @@ export default async function handler(
             name: query.user
         });
         if (checkUser == null) return res.status(404).end();
+        // Make sure to reverse methods so that way other owners can edit this troll
         if (!compareCredentials(checkUser, cookies)) {
             const thisUser = await getSingleUser({
                 name: cookies.TROLLCALL_NAME
