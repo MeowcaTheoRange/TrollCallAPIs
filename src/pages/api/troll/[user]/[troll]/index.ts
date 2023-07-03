@@ -10,8 +10,7 @@ import {
 } from "@/lib/trollcall/perms";
 import { changeTroll, getSingleTroll } from "@/lib/trollcall/troll";
 import { getSingleUser } from "@/lib/trollcall/user";
-import { SubmitTroll } from "@/types/client/troll";
-import { PartialUserSchema } from "@/types/client/user";
+import { PartialTrollSchema, SubmitTroll } from "@/types/client/troll";
 import { Router } from "express";
 import { NextApiRequest, NextApiResponse } from "next";
 
@@ -37,7 +36,7 @@ export default async function handler(
     } else if (method === "PUT") {
         let validatedTroll: Partial<SubmitTroll>;
         try {
-            validatedTroll = (await PartialUserSchema.validate(body, {
+            validatedTroll = (await PartialTrollSchema.validate(body, {
                 stripUnknown: true
             })) as Partial<SubmitTroll>;
         } catch (err) {

@@ -109,6 +109,7 @@ export const SubmitTrollSchema = yup
                 return v === "" ? null : v;
             })
             .oneOf(TrueSignKeys), // "Keelez Bunbat"
+        prioritizeTrueSign: yup.boolean().default(false),
         class: yup.string().required().oneOf(ClassKeys),
 
         // Trollian
@@ -127,10 +128,11 @@ export const SubmitTrollSchema = yup
         species: yup
             .string()
             .notRequired()
-            .matches(/^([A-z-]+)|()$/, "Letters only"), // "Troll-*" if defined. Otherwise, just "Troll".
+            .matches(/^([A-z-]+)|()$/, "Letters only")
+            .max(50), // "Troll-*" if defined. Otherwise, just "Troll".
         height: yup.number().required().positive(), // Inches
         age: yup.number().required().positive(), // Sweeps
-        image: yup.string().required().url(),
+        images: yup.array().of(yup.string().required().url()).required(),
         // Meta stuff
         policies: yup
             .object({
@@ -221,6 +223,7 @@ export const PartialTrollSchema = yup
                 return v === "" ? null : v;
             })
             .oneOf(TrueSignKeys), // "Keelez Bunbat"
+        prioritizeTrueSign: yup.boolean(),
         class: yup.string().oneOf(ClassKeys),
 
         // Trollian
@@ -239,10 +242,13 @@ export const PartialTrollSchema = yup
         // Handled! :D
 
         // Physical stuff
-        species: yup.string().matches(/^([A-z-]+)|()$/, "Letters only"), // "Troll-*" if defined. Otherwise, just "Troll".
+        species: yup
+            .string()
+            .matches(/^([A-z-]+)|()$/, "Letters only")
+            .max(50), // "Troll-*" if defined. Otherwise, just "Troll".
         height: yup.number().positive(), // Inches
         age: yup.number().positive(), // Sweeps
-        image: yup.string().url(),
+        images: yup.array().of(yup.string().url()),
         // Meta stuff
         policies: yup.object({
             fanart: PolicySchema,
