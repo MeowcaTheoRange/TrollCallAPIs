@@ -53,6 +53,7 @@ export default async function handler(
             });
             if (thisUser == null || !compareCredentials(thisUser, cookies))
                 return res.status(403).end();
+            console.log(getLevel(thisUser));
             if (!compareLevels(getLevel(thisUser), "MODERATOR"))
                 return res.status(403).end();
         }
@@ -68,6 +69,3 @@ export default async function handler(
         res.json(newTroll);
     } else return res.status(405).end();
 }
-
-// 1119731948118605995
-// 1089603977131331584

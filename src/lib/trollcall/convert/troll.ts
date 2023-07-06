@@ -36,8 +36,8 @@ export function SubmitTrollToServerTroll(
         quirks: submitTroll.quirks
             ? Object.fromEntries(submitTroll.quirks)
             : undefined,
-        owners: [],
-        flairs: [],
+        owners: undefined,
+        flairs: undefined,
         updatedDate: new Date()
     };
     return serverTroll;

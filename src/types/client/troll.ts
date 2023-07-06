@@ -2,7 +2,7 @@ import { ColorSchema } from "@/types/assist/color";
 import * as yup from "yup";
 import { ClassKeys, TrueSignKeys } from "../assist/extended_zodiac";
 import { PolicySchema } from "../assist/generics";
-import { SubmitQuirkHolderSchema } from "./quirks";
+import { PartialQuirkHolderSchema, SubmitQuirkHolderSchema } from "./quirks";
 
 export const SubmitTrollSchema = yup
     .object({
@@ -122,7 +122,7 @@ export const SubmitTrollSchema = yup
             ),
         textColor: ColorSchema.notRequired(), // default to trueSign color if undefined,
         quirks: SubmitQuirkHolderSchema.required(), // DO NOT HANDLE RIGHT NOW.
-        // Handled! :D
+        quotes: yup.array().of(yup.string().max(1000)).required(),
 
         // Physical stuff
         species: yup
@@ -238,8 +238,8 @@ export const PartialTrollSchema = yup
             yup.number().min(0).max(255),
             yup.number().min(0).max(255)
         ]),
-        quirks: SubmitQuirkHolderSchema, // DO NOT HANDLE RIGHT NOW.
-        // Handled! :D
+        quirks: PartialQuirkHolderSchema, // DO NOT HANDLE RIGHT NOW.
+        quotes: yup.array().of(yup.string().max(1000)),
 
         // Physical stuff
         species: yup

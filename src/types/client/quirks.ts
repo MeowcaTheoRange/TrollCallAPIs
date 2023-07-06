@@ -17,3 +17,9 @@ export const SubmitQuirkHolderSchema = yup
     );
 
 export type SubmitQuirkHolder = yup.InferType<typeof SubmitQuirkHolderSchema>;
+
+export const PartialQuirkHolderSchema = yup
+    .array()
+    .of(yup.tuple([yup.string().lowercase(), QuirkSchema]));
+
+export type PartialQuirkHolder = yup.InferType<typeof PartialQuirkHolderSchema>;
