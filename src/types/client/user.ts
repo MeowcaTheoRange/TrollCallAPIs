@@ -14,8 +14,40 @@ export const SubmitUserSchema = yup
         description: yup.string().max(10000).ensure(),
         url: yup.string().notRequired().url(),
         trueSign: yup.string().required().oneOf(TrueSignKeys),
+        pronouns: yup
+            .array()
+            .of(
+                yup
+                    .tuple([
+                        yup
+                            .string()
+                            .required()
+                            .matches(/^[A-z]+$/, "Letters only")
+                            .min(1)
+                            .max(10)
+                            .lowercase(), // she, he, they
+                        yup
+                            .string()
+                            .required()
+                            .matches(/^[A-z]+$/, "Letters only")
+                            .min(1)
+                            .max(10)
+                            .lowercase(), // her, him, them
+                        yup
+                            .string()
+                            .required()
+                            .matches(/^[A-z]+$/, "Letters only")
+                            .min(1)
+                            .max(10)
+                            .lowercase() // hers, his, theirs
+                    ])
+                    .required()
+            )
+            .required()
+            .min(1),
         color: ColorSchema.required(),
         pfp: yup.string().notRequired().url(),
+        bgimage: yup.string().notRequired().url(),
         code: yup.string().notRequired().max(256, "Too secure!!")
         // flairs: yup.array().of(ClientFlairSchema).required(),
     })
@@ -40,12 +72,38 @@ export const PartialUserSchema = yup
                 return v === "" ? null : v;
             })
             .oneOf(TrueSignKeys),
+        pronouns: yup
+            .array()
+            .of(
+                yup.tuple([
+                    yup
+                        .string()
+                        .matches(/^[A-z]+$/, "Letters only")
+                        .min(1)
+                        .max(10)
+                        .lowercase(), // she, he, they
+                    yup
+                        .string()
+                        .matches(/^[A-z]+$/, "Letters only")
+                        .min(1)
+                        .max(10)
+                        .lowercase(), // her, him, them
+                    yup
+                        .string()
+                        .matches(/^[A-z]+$/, "Letters only")
+                        .min(1)
+                        .max(10)
+                        .lowercase() // hers, his, theirs
+                ])
+            )
+            .min(1),
         color: yup.tuple([
             yup.number().min(0).max(255),
             yup.number().min(0).max(255),
             yup.number().min(0).max(255)
         ]),
         pfp: yup.string().url(),
+        bgimage: yup.string().url(),
         code: yup.string().max(256, "Too secure!!")
         // flairs: yup.array().of(ClientFlairSchema).required(),
     })

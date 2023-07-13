@@ -11,10 +11,7 @@ import {
 import { changeTroll, getSingleTroll } from "@/lib/trollcall/troll";
 import { getSingleUser } from "@/lib/trollcall/user";
 import { PartialTrollSchema, SubmitTroll } from "@/types/client/troll";
-import { Router } from "express";
 import { NextApiRequest, NextApiResponse } from "next";
-
-export const trollRouter = Router();
 
 export default async function handler(
     req: NextApiRequest,
@@ -46,7 +43,6 @@ export default async function handler(
             name: query.user
         });
         if (checkUser == null) return res.status(404).end();
-        // Make sure to reverse methods so that way other owners can edit this troll
         if (!compareCredentials(checkUser, cookies)) {
             const thisUser = await getSingleUser({
                 name: cookies.TROLLCALL_NAME
@@ -59,7 +55,7 @@ export default async function handler(
         }
         const editingTroll = await getSingleTroll({
             "name.0": query.troll,
-            "owners": checkUser._id
+            "owners.0": checkUser._id
         });
         if (editingTroll == null) return res.status(404).end();
         const serverTroll = SubmitTrollToServerTroll(validatedTroll);

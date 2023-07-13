@@ -1,4 +1,5 @@
 import { SubmitUserToServerUser } from "@/lib/trollcall/convert/user";
+import { compareLevels, getLevel } from "@/lib/trollcall/perms";
 import { createUser, getSingleUser } from "@/lib/trollcall/user";
 import { SubmitUserSchema } from "@/types/client/user";
 import { ServerUser } from "@/types/user";
@@ -30,6 +31,8 @@ export default async function handler(
             "_id"
         >;
         if (serverUser.code === "") serverUser.code = nanoid(16);
+        if (!compareLevels(getLevel(serverUser), "SUPPORTER"))
+            serverUser.bgimage = null;
         const newUser = await createUser(serverUser);
         if (newUser == null) return res.status(503).end();
         // Give cookies

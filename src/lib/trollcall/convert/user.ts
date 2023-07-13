@@ -27,7 +27,7 @@ export function SubmitUserToServerUser(
 ): Omit<Partial<ServerUser>, "_id"> {
     let serverUser: Omit<Partial<ServerUser>, "_id"> = {
         ...submitUser,
-        flairs: [],
+        flairs: undefined,
         code: submitUser.code || "",
         updatedDate: new Date()
     };

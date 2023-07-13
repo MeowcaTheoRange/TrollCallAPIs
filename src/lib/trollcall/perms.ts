@@ -1,7 +1,8 @@
 import { Levels, Permissions } from "@/permissions";
 import { ServerUser } from "@/types/user";
+import { ObjectId } from "mongodb";
 
-export function getLevel(user: ServerUser) {
+export function getLevel(user: Partial<ServerUser> & { flairs: ObjectId[] }) {
     let highestLevel = "USER";
     for (let level of Permissions) {
         if (user.flairs.some(oid => level.values.includes(oid.toString())))
