@@ -20,9 +20,9 @@ export const ClientTrollSchema = SubmitTrollSchema.shape({
     owners: yup.array().of(ClientUserSchema.required()).required().min(1),
     flairs: yup.array().of(ClientFlairSchema.required()).required(),
     quirks: ServerQuirkHolderSchema.required(),
-    trueSign: TrueSignSchema.required(),
+    trueSign: TrueSignSchema.notRequired(),
     falseSign: TrueSignSchema.notRequired(),
-    class: ClassSchema.required()
+    class: ClassSchema.notRequired()
 });
 
 export interface ClientTroll extends yup.InferType<typeof ClientTrollSchema> {

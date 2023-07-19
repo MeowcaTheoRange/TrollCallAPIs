@@ -15,7 +15,7 @@ export type ServerUser = WithId<yup.InferType<typeof ServerUserSchema>>;
 
 export const ClientUserSchema = SubmitUserSchema.shape({
     flairs: yup.array().of(ClientFlairSchema.required()).required(),
-    trueSign: TrueSignSchema.required(),
+    trueSign: TrueSignSchema.notRequired(),
     updatedDate: yup.number().notRequired()
 });
 

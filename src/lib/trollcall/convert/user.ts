@@ -15,7 +15,7 @@ export async function ServerUserToClientUser(
     );
     let clientUser: ClientUser = {
         ...sanitizedUser,
-        trueSign: TrueSign[serverUser.trueSign],
+        trueSign: serverUser.trueSign ? TrueSign[serverUser.trueSign] : null,
         flairs: cutArray(flairs),
         updatedDate: serverUser.updatedDate?.getTime()
     };

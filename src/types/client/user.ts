@@ -1,6 +1,6 @@
 import * as yup from "yup";
-import { ColorSchema } from "../assist/color";
 import { TrueSignKeys } from "../assist/extended_zodiac";
+import { PolicySchema } from "../assist/generics";
 
 export const SubmitUserSchema = yup
     .object({
@@ -13,7 +13,7 @@ export const SubmitUserSchema = yup
             .lowercase(),
         description: yup.string().max(10000).ensure(),
         url: yup.string().notRequired().url(),
-        trueSign: yup.string().required().oneOf(TrueSignKeys),
+        trueSign: yup.string().notRequired().oneOf(TrueSignKeys),
         pronouns: yup
             .array()
             .of(
@@ -45,9 +45,25 @@ export const SubmitUserSchema = yup
             )
             .required()
             .min(1),
-        color: ColorSchema.required(),
+        color: yup
+            .tuple([
+                yup.number().min(0).max(255),
+                yup.number().min(0).max(255),
+                yup.number().min(0).max(255)
+            ])
+            .notRequired(),
+        policies: yup
+            .object({
+                fanart: PolicySchema.required(),
+                fanartOthers: PolicySchema.required(),
+                kinning: PolicySchema.required(),
+                shipping: PolicySchema.required(),
+                fanfiction: PolicySchema.required()
+            })
+            .required(),
         pfp: yup.string().notRequired().url(),
         bgimage: yup.string().notRequired().url(),
+        css: yup.string().notRequired(),
         code: yup.string().notRequired().max(256, "Too secure!!")
         // flairs: yup.array().of(ClientFlairSchema).required(),
     })
@@ -102,8 +118,16 @@ export const PartialUserSchema = yup
             yup.number().min(0).max(255),
             yup.number().min(0).max(255)
         ]),
+        policies: yup.object({
+            fanart: PolicySchema,
+            fanartOthers: PolicySchema,
+            kinning: PolicySchema,
+            shipping: PolicySchema,
+            fanfiction: PolicySchema
+        }),
         pfp: yup.string().url(),
         bgimage: yup.string().url(),
+        css: yup.string(),
         code: yup.string().max(256, "Too secure!!")
         // flairs: yup.array().of(ClientFlairSchema).required(),
     })

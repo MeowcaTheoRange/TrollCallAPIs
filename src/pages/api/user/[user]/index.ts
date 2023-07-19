@@ -53,8 +53,10 @@ export default async function handler(
         const serverUser = SubmitUserToServerUser(validatedUser);
         if (serverUser.code === "")
             serverUser.code = checkExistingUser.code || nanoid(16);
-        if (!compareLevels(getLevel(checkExistingUser), "SUPPORTER"))
+        if (!compareLevels(getLevel(checkExistingUser), "SUPPORTER")) {
             serverUser.bgimage = null;
+            serverUser.css = null;
+        }
         const bothUsers = MergeServerUsers(checkExistingUser, serverUser);
         const newUser = await changeUser(bothUsers);
         if (newUser == null) return res.status(503).end();

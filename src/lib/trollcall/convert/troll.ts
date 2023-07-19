@@ -20,7 +20,7 @@ export async function ServerTrollToClientTroll(
             serverTroll.falseSign != null
                 ? TrueSign[serverTroll.falseSign]
                 : null,
-        class: Class[serverTroll.class],
+        class: serverTroll.class ? Class[serverTroll.class] : null,
         owners: [],
         flairs: cutArray(flairs)
     };

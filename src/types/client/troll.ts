@@ -1,4 +1,3 @@
-import { ColorSchema } from "@/types/assist/color";
 import * as yup from "yup";
 import { ClassKeys, TrueSignKeys } from "../assist/extended_zodiac";
 import { PolicySchema } from "../assist/generics";
@@ -13,13 +12,15 @@ export const SubmitTrollSchema = yup
                     .string()
                     .required()
                     .matches(/^[A-z]+$/, "Letters only")
-                    .length(6)
+                    .min(1)
+                    .max(24)
                     .lowercase(),
                 yup
                     .string()
                     .required()
                     .matches(/^[A-z]+$/, "Letters only")
-                    .length(6)
+                    .min(1)
+                    .max(24)
                     .lowercase()
             ])
             .required(),
@@ -77,28 +78,17 @@ export const SubmitTrollSchema = yup
             .max(30),
 
         // Personal
-        preferences: yup
-            .object({
-                love: yup
-                    .array()
-                    .of(yup.string().required().min(5).max(100))
-                    .required()
-                    .min(3)
-                    .max(10),
-                hate: yup
-                    .array()
-                    .of(yup.string().required().min(5).max(100))
-                    .required()
-                    .min(3)
-                    .max(10)
-            })
-            .required(),
-        facts: yup
-            .array()
-            .of(yup.string().required().min(5).max(100))
-            .required()
-            .min(3)
-            .max(10),
+        preferences: yup.object({
+            love: yup
+                .array()
+                .of(yup.string().required().min(5).max(500))
+                .max(10),
+            hate: yup
+                .array()
+                .of(yup.string().required().min(5).max(500))
+                .max(10)
+        }),
+        facts: yup.array().of(yup.string().required().min(5).max(500)).max(10),
 
         // Hiveswap identity
         trueSign: yup.string().required().oneOf(TrueSignKeys),
@@ -108,21 +98,27 @@ export const SubmitTrollSchema = yup
             .transform(v => {
                 return v === "" ? null : v;
             })
-            .oneOf(TrueSignKeys), // "Keelez Bunbat"
-        prioritizeTrueSign: yup.boolean().default(false),
-        class: yup.string().required().oneOf(ClassKeys),
+            .oneOf(TrueSignKeys),
+        class: yup.string().oneOf(ClassKeys),
 
         // Trollian
-        username: yup
-            .string()
-            .required()
-            .matches(
-                /^(([a-z])[a-z]+)(([A-Z])[a-z]+)$/,
-                "Username must match Pesterchum formatting."
-            ),
-        textColor: ColorSchema.notRequired(), // default to trueSign color if undefined,
+        username: yup.string().max(100),
+        textColor: yup
+            .tuple([
+                yup.number().min(0).max(255),
+                yup.number().min(0).max(255),
+                yup.number().min(0).max(255)
+            ])
+            .notRequired(), // default to trueSign color if undefined,
+        pageColor: yup
+            .tuple([
+                yup.number().min(0).max(255),
+                yup.number().min(0).max(255),
+                yup.number().min(0).max(255)
+            ])
+            .notRequired(), // colors the page.
         quirks: SubmitQuirkHolderSchema.required(), // DO NOT HANDLE RIGHT NOW.
-        quotes: yup.array().of(yup.string().max(1000)).required(),
+        quotes: yup.array().of(yup.string().max(1000)).max(20),
 
         // Physical stuff
         species: yup
@@ -134,15 +130,13 @@ export const SubmitTrollSchema = yup
         age: yup.number().required().positive(), // Sweeps
         images: yup.array().of(yup.string().required().url()).required(),
         // Meta stuff
-        policies: yup
-            .object({
-                fanart: PolicySchema.required(),
-                fanartOthers: PolicySchema.required(),
-                kinning: PolicySchema.required(),
-                shipping: PolicySchema.required(),
-                fanfiction: PolicySchema.required()
-            })
-            .required()
+        policies: yup.object({
+            fanart: PolicySchema.required(),
+            fanartOthers: PolicySchema.required(),
+            kinning: PolicySchema.required(),
+            shipping: PolicySchema.required(),
+            fanfiction: PolicySchema.required()
+        })
         // owners: yup.array().of(yup.string().required()).required().min(1),
         // flairs: yup.array().of(yup.mixed()).required().ensure(),
     })
@@ -157,12 +151,14 @@ export const PartialTrollSchema = yup
             yup
                 .string()
                 .matches(/^[A-z]+$/, "Letters only")
-                .length(6)
+                .min(1)
+                .max(24)
                 .lowercase(),
             yup
                 .string()
                 .matches(/^[A-z]+$/, "Letters only")
-                .length(6)
+                .min(1)
+                .max(24)
                 .lowercase()
         ]),
         description: yup.string().max(10000),
@@ -209,10 +205,10 @@ export const PartialTrollSchema = yup
 
         // Personal
         preferences: yup.object({
-            love: yup.array().of(yup.string().min(5).max(100)).min(3).max(10),
-            hate: yup.array().of(yup.string().min(5).max(100)).min(3).max(10)
+            love: yup.array().of(yup.string().min(5).max(500)).max(10),
+            hate: yup.array().of(yup.string().min(5).max(500)).max(10)
         }),
-        facts: yup.array().of(yup.string().min(5).max(100)).min(3).max(10),
+        facts: yup.array().of(yup.string().min(5).max(500)).max(10),
 
         // Hiveswap identity
         trueSign: yup.string().oneOf(TrueSignKeys),
@@ -223,17 +219,16 @@ export const PartialTrollSchema = yup
                 return v === "" ? null : v;
             })
             .oneOf(TrueSignKeys), // "Keelez Bunbat"
-        prioritizeTrueSign: yup.boolean(),
         class: yup.string().oneOf(ClassKeys),
 
         // Trollian
-        username: yup
-            .string()
-            .matches(
-                /^(([a-z])[a-z]+)(([A-Z])[a-z]+)$/,
-                "Username must match Pesterchum formatting."
-            ),
+        username: yup.string().max(100),
         textColor: yup.tuple([
+            yup.number().min(0).max(255),
+            yup.number().min(0).max(255),
+            yup.number().min(0).max(255)
+        ]),
+        pageColor: yup.tuple([
             yup.number().min(0).max(255),
             yup.number().min(0).max(255),
             yup.number().min(0).max(255)
