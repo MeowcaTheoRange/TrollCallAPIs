@@ -1,5 +1,5 @@
-import { ServerUserToClientUser } from "@/lib/trollcall/convert/user";
-import { getManyPagedUsers } from "@/lib/trollcall/user";
+import { getManyPagedClans } from "@/lib/trollcall/clan";
+import { ServerClanToClientClan } from "@/lib/trollcall/convert/clan";
 import { NextApiRequest, NextApiResponse } from "next";
 
 export default async function handler(
@@ -9,13 +9,13 @@ export default async function handler(
     const { method, query } = req;
     const page = query.page ? query.page[0] : 0;
     if (method === "GET") {
-        const users = await getManyPagedUsers(
+        const clans = await getManyPagedClans(
             {},
-            ServerUserToClientUser,
+            ServerClanToClientClan,
             5,
             page
         );
-        if (users == null) return res.status(404).end();
-        res.json(users);
+        if (clans == null) return res.status(404).end();
+        res.json(clans);
     } else return res.status(405).end();
 }

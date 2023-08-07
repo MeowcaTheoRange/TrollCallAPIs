@@ -1,6 +1,6 @@
+import { getSingleClan } from "@/lib/trollcall/clan";
 import { ServerTrollToClientTroll } from "@/lib/trollcall/convert/troll";
 import { getManyPagedTrolls } from "@/lib/trollcall/troll";
-import { getSingleUser } from "@/lib/trollcall/user";
 import { NextApiRequest, NextApiResponse } from "next";
 
 export default async function handler(
@@ -10,13 +10,13 @@ export default async function handler(
     const { method, query } = req;
     const page = query.page ? query.page[0] : 0;
     if (method === "GET") {
-        const user = await getSingleUser({
-            name: query.user
+        const clan = await getSingleClan({
+            name: query.clan
         });
-        if (user == null) return res.status(404).end();
+        if (clan == null) return res.status(404).end();
         const trolls = await getManyPagedTrolls(
             {
-                "owners.0": user._id
+                "owner": clan._id
             },
             ServerTrollToClientTroll,
             5,

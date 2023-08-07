@@ -58,8 +58,8 @@ export async function getManyPagedTrolls<T>(
     const find = readMany("trolls", query, TrollSort)
         .limit(count)
         .skip(page * count);
-    const user = (await cursorToArray(find, func)) as (Awaited<T> | null)[];
-    return user;
+    const clan = (await cursorToArray(find, func)) as (Awaited<T> | null)[];
+    return clan;
 }
 
 /**

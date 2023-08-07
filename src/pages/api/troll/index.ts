@@ -1,7 +1,7 @@
+import { getSingleClan } from "@/lib/trollcall/clan";
 import { SubmitTrollToServerTroll } from "@/lib/trollcall/convert/troll";
 import { compareCredentials } from "@/lib/trollcall/perms";
 import { createTroll, getSingleTroll } from "@/lib/trollcall/troll";
-import { getSingleUser } from "@/lib/trollcall/user";
 import { SubmitTrollSchema } from "@/types/client/troll";
 import { ServerTroll } from "@/types/troll";
 import { NextApiRequest, NextApiResponse } from "next";
@@ -20,15 +20,15 @@ export default async function handler(
         } catch (err) {
             return res.status(400).send(err);
         }
-        const checkUser = await getSingleUser({
+        const checkClan = await getSingleClan({
             name: cookies.TROLLCALL_NAME
         });
-        if (checkUser == null) return res.status(404).end();
-        if (!compareCredentials(checkUser, cookies))
+        if (checkClan == null) return res.status(404).end();
+        if (!compareCredentials(checkClan, cookies))
             return res.status(403).end();
         const checkExistingTroll = await getSingleTroll({
             "name.0": validatedTroll.name[0],
-            "owners": checkUser._id
+            "owner": checkClan._id
         });
         if (checkExistingTroll != null) return res.status(409).end();
         // we are sure this object is full, so cast partial
@@ -36,7 +36,7 @@ export default async function handler(
             ServerTroll,
             "_id"
         >;
-        serverTroll.owners[0] = checkUser._id;
+        serverTroll.owner = checkClan._id;
         const newTroll = await createTroll(serverTroll);
         if (newTroll == null) return res.status(503).end();
         res.json(newTroll);

@@ -1,11 +1,13 @@
 import { Levels, Permissions } from "@/permissions";
-import { ServerUser } from "@/types/user";
+import { ServerClan } from "@/types/clan";
+import CryptoJS from "crypto-js";
+import AES from "crypto-js/aes";
 import { ObjectId } from "mongodb";
 
-export function getLevel(user: Partial<ServerUser> & { flairs: ObjectId[] }) {
-    let highestLevel = "USER";
+export function getLevel(clan: Partial<ServerClan> & { flairs: ObjectId[] }) {
+    let highestLevel = "CLAN";
     for (let level of Permissions) {
-        if (user.flairs.some(oid => level.values.includes(oid.toString())))
+        if (clan.flairs.some(oid => level.values.includes(oid.toString())))
             highestLevel = level.name;
     }
     return highestLevel;
@@ -16,13 +18,17 @@ export function compareLevels(level: string, compareLevel: string) {
 }
 
 export function compareCredentials(
-    user: ServerUser,
+    clan: ServerClan,
     cookies: Partial<{
         [key: string]: string;
     }>
 ) {
+    const decryptCode = AES.decrypt(
+        clan.code,
+        process.env.ENCRYPT_CODE ?? "HACKTHIS"
+    ).toString(CryptoJS.enc.Utf8);
     return (
-        user.code === cookies.TROLLCALL_CODE &&
-        user.name === cookies.TROLLCALL_NAME
+        decryptCode === cookies.TROLLCALL_CODE &&
+        clan.name === cookies.TROLLCALL_NAME
     );
 }

@@ -1,19 +1,14 @@
 import { Class, TrueSign } from "@/types/assist/extended_zodiac";
 import { SubmitTroll } from "@/types/client/troll";
 import { ClientTroll, ServerTroll } from "@/types/troll";
-import { getManyFlairs } from "../flair";
-import { cutArray, cutObject, sanitize } from "../utility/merge";
-import { ServerFlairToClientFlair } from "./flair";
+import { cutObject, sanitize } from "../utility/merge";
 
 export async function ServerTrollToClientTroll(
     serverTroll: ServerTroll
-): Promise<ClientTroll> {
+): Promise<Partial<ClientTroll>> {
     const sanitizedTroll = sanitize(serverTroll);
-    const flairs = await getManyFlairs(
-        { _id: { $in: serverTroll.flairs } },
-        ServerFlairToClientFlair
-    );
-    let clientTroll: ClientTroll = {
+
+    let clientTroll: Partial<ClientTroll> = {
         ...sanitizedTroll,
         trueSign: TrueSign[serverTroll.trueSign],
         falseSign:
@@ -21,8 +16,8 @@ export async function ServerTrollToClientTroll(
                 ? TrueSign[serverTroll.falseSign]
                 : null,
         class: serverTroll.class ? Class[serverTroll.class] : null,
-        owners: [],
-        flairs: cutArray(flairs)
+        owner: undefined,
+        flairs: undefined
     };
 
     return clientTroll;
@@ -36,7 +31,7 @@ export function SubmitTrollToServerTroll(
         quirks: submitTroll.quirks
             ? Object.fromEntries(submitTroll.quirks)
             : undefined,
-        owners: undefined,
+        owner: undefined,
         flairs: undefined,
         updatedDate: new Date()
     };

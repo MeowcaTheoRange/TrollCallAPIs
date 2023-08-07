@@ -31,12 +31,14 @@ export const SubmitTrollSchema = yup
                     .string()
                     .required()
                     .matches(/^[A-z-]+$/, "Letters only")
-                    .lowercase(),
+                    .lowercase()
+                    .max(50),
                 yup
                     .string()
                     .required()
                     .matches(/^[A-z-]+$/, "Letters only")
                     .lowercase()
+                    .max(50)
             ])
             .required(),
         pronouns: yup
@@ -137,8 +139,6 @@ export const SubmitTrollSchema = yup
             shipping: PolicySchema.required(),
             fanfiction: PolicySchema.required()
         })
-        // owners: yup.array().of(yup.string().required()).required().min(1),
-        // flairs: yup.array().of(yup.mixed()).required().ensure(),
     })
     .required();
 
