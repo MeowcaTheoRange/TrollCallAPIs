@@ -15,6 +15,7 @@ export default async function handler(
             5,
             page
         );
+        console.log(trolls);
         if (trolls == null) return res.status(404).end();
         res.json(trolls);
     } else return res.status(405).end();

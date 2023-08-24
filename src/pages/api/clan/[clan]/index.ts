@@ -21,6 +21,8 @@ export default async function handler(
 ) {
     const { body, cookies, query, method } = req;
     if (method === "GET") {
+        const clan = await ClanGET(query);
+        if (clan == null) return res.status(404).end();
         res.json(await ClanGET(query));
     } else if (method === "PUT") {
         let validatedClan: Partial<SubmitClan>;
