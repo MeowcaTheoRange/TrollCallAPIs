@@ -10,6 +10,7 @@ export const SubmitClanSchema = yup
             .min(3)
             .max(50)
             .lowercase(),
+        displayName: yup.string().notRequired().min(3).max(100),
         members: yup
             .array()
             .of(
@@ -84,6 +85,7 @@ export const PartialClanSchema = yup
             .min(3)
             .max(50)
             .lowercase(),
+        displayName: yup.string().min(3).max(100),
         members: yup
             .array()
             .of(
