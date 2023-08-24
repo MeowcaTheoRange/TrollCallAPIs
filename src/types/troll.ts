@@ -11,7 +11,7 @@ export const ServerTrollSchema = SubmitTrollSchema.shape({
     owner: ObjectIdSchema.required(),
     flairs: yup.array().of(ObjectIdSchema.required()).required(),
     quirks: ServerQuirkHolderSchema.required(),
-    updatedDate: yup.date().notRequired()
+    updatedDate: yup.date()
 });
 
 export type ServerTroll = WithId<yup.InferType<typeof ServerTrollSchema>>;
@@ -22,7 +22,8 @@ export const ClientTrollSchema = SubmitTrollSchema.shape({
     quirks: ServerQuirkHolderSchema.required(),
     trueSign: TrueSignSchema.notRequired(),
     falseSign: TrueSignSchema.notRequired(),
-    class: ClassSchema.notRequired()
+    class: ClassSchema.notRequired(),
+    updatedDate: yup.number().notRequired()
 });
 
 export interface ClientTroll extends yup.InferType<typeof ClientTrollSchema> {

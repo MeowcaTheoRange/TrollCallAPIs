@@ -17,7 +17,8 @@ export async function ServerTrollToClientTroll(
                 : null,
         class: serverTroll.class ? Class[serverTroll.class] : null,
         owner: undefined,
-        flairs: undefined
+        flairs: undefined,
+        updatedDate: serverTroll.updatedDate?.getTime()
     };
 
     return clientTroll;
