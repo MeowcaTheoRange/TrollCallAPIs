@@ -53,9 +53,9 @@ export const SubmitClanSchema = yup
         url: yup.string().notRequired().url(),
         color: yup
             .tuple([
-                yup.number().min(0).max(255),
-                yup.number().min(0).max(255),
-                yup.number().min(0).max(255)
+                yup.number().min(0).max(255).required(),
+                yup.number().min(0).max(255).required(),
+                yup.number().min(0).max(255).required()
             ])
             .notRequired(),
         policies: yup
