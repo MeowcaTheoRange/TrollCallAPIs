@@ -94,23 +94,25 @@ export const PartialClanSchema = yup
                     pronouns: yup
                         .array()
                         .of(
-                            yup.tuple([
-                                yup
-                                    .string()
-                                    .matches(/^[A-z]+$/, "Letters only")
-                                    .max(10)
-                                    .lowercase(), // she, he, they
-                                yup
-                                    .string()
-                                    .matches(/^[A-z]+$/, "Letters only")
-                                    .max(10)
-                                    .lowercase(), // her, him, them
-                                yup
-                                    .string()
-                                    .matches(/^[A-z]+$/, "Letters only")
-                                    .max(10)
-                                    .lowercase() // hers, his, theirs
-                            ])
+                            yup
+                                .tuple([
+                                    yup
+                                        .string()
+                                        .matches(/^[A-z]+$/, "Letters only")
+                                        .max(10)
+                                        .lowercase(), // she, he, they
+                                    yup
+                                        .string()
+                                        .matches(/^[A-z]+$/, "Letters only")
+                                        .max(10)
+                                        .lowercase(), // her, him, them
+                                    yup
+                                        .string()
+                                        .matches(/^[A-z]+$/, "Letters only")
+                                        .max(10)
+                                        .lowercase() // hers, his, theirs
+                                ])
+                                .required()
                         )
                         .min(1)
                 })
