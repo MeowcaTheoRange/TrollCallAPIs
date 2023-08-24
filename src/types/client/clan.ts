@@ -20,26 +20,28 @@ export const SubmitClanSchema = yup
                         pronouns: yup
                             .array()
                             .of(
-                                yup.tuple([
-                                    yup
-                                        .string()
-                                        .required()
-                                        .matches(/^[A-z]+$/, "Letters only")
-                                        .max(10)
-                                        .lowercase(), // she, he, they
-                                    yup
-                                        .string()
-                                        .required()
-                                        .matches(/^[A-z]+$/, "Letters only")
-                                        .max(10)
-                                        .lowercase(), // her, him, them
-                                    yup
-                                        .string()
-                                        .required()
-                                        .matches(/^[A-z]+$/, "Letters only")
-                                        .max(10)
-                                        .lowercase() // hers, his, theirs
-                                ])
+                                yup
+                                    .tuple([
+                                        yup
+                                            .string()
+                                            .required()
+                                            .matches(/^[A-z]+$/, "Letters only")
+                                            .max(10)
+                                            .lowercase(), // she, he, they
+                                        yup
+                                            .string()
+                                            .required()
+                                            .matches(/^[A-z]+$/, "Letters only")
+                                            .max(10)
+                                            .lowercase(), // her, him, them
+                                        yup
+                                            .string()
+                                            .required()
+                                            .matches(/^[A-z]+$/, "Letters only")
+                                            .max(10)
+                                            .lowercase() // hers, his, theirs
+                                    ])
+                                    .required()
                             )
                             .required()
                             .min(1)
@@ -94,25 +96,23 @@ export const PartialClanSchema = yup
                     pronouns: yup
                         .array()
                         .of(
-                            yup
-                                .tuple([
-                                    yup
-                                        .string()
-                                        .matches(/^[A-z]+$/, "Letters only")
-                                        .max(10)
-                                        .lowercase(), // she, he, they
-                                    yup
-                                        .string()
-                                        .matches(/^[A-z]+$/, "Letters only")
-                                        .max(10)
-                                        .lowercase(), // her, him, them
-                                    yup
-                                        .string()
-                                        .matches(/^[A-z]+$/, "Letters only")
-                                        .max(10)
-                                        .lowercase() // hers, his, theirs
-                                ])
-                                .required()
+                            yup.tuple([
+                                yup
+                                    .string()
+                                    .matches(/^[A-z]+$/, "Letters only")
+                                    .max(10)
+                                    .lowercase(), // she, he, they
+                                yup
+                                    .string()
+                                    .matches(/^[A-z]+$/, "Letters only")
+                                    .max(10)
+                                    .lowercase(), // her, him, them
+                                yup
+                                    .string()
+                                    .matches(/^[A-z]+$/, "Letters only")
+                                    .max(10)
+                                    .lowercase() // hers, his, theirs
+                            ])
                         )
                         .min(1)
                 })
