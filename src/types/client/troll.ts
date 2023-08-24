@@ -107,16 +107,16 @@ export const SubmitTrollSchema = yup
         username: yup.string().max(100),
         textColor: yup
             .tuple([
-                yup.number().min(0).max(255),
-                yup.number().min(0).max(255),
-                yup.number().min(0).max(255)
+                yup.number().min(0).max(255).required(),
+                yup.number().min(0).max(255).required(),
+                yup.number().min(0).max(255).required()
             ])
             .notRequired(), // default to trueSign color if undefined,
         pageColor: yup
             .tuple([
-                yup.number().min(0).max(255),
-                yup.number().min(0).max(255),
-                yup.number().min(0).max(255)
+                yup.number().min(0).max(255).required(),
+                yup.number().min(0).max(255).required(),
+                yup.number().min(0).max(255).required()
             ])
             .notRequired(), // colors the page.
         quirks: SubmitQuirkHolderSchema.required(), // DO NOT HANDLE RIGHT NOW.
