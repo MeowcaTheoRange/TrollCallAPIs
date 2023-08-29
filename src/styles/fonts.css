@@ -1,0 +1,50 @@
+@font-face {
+    font-family: "TrollCall Display";
+    src: url("../../public/fonts/TrollCallDisplay/TrollCallDisplay.woff")
+            format("woff"),
+        url("../../public/fonts/TrollCallDisplay/TrollCallDisplay.woff2")
+            format("woff2"),
+        url("../../public/fonts/TrollCallDisplay/TrollCallDisplay.otf")
+            format("opentype");
+}
+
+/* ANY usage of the Renogare font should also specify a fallback! Try the Poppins font found below. */
+@font-face {
+    font-family: "Renogare";
+    src: url("../../public/fonts/Renogare/Renogare.woff") format("woff"),
+        url("../../public/fonts/Renogare/Renogare.woff2") format("woff2"),
+        url("../../public/fonts/Renogare/Renogare.otf") format("opentype");
+}
+
+@font-face {
+    font-family: "Poppins";
+    src: url("../../public/fonts/Poppins/Poppins.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: "Flow Circular";
+    src: url("../../public/fonts/FlowCircular/FlowCircular.ttf")
+        format("truetype");
+}
+
+@font-face {
+    font-family: "Material Symbols Outlined";
+    font-style: normal;
+    src: url("../../public/fonts/MaterialSymbolsOutlined/MaterialSymbolsOutlined.woff2")
+            format("woff2"),
+        url("../../public/fonts/MaterialSymbolsOutlined/MaterialSymbolsOutlined.ttf")
+            format("truetype");
+}
+
+@font-face {
+    font-family: "Space Grotesk";
+    font-style: normal;
+    src: url("../../public/fonts/SpaceGrotesk/SpaceGrotesk.ttf")
+        format("truetype");
+}
+
+@font-face {
+    font-family: "Space Mono";
+    font-style: normal;
+    src: url("../../public/fonts/SpaceMono/SpaceMono.ttf") format("truetype");
+}

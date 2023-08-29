@@ -1,0 +1,107 @@
+---
+openapi: 3.1.0
+tags:
+    - name: clan
+      description: "Clan operations"
+    - name: character
+      description: "Character operations"
+    - name: view
+      description: "Passive operations"
+    - name: create
+      description: "Constructive operations"
+    - name: edit
+      description: "Additive operations"
+    - name: delete
+      description: "Destructive operations"
+    - name: bulk
+      description: "Bulk operations"
+info:
+    title: TrollCall API
+    version: 2.0.0
+    contact:
+        name: MeowcaTheoRange
+        url: https://me.trollcall.xyz/
+    description: Blah blah blah.
+servers:
+    - url: https://trollcall.xyz/api
+      description: API server
+paths:
+    "/clan":
+        post:
+            tags:
+                - clan
+                - create
+            description: Create a Clan.
+            operationId: createClan
+            responses:
+                "200":
+                    description: Clan created successfully
+                "400":
+                    description: ValidationError
+                "409":
+                    description: Clan with name already exists
+                "503":
+                    description: Database unavaliable
+    "/clan/...":
+        get:
+            tags:
+                - clan
+                - view
+                - bulk
+            description: View all Clans.
+            operationId: getManyClans
+            responses:
+                "200":
+                    description: Array of Clans
+                "404":
+                    description: Clans/page specified does not exist
+    "/clan/.../{page}":
+        parameters:
+            - name: page
+              in: path
+              required: true
+              description: Page offset
+              schema:
+                  type: number
+        get:
+            tags:
+                - clan
+                - view
+                - bulk
+            description: View all Clans at page offset.
+            operationId: getManyClansWithPage
+            responses:
+                "200":
+                    description: Array of Clans
+                "404":
+                    description: Clans/page specified does not exist
+    "/clan/{clan}":
+        parameters:
+            - name: clan
+              in: path
+              description: Name of clan to view
+              required: true
+              schema:
+                  type: string
+        get:
+            tags:
+                - clan
+                - view
+            description: View specified Clan.
+            operationId: getClan
+            responses:
+                "200":
+                    description: Clan
+                "404":
+                    description: Clan specified does not exist
+        put:
+            tags:
+                - clan
+                - edit
+            description: Edit specified Clan.
+            operationId: editClan
+            responses:
+                "200":
+                    description: Clan
+                "404":
+                    description: Clan specified does not exist

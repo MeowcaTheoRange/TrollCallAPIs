@@ -1,0 +1,74 @@
+.TrollCard {
+    min-width: 600px;
+    width: 100%;
+}
+
+.TrollCard.Skeleton {
+    opacity: 0.25;
+    user-select: none;
+}
+
+.TrollCard .top {
+    display: grid;
+    grid-template-columns: max-content auto;
+    gap: 8px;
+}
+
+.TrollCard .top .gridItem {
+    width: auto;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.TrollCard .top .primary {
+    align-items: center;
+    justify-content: center;
+}
+
+.TrollCard .top .secondary {
+    gap: 4px;
+    padding: 4px;
+}
+
+.TrollCard .top .topImage {
+    width: 150px;
+    height: 200px;
+    object-fit: contain;
+}
+
+.TrollCard .bottom {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.TrollCard .stack {
+    --offset-value: 32px;
+    position: relative;
+    padding-bottom: var(--offset-value);
+    padding-right: var(--offset-value);
+    width: max-content;
+}
+
+.TrollCard .stack.noFalseSign {
+    padding: 0;
+}
+
+.TrollCard .stack > div:nth-child(1) {
+    position: relative;
+    z-index: 2;
+    /* width: max-content; */
+}
+
+.TrollCard .stack > div:nth-child(2) {
+    position: absolute;
+    /* width: max-content; */
+    top: var(--offset-value);
+    left: var(--offset-value);
+    z-index: 1;
+}
+
+.TrollCard .stack > div:nth-child(2):hover {
+    z-index: 3;
+}

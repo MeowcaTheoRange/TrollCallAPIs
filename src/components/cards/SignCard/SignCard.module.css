@@ -1,0 +1,33 @@
+.SignCard {
+    display: grid !important;
+    grid-template-columns: auto auto;
+    gap: 8px !important;
+    /* padding: 2px !important; */
+}
+
+.SignCard.Skeleton {
+    user-select: none;
+}
+
+.SignCard .gridItem {
+    width: auto;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    gap: 4px;
+}
+
+.SignCard .secondary {
+    padding: 4px;
+}
+.SignCard .topImage {
+    height: 52px;
+    width: auto;
+    filter: drop-shadow(1px 1px 0 currentcolor)
+        drop-shadow(-1px -1px 0 currentcolor)
+        drop-shadow(1px -1px 0 currentcolor)
+        drop-shadow(-1px 1px 0 currentcolor);
+}

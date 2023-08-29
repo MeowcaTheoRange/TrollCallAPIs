@@ -35,3 +35,8 @@ src/permissions.ts
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Renogare font, until further licensing agreement
+public/fonts/Renogare/Renogare*
+# Celeste assets (ripped)
+public/assets/celeste/

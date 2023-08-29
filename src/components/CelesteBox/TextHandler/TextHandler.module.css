@@ -1,0 +1,35 @@
+@keyframes wavy {
+    0% {
+        top: -2px;
+    }
+    50% {
+        top: 2px;
+    }
+    100% {
+        top: -2px;
+    }
+}
+
+.TextHandler {
+    /* display: inline; */
+    max-width: 80%;
+    white-space: pre-line;
+}
+
+.TextHandler .letter {
+    position: relative;
+    opacity: 0;
+    top: -10px;
+    transition: all 0.2s;
+}
+
+.TextHandler .letter.visible {
+    top: 0px;
+    opacity: 1;
+}
+
+.TextHandler .wavy .letter {
+    animation-duration: 0.75s;
+    animation-timing-function: cubic-bezier(0.5, 0.25, 0.5, 0.75);
+    animation-iteration-count: infinite;
+}

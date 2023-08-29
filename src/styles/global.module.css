@@ -1,0 +1,143 @@
+@import url(./fonts.css);
+
+.title {
+    font-size: 16px;
+    line-height: 20px;
+    font-family: "TrollCall Display";
+    text-transform: uppercase;
+}
+
+.titleSmall {
+    font-size: 14px;
+    line-height: 18px;
+    font-family: "TrollCall Display";
+    text-transform: uppercase;
+}
+
+.text {
+    font-size: 16px;
+    line-height: 20px;
+    font-family: "Space Grotesk";
+}
+
+.blockText {
+    display: block;
+    font-size: 16px;
+    line-height: 20px;
+    font-family: "Space Grotesk";
+}
+
+.small {
+    font-size: 12px;
+    line-height: 14px;
+    font-family: "Space Grotesk";
+}
+
+.mono {
+    font-size: 16px;
+    line-height: 20px;
+    font-family: "Space Mono";
+}
+
+.icon {
+    font-size: 24px;
+    line-height: 24px;
+    font-family: "Material Symbols Outlined";
+    font-variation-settings: "FILL" 1, "opsz" 24, "GRAD" 0, "wght" 400;
+    user-select: none;
+}
+
+.iconSmall {
+    font-size: 16px;
+    line-height: 16px;
+    font-family: "Material Symbols Outlined";
+    font-variation-settings: "FILL" 1, "opsz" 24, "GRAD" 0, "wght" 400;
+    user-select: none;
+}
+
+.iconlike {
+    font-size: 20px;
+    line-height: 20px;
+    font-family: "Space Mono";
+    user-select: none;
+}
+
+.link {
+    text-decoration: none;
+    color: inherit;
+    text-shadow: 0 0 2px currentColor;
+    cursor: pointer;
+    transition: text-shadow 0.125s;
+}
+
+.link:hover {
+    text-decoration: underline;
+    text-shadow: 0 0 8px currentColor;
+}
+
+.button {
+    color: inherit;
+    box-shadow: 0 0 2px currentColor;
+    background-color: transparent;
+    border: 1px solid currentColor;
+
+    padding: 4px 8px;
+    border-radius: 2px;
+    font-size: 16px;
+    line-height: 20px;
+    font-family: "Space Grotesk";
+    cursor: pointer;
+
+    transition: box-shadow 0.125s;
+}
+
+.button:hover {
+    box-shadow: 0 0 8px currentColor;
+}
+
+.buttonLink {
+    color: inherit;
+    background-color: transparent;
+    border: none;
+    text-decoration: none;
+    font-size: 16px;
+    line-height: 20px;
+    font-family: "Space Grotesk";
+    padding: 0;
+    margin: 0;
+    display: inline;
+    text-align: left;
+    cursor: pointer;
+
+    text-shadow: 0 0 2px currentColor;
+    transition: text-shadow 0.125s;
+}
+
+.buttonLink:hover {
+    text-decoration: underline;
+    text-shadow: 0 0 8px currentColor;
+}
+
+.buttonRow,
+.horizontalList {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+}
+.horizontalListLeft {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    gap: 8px;
+}
+
+.iconText {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 8px;
+}

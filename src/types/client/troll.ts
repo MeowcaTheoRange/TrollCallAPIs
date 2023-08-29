@@ -75,7 +75,7 @@ export const SubmitTrollSchema = yup
         gender: yup
             .string()
             .required()
-            .matches(/^[A-z-_]+$/, "Letters only")
+            .matches(/^[A-z- ]+$/, "Letters only")
             .min(3)
             .max(30),
 
@@ -132,13 +132,15 @@ export const SubmitTrollSchema = yup
         age: yup.number().required().positive(), // Sweeps
         images: yup.array().of(yup.string().required().url()).required(),
         // Meta stuff
-        policies: yup.object({
-            fanart: PolicySchema.required(),
-            fanartOthers: PolicySchema.required(),
-            kinning: PolicySchema.required(),
-            shipping: PolicySchema.required(),
-            fanfiction: PolicySchema.required()
-        })
+        policies: yup
+            .object({
+                fanart: PolicySchema.notRequired(),
+                fanartOthers: PolicySchema.notRequired(),
+                kinning: PolicySchema.notRequired(),
+                shipping: PolicySchema.notRequired(),
+                fanfiction: PolicySchema.notRequired()
+            })
+            .notRequired()
     })
     .required();
 

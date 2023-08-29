@@ -1,0 +1,33 @@
+.Box {
+    background-color: var(--pri-bg);
+    color: var(--pri-fg);
+    border: 1px solid currentColor;
+    border-radius: 2px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    padding: 8px;
+    width: max-content;
+    max-width: 100%;
+}
+
+.Box.secondary {
+    background-color: var(--sec-bg);
+    color: var(--sec-fg);
+}
+
+.Box.fw {
+    width: 100%;
+}
+
+.Box .innerContent {
+    padding: 4px 4px;
+    padding-top: 8px;
+    display: inline-flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.Box .innerContentNoTitle {
+    padding: 0;
+}

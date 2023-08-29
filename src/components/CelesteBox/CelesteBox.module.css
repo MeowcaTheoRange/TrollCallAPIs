@@ -1,0 +1,76 @@
+.CelesteBoxScrim {
+    position: fixed;
+    top: -100vh;
+    left: 0;
+    background-color: #0000;
+    width: 100vw;
+    height: 100vh;
+    backdrop-filter: blur(0px);
+    pointer-events: none;
+    z-index: 8;
+    transition: backdrop-filter 0.5s, background-color 0.5s, top 0.5s step-end;
+}
+
+.CelesteBoxScrim.open {
+    top: 0;
+    background-color: #0008;
+    backdrop-filter: blur(10px);
+    pointer-events: all;
+    transition: backdrop-filter 0.5s, background-color 0.5s;
+}
+
+.CelesteBox {
+    position: fixed;
+    top: -224px;
+    left: 0;
+    margin: 24px;
+    height: 176px;
+    width: calc(100vw - 48px);
+    background-color: black;
+    z-index: 8;
+    transform: scaleY(0);
+    transition: transform 0.25s cubic-bezier(0.25, 0, 1, 0.5),
+        top 0.25s step-end;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 24px;
+    box-sizing: border-box;
+    gap: 24px;
+}
+
+.CelesteBox.open {
+    top: 56px;
+    transform: scaleY(1);
+    transition: transform 0.25s cubic-bezier(0, 0.25, 0.5, 1);
+}
+
+.CelesteBox .TextHolder {
+    visibility: hidden;
+}
+
+.CelesteBox.open .TextHolder {
+    visibility: visible;
+    transition: visibility 0.25s step-end;
+}
+
+.PortraitHolder {
+    width: 128px;
+    height: 128px;
+}
+
+.TextHolder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    font-family: "Renogare", "Poppins";
+    color: white;
+    font-size: 28px;
+    line-height: 35px;
+    user-select: none;
+}

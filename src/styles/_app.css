@@ -1,0 +1,57 @@
+body,
+div#__next,
+main.App {
+  margin: 0;
+  min-height: 100vh;
+  width: 100vw;
+  box-sizing: border-box;
+
+  /* Default text styling */
+  font-size: 16px;
+  line-height: 20px;
+  font-family: "Space Grotesk";
+}
+
+main.App {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 8px;
+  background-color: var(--sec-bg);
+  color: var(--sec-fg);
+  background-image: url("/assets/pattern/pattern.png");
+  background-blend-mode: hard-light;
+}
+
+main.App.inverted {
+  background-image: url("/assets/pattern/pattern_inv.png");
+}
+
+main.App div.mainContent {
+  display: flex;
+  box-sizing: border-box;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 8px 0;
+  gap: 8px;
+  width: 100%;
+  max-width: 768px;
+  /* height: 100vh; */
+}
+
+/* Change behaviour of some elements */
+
+p,
+ul,
+ol {
+  margin: 0;
+  padding: 0;
+  display: block;
+}
+
+ul,
+ol {
+  list-style-position: inside;
+}

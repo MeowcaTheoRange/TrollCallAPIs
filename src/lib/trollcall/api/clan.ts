@@ -12,10 +12,9 @@ export async function ClanGET(
     existingClan?: ServerClan
 ): Promise<ClientClan | null> {
     const clan =
-        existingClan ??
-        (await getSingleClan({
-            name: query?.clan
-        }));
+        existingClan != null || query == null
+            ? existingClan
+            : await getSingleClan(query);
     if (clan == null) return null;
     const serverClan = await ServerClanToClientClan(clan);
     serverClan.flairs = cutArray(
