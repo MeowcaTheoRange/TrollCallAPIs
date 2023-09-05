@@ -2,13 +2,16 @@ import Box from "@/components/Box/Box";
 import globals from "@/styles/global.module.css";
 import "@/styles/index.module.css";
 import { ThemerGetSet } from "@/types/generics";
+import { defaultTheme } from "@/utility/react/Themer";
 import Link from "next/link";
+import { useEffect } from "react";
 
 export default function Index({
     themerVars: [theme, setTheme]
 }: {
     themerVars: ThemerGetSet;
 }) {
+    useEffect(() => setTheme(defaultTheme), []);
     return (
         <>
             <Box
@@ -151,6 +154,15 @@ export default function Index({
                     <li className={globals.text}>
                         <Link
                             className={globals.link}
+                            href="https://www.npmjs.com/package/argon2"
+                            target="_blank"
+                        >
+                            argon2
+                        </Link>
+                    </li>
+                    <li className={globals.text}>
+                        <Link
+                            className={globals.link}
                             href="https://www.npmjs.com/package/body-parser"
                             target="_blank"
                         >
@@ -288,6 +300,69 @@ export default function Index({
             <Box
                 properties={{
                     title: {
+                        text: "Asset credits"
+                    }
+                }}
+            >
+                <p className={globals.text}>
+                    Extended Zodiac sign SVGs created by{" "}
+                    <Link
+                        className={globals.link}
+                        href={
+                            "https://www.deviantart.com/ylimegirl/art/Extended-Zodiac-Vectors-All-signs-721467417"
+                        }
+                    >
+                        Ylimegirl on DeviantArt
+                    </Link>
+                    .
+                </p>
+                <p className={globals.text}>
+                    Aspect symbol SVGs created by{" "}
+                    <Link
+                        className={globals.link}
+                        href={
+                            "https://meggies-effort.myshopify.com/products/aspect-symbols-homestuck"
+                        }
+                    >
+                        Meggie's Effort
+                    </Link>{" "}
+                    (beware popups).
+                </p>
+                <hr className={globals.sep} />
+                <p className={globals.text}>
+                    Mothvertisements served by{" "}
+                    <Link
+                        className={globals.link}
+                        href={"https://mothvertising.moth.monster/"}
+                    >
+                        moth.monster
+                    </Link>
+                </p>
+                <p className={globals.text}>
+                    NavLink Ads served by{" "}
+                    <Link
+                        className={globals.link}
+                        href={"https://dimden.dev/navlinkads/"}
+                    >
+                        dimden.dev
+                    </Link>
+                </p>
+                <p className={globals.text}>
+                    ~&gt;{" "}
+                    <button
+                        onClick={() => {
+                            window.localStorage.setItem("hideAds", "false");
+                            window.location.reload();
+                        }}
+                        className={globals.buttonLink}
+                    >
+                        Give me back my ads!
+                    </button>
+                </p>
+            </Box>
+            <Box
+                properties={{
+                    title: {
                         text: "General credits"
                     }
                 }}
@@ -365,6 +440,23 @@ export default function Index({
                 </p>
                 <p className={globals.text}>
                     Homestuck and HIVESWAP © Homestuck Inc.
+                </p>
+            </Box>
+            <Box properties={{ title: { text: "Contact Me" } }}>
+                <p className={globals.text}>
+                    Please{" "}
+                    <Link
+                        className={globals.link}
+                        href={"https://abtmtr.link/"}
+                    >
+                        let MeowcaTheoRange know
+                    </Link>{" "}
+                    if you have any questions about these credits!
+                </p>
+            </Box>
+            <Box properties={{ title: { text: "Helper Credits" } }}>
+                <p className={globals.text}>
+                    A list of people who are on the TrollCall team.
                 </p>
             </Box>
         </>

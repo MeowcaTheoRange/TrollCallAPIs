@@ -1,7 +1,6 @@
 import { Levels, Permissions } from "@/permissions";
 import { ServerClan } from "@/types/clan";
-import CryptoJS from "crypto-js";
-import AES from "crypto-js/aes";
+import { verify } from "argon2";
 import { ObjectId } from "mongodb";
 
 export function getLevel(clan: Partial<ServerClan> & { flairs: ObjectId[] }) {
@@ -17,18 +16,15 @@ export function compareLevels(level: string, compareLevel: string) {
     return Levels[level] > Levels[compareLevel];
 }
 
-export function compareCredentials(
+export async function compareCredentials(
     clan: ServerClan,
     cookies: Partial<{
         [key: string]: string;
     }>
 ) {
-    const decryptCode = AES.decrypt(
-        clan.code,
-        process.env.ENCRYPT_CODE ?? "HACKTHIS"
-    ).toString(CryptoJS.enc.Utf8);
+    if (cookies.TROLLCALL_CODE == null) return null;
     return (
-        decryptCode === cookies.TROLLCALL_CODE &&
+        (await verify(clan.code, cookies.TROLLCALL_CODE)) &&
         clan.name === cookies.TROLLCALL_NAME
     );
 }

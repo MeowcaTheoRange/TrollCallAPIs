@@ -14,17 +14,19 @@ export async function TrollGET(
     existingTroll?: ServerTroll
 ): Promise<ClientTroll | null> {
     const clan =
-        existingOwner ??
-        (await getSingleClan({
-            name: query?.clan
-        }));
+        existingOwner != null || query == null
+            ? existingOwner
+            : await getSingleClan({
+                  name: query.clan
+              });
     if (clan == null) return null;
     const troll =
-        existingTroll ??
-        (await getSingleTroll({
-            "name.0": query?.troll,
-            "owner": clan._id
-        }));
+        existingTroll != null || query == null
+            ? existingTroll
+            : await getSingleTroll({
+                  "name.0": query.troll,
+                  "owner": clan._id
+              });
     if (troll == null) return null;
     const serverTroll = await ServerTrollToClientTroll(troll);
     serverTroll.flairs = cutArray(

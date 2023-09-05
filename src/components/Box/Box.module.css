@@ -9,6 +9,7 @@
     padding: 8px;
     width: max-content;
     max-width: 100%;
+    overflow: hidden;
 }
 
 .Box.secondary {
@@ -21,11 +22,11 @@
 }
 
 .Box .innerContent {
-    padding: 4px 4px;
-    padding-top: 8px;
+    padding: 6px 4px;
     display: inline-flex;
     flex-direction: column;
     gap: 8px;
+    max-width: 100%;
 }
 
 .Box .innerContentNoTitle {

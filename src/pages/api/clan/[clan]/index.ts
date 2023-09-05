@@ -10,8 +10,8 @@ import {
     getLevel
 } from "@/lib/trollcall/perms";
 import { PartialClanSchema, SubmitClan } from "@/types/client/clan";
+import { hash } from "argon2";
 import { serialize } from "cookie";
-import AES from "crypto-js/aes";
 import { nanoid } from "nanoid";
 import { NextApiRequest, NextApiResponse } from "next";
 
@@ -21,9 +21,9 @@ export default async function handler(
 ) {
     const { body, cookies, query, method } = req;
     if (method === "GET") {
-        const clan = await ClanGET(query);
+        const clan = await ClanGET({ name: query.clan });
         if (clan == null) return res.status(404).end();
-        res.json(await ClanGET(query));
+        res.json(clan);
     } else if (method === "PUT") {
         let validatedClan: Partial<SubmitClan>;
         try {
@@ -38,11 +38,14 @@ export default async function handler(
         });
         if (checkExistingClan == null) return res.status(404).end();
         let isModerator = false;
-        if (!compareCredentials(checkExistingClan, cookies)) {
+        if (!(await compareCredentials(checkExistingClan, cookies))) {
             const thisClan = await getSingleClan({
                 name: cookies.TROLLCALL_NAME
             });
-            if (thisClan == null || !compareCredentials(thisClan, cookies))
+            if (
+                thisClan == null ||
+                !(await compareCredentials(thisClan, cookies))
+            )
                 return res.status(403).end();
             if (!compareLevels(getLevel(thisClan), "MODERATOR"))
                 return res.status(403).end();
@@ -53,10 +56,7 @@ export default async function handler(
             serverClan.code = checkExistingClan.code || nanoid(16);
 
         // Encrypt code lole
-        serverClan.code = AES.encrypt(
-            serverClan.code,
-            process.env.ENCRYPT_CODE ?? "HACKTHIS"
-        ).toString();
+        serverClan.code = await hash(serverClan.code);
 
         if (!compareLevels(getLevel(checkExistingClan), "SUPPORTER")) {
             serverClan.bgimage = null;

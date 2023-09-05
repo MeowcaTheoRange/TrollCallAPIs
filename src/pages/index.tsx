@@ -5,10 +5,13 @@ import TrollCard from "@/components/cards/TrollCard/TrollCard";
 import TrollSkeleton from "@/components/cards/TrollCard/TrollSkeleton";
 import globals from "@/styles/global.module.css";
 import "@/styles/index.module.css";
+import { Color3 } from "@/types/assist/color";
 import { ClientClan } from "@/types/clan";
 import { ThemerGetSet } from "@/types/generics";
 import { ClientTroll } from "@/types/troll";
+import { defaultTheme } from "@/utility/react/Themer";
 import { getCookies } from "cookies-next";
+import Link from "next/link";
 import { useEffect, useState } from "react";
 
 getCookies();
@@ -35,6 +38,7 @@ export default function Index({
             setFetchedClans(json);
         }
         getClan();
+        setTheme(defaultTheme);
     }, []);
     return (
         <>
@@ -50,15 +54,30 @@ export default function Index({
             <Box
                 properties={{
                     title: {
+                        text: "Hiveswap"
+                    },
+                    theme: new Color3(0.25, 0, 0.5)
+                }}
+            >
+                <span className={globals.text}>
+                    Indulge yourself within the Extended Zodiac and its effects
+                    on... everything, I guess.
+                </span>
+                <Link
+                    className={globals.linkButton}
+                    href="/hiveswap"
+                >
+                    Enter the Hiveswap section
+                </Link>
+            </Box>
+            <Box
+                properties={{
+                    title: {
                         text: "List of characters",
                         small: true
                     }
                 }}
             >
-                {/* <span className={globals.text}>
-                    This is a series of cards that represent the most important
-                    aspects of TrollCall.
-                </span> */}
                 {fetchedTrolls == null ? (
                     <>
                         <TrollSkeleton />
@@ -67,7 +86,10 @@ export default function Index({
                     </>
                 ) : (
                     fetchedTrolls.map((troll: ClientTroll, idx) => (
-                        <TrollCard troll={troll} />
+                        <TrollCard
+                            troll={troll}
+                            key={idx + "troll"}
+                        />
                     ))
                 )}
             </Box>
@@ -79,10 +101,6 @@ export default function Index({
                     }
                 }}
             >
-                {/* <span className={globals.text}>
-                    This is a series of cards that represent the most important
-                    aspects of TrollCall.
-                </span> */}
                 {fetchedClans == null ? (
                     <>
                         <ClanSkeleton />
@@ -91,7 +109,10 @@ export default function Index({
                     </>
                 ) : (
                     fetchedClans.map((clan: ClientClan, idx) => (
-                        <ClanCard clan={clan} />
+                        <ClanCard
+                            clan={clan}
+                            key={idx + "clan"}
+                        />
                     ))
                 )}
             </Box>

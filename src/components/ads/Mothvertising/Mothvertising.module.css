@@ -1,0 +1,23 @@
+.Mothvertisement {
+    margin-left: auto;
+    display: block;
+    margin-right: auto;
+    max-width: 728px;
+    width: 100%;
+    height: 90px;
+    border: 1px solid var(--pri-fg);
+    border-radius: 2px;
+    opacity: 0.5;
+    transition: opacity 0.125s;
+}
+.Mothvertisement:hover {
+    opacity: 1;
+}
+
+@media (max-width: 750px) {
+    .Mothvertisement {
+        max-width: 300px;
+        width: 100%;
+        height: 250px;
+    }
+}

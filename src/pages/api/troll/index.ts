@@ -24,7 +24,7 @@ export default async function handler(
             name: cookies.TROLLCALL_NAME
         });
         if (checkClan == null) return res.status(404).end();
-        if (!compareCredentials(checkClan, cookies))
+        if (!(await compareCredentials(checkClan, cookies)))
             return res.status(403).end();
         const checkExistingTroll = await getSingleTroll({
             "name.0": validatedTroll.name[0],

@@ -47,15 +47,6 @@
     transition: transform 0.25s cubic-bezier(0, 0.25, 0.5, 1);
 }
 
-.CelesteBox .TextHolder {
-    visibility: hidden;
-}
-
-.CelesteBox.open .TextHolder {
-    visibility: visible;
-    transition: visibility 0.25s step-end;
-}
-
 .PortraitHolder {
     width: 128px;
     height: 128px;
@@ -73,4 +64,14 @@
     font-size: 28px;
     line-height: 35px;
     user-select: none;
+}
+
+.CelesteBox .TextHolder {
+    visibility: hidden;
+    display: none;
+}
+
+.CelesteBox.open .TextHolder {
+    visibility: visible;
+    display: flex;
 }

@@ -35,11 +35,14 @@ export default async function handler(
             name: query.clan
         });
         if (checkClan == null) return res.status(404).end();
-        if (!compareCredentials(checkClan, cookies)) {
+        if (!(await compareCredentials(checkClan, cookies))) {
             const thisClan = await getSingleClan({
                 name: cookies.TROLLCALL_NAME
             });
-            if (thisClan == null || !compareCredentials(thisClan, cookies))
+            if (
+                thisClan == null ||
+                !(await compareCredentials(thisClan, cookies))
+            )
                 return res.status(403).end();
             console.log(getLevel(thisClan));
             if (!compareLevels(getLevel(thisClan), "MODERATOR"))

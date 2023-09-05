@@ -14,44 +14,16 @@ export default function TextHandler({
     wantTextboxDoneStuff: [boolean, (wantTextboxDone: boolean) => void];
 }) {
     const textSpan = useRef<HTMLSpanElement>(null);
-    const [content, setContent] = useState(Runner(dialogIndex.dialog));
+    const [content, setContent] = useState(Runner(dialogIndex.dialog, "start"));
     const animationFrame = useRef(0);
-    let clickSound: AudioBuffer;
-    let inSound: AudioBuffer;
-    let outSound: AudioBuffer;
-    let context: AudioContext;
-    let gain: GainNode;
-    let contextGot = false;
-    async function getContext() {
-        context = new AudioContext();
-        gain = context.createGain();
-        gain.gain.value = 0.2;
-        gain.connect(context.destination);
-        await fetch("assets/celeste/click.wav")
-            .then(response => response.arrayBuffer())
-            .then(arrayBuffer => context.decodeAudioData(arrayBuffer))
-            .then((audioBuffer: AudioBuffer) => (clickSound = audioBuffer));
-        await fetch("assets/celeste/in.wav")
-            .then(response => response.arrayBuffer())
-            .then(arrayBuffer => context.decodeAudioData(arrayBuffer))
-            .then((audioBuffer: AudioBuffer) => (inSound = audioBuffer));
-        await fetch("assets/celeste/out.wav")
-            .then(response => response.arrayBuffer())
-            .then(arrayBuffer => context.decodeAudioData(arrayBuffer))
-            .then((audioBuffer: AudioBuffer) => (outSound = audioBuffer));
-    }
     useEffect(generateContent, [dialogIndex, dialogIsOpen]);
     function generateContent() {
         console.log("generating");
         if (!dialogIsOpen) return;
         if (textSpan.current == null) return;
         cancelAnimationFrame(animationFrame.current);
-        setContent(Runner(dialogIndex.dialog));
+        setContent(Runner(dialogIndex.dialog, "start"));
     }
-    (async () => {
-        await getContext();
-        contextGot = true;
-    })();
     useEffect(formatContent, [content]);
     function formatContent() {
         console.log("formatting", content);
@@ -134,12 +106,6 @@ export default function TextHandler({
                 default:
                     waitLength = 0.025;
             }
-            // if (makeSound && contextGot) {
-            //     let source = context.createBufferSource();
-            //     source.buffer = clickSound;
-            //     source.connect(gain);
-            //     source.start();
-            // }
             await wait(waitLength).then(() => {
                 animationFrame.current = requestAnimationFrame(showLetters);
             });
@@ -158,12 +124,18 @@ export default function TextHandler({
     );
 }
 
-function Runner(text: ElementArray) {
-    if (typeof text === "string") return StringRunner(text);
-    else if (Array.isArray(text)) return <span>{text.map(Runner)}</span>;
+function Runner(text: ElementArray, index?: string) {
+    if (typeof text === "string") return StringRunner(text, index);
+    else if (Array.isArray(text))
+        return (
+            <span key={index}>
+                {text.map((x, i) => Runner(x, (index ?? "") + "_" + i))}
+            </span>
+        );
     else if (typeof text === "object") {
         return (
             <span
+                key={index}
                 className={
                     text.effects?.className
                         ? text.effects.className +
@@ -173,19 +145,19 @@ function Runner(text: ElementArray) {
                 }
                 style={text.effects?.style ?? {}}
             >
-                {Runner(text.text)}
+                {Runner(text.text, index)}
             </span>
         );
     }
 }
 
-function StringRunner(string: string) {
+function StringRunner(string: string, index?: string) {
     return (
         <>
             {string.split("").map((letter, i) => (
                 <span
                     className={`letter ${styles.letter}`}
-                    key={i + Math.random()}
+                    key={(index ?? "") + "_" + i + Math.random()}
                 >
                     {letter}
                 </span>

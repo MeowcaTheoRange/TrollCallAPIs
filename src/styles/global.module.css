@@ -1,67 +1,5 @@
 @import url(./fonts.css);
 
-.title {
-    font-size: 16px;
-    line-height: 20px;
-    font-family: "TrollCall Display";
-    text-transform: uppercase;
-}
-
-.titleSmall {
-    font-size: 14px;
-    line-height: 18px;
-    font-family: "TrollCall Display";
-    text-transform: uppercase;
-}
-
-.text {
-    font-size: 16px;
-    line-height: 20px;
-    font-family: "Space Grotesk";
-}
-
-.blockText {
-    display: block;
-    font-size: 16px;
-    line-height: 20px;
-    font-family: "Space Grotesk";
-}
-
-.small {
-    font-size: 12px;
-    line-height: 14px;
-    font-family: "Space Grotesk";
-}
-
-.mono {
-    font-size: 16px;
-    line-height: 20px;
-    font-family: "Space Mono";
-}
-
-.icon {
-    font-size: 24px;
-    line-height: 24px;
-    font-family: "Material Symbols Outlined";
-    font-variation-settings: "FILL" 1, "opsz" 24, "GRAD" 0, "wght" 400;
-    user-select: none;
-}
-
-.iconSmall {
-    font-size: 16px;
-    line-height: 16px;
-    font-family: "Material Symbols Outlined";
-    font-variation-settings: "FILL" 1, "opsz" 24, "GRAD" 0, "wght" 400;
-    user-select: none;
-}
-
-.iconlike {
-    font-size: 20px;
-    line-height: 20px;
-    font-family: "Space Mono";
-    user-select: none;
-}
-
 .link {
     text-decoration: none;
     color: inherit;
@@ -73,6 +11,29 @@
 .link:hover {
     text-decoration: underline;
     text-shadow: 0 0 8px currentColor;
+}
+
+.linkButton {
+    text-decoration: none;
+    color: inherit;
+    box-shadow: 0 0 2px currentColor;
+    background-color: transparent;
+    border: 1px solid currentColor;
+
+    padding: 4px 8px;
+    border-radius: 2px;
+    font-size: 16px;
+    line-height: 20px;
+    font-family: "Space Grotesk";
+    cursor: pointer;
+    text-align: center;
+
+    transition: box-shadow 0.125s;
+}
+
+.linkButton:hover {
+    text-decoration: none;
+    box-shadow: 0 0 8px currentColor;
 }
 
 .button {
@@ -118,6 +79,82 @@
     text-shadow: 0 0 8px currentColor;
 }
 
+.title {
+    font-size: 16px;
+    line-height: 20px;
+    font-family: "TrollCall Display";
+    text-transform: uppercase;
+}
+
+.titleSmall {
+    font-size: 14px;
+    line-height: 18px;
+    font-family: "TrollCall Display";
+    text-transform: uppercase;
+}
+
+.text {
+    font-size: 16px;
+    line-height: 20px;
+    font-family: "Space Grotesk";
+}
+
+.blockText {
+    display: block;
+    font-size: 16px;
+    line-height: 20px;
+    font-family: "Space Grotesk";
+}
+
+.small {
+    font-size: 12px;
+    line-height: 14px;
+    font-family: "Space Grotesk";
+}
+
+.mono {
+    font-size: 16px;
+    line-height: 20px;
+    font-family: "Space Mono";
+}
+
+.icon {
+    display: inline-block;
+    font-size: 24px;
+    line-height: 24px;
+    height: 24px;
+    font-family: "Material Symbols Outlined";
+    font-variation-settings: "FILL" 1, "opsz" 24, "GRAD" 0, "wght" 400;
+    user-select: none;
+}
+
+.iconSmall {
+    display: inline-block;
+    font-size: 16px;
+    line-height: 16px;
+    height: 16px;
+    font-family: "Material Symbols Outlined";
+    font-variation-settings: "FILL" 1, "opsz" 24, "GRAD" 0, "wght" 400;
+    user-select: none;
+}
+
+.iconlike {
+    display: inline-block;
+    font-size: 20px;
+    line-height: 24px;
+    height: 24px;
+    padding-bottom: 2px;
+    vertical-align: middle;
+    font-family: "Space Mono";
+    user-select: none;
+}
+
+.boxLike {
+    display: inline-flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
 .buttonRow,
 .horizontalList {
     display: flex;
@@ -140,4 +177,77 @@
     align-items: center;
     justify-content: flex-start;
     gap: 8px;
+}
+
+.iconTextTop {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 8px;
+}
+
+.buttonLeft {
+    display: grid;
+    grid-template-columns: max-content 1fr;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 16px;
+    padding-right: 8px;
+}
+
+.buttonRight {
+    display: grid;
+    grid-template-columns: 1fr max-content;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 16px;
+    padding-left: 8px;
+}
+
+.sep {
+    width: 100%;
+    background-color: currentColor;
+    color: currentColor;
+    padding: 0;
+    margin: 8px 0;
+    border: none;
+    height: 1px;
+}
+
+.sepHeader {
+    width: 100%;
+    background-color: currentColor;
+    color: currentColor;
+    padding: 0;
+    margin: 0;
+    border: none;
+    height: 1px;
+}
+
+.invisep {
+    width: 100%;
+    background-color: transparent;
+    color: transparent;
+    padding: 0;
+    margin: 2px 0;
+    border: none;
+    height: 1px;
+}
+
+.invisepHeader {
+    width: 100%;
+    background-color: transparent;
+    color: transparent;
+    padding: 0;
+    margin: 0;
+    border: none;
+    height: 1px;
+}
+
+.signage {
+    filter: drop-shadow(1px 1px 0 currentcolor)
+        drop-shadow(-1px -1px 0 currentcolor)
+        drop-shadow(1px -1px 0 currentcolor)
+        drop-shadow(-1px 1px 0 currentcolor);
 }

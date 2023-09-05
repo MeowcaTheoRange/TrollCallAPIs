@@ -3,8 +3,8 @@ import { SubmitClanToServerClan } from "@/lib/trollcall/convert/clan";
 import { compareLevels, getLevel } from "@/lib/trollcall/perms";
 import { ServerClan } from "@/types/clan";
 import { SubmitClanSchema } from "@/types/client/clan";
+import { hash } from "argon2";
 import { serialize } from "cookie";
-import AES from "crypto-js/aes";
 import { nanoid } from "nanoid";
 import { NextApiRequest, NextApiResponse } from "next";
 
@@ -34,10 +34,7 @@ export default async function handler(
         if (serverClan.code == null) serverClan.code = nanoid(16);
 
         // Encrypt code lole
-        serverClan.code = AES.encrypt(
-            serverClan.code,
-            process.env.ENCRYPT_CODE ?? "HACKTHIS"
-        ).toString();
+        serverClan.code = hash(serverClan.code).toString();
 
         if (!compareLevels(getLevel(serverClan), "SUPPORTER"))
             serverClan.bgimage = null;

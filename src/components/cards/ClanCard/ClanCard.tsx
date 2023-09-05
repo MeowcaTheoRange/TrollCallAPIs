@@ -4,11 +4,17 @@ import globals from "@/styles/global.module.css";
 import { Color3 } from "@/types/assist/color";
 import { ClientClan } from "@/types/clan";
 import { PronounGrouper } from "@/utility/language";
-import Conditional from "@/utility/react/Conditional";
+import Conditional, { ConditionalParent } from "@/utility/react/Conditional";
 import Link from "next/link";
 import styles from "./ClanCard.module.css";
 
-export default function ClanCard({ clan }: { clan: ClientClan }) {
+export default function ClanCard({
+    clan,
+    link = true
+}: {
+    clan: ClientClan;
+    link?: boolean;
+}) {
     return (
         <Box
             properties={{
@@ -16,7 +22,7 @@ export default function ClanCard({ clan }: { clan: ClientClan }) {
                 theme: clan.color ? Color3.fromRGB(...clan.color) : undefined
             }}
         >
-            <Conditional condition={clan.bgimage != null}>
+            <Conditional condition={link && clan.bgimage != null}>
                 <div className={styles.headerImage}>
                     <img
                         src={clan.bgimage as string}
@@ -36,13 +42,23 @@ export default function ClanCard({ clan }: { clan: ClientClan }) {
                     </div>
                 </Conditional>
                 <div className={styles.horizontalRight}>
-                    <p className={globals.title}>
-                        <Link
-                            href={`/clan/${clan.name}`}
-                            className={globals.link}
+                    <p
+                        className={globals.title}
+                        title={clan.displayName ?? clan.name}
+                    >
+                        <ConditionalParent
+                            condition={link}
+                            parent={children => (
+                                <Link
+                                    href={`/clan/${clan.name}`}
+                                    className={globals.link}
+                                >
+                                    {children}
+                                </Link>
+                            )}
                         >
                             {clan.displayName ?? clan.name}
-                        </Link>
+                        </ConditionalParent>
                     </p>
                     <p className={globals.iconText}>
                         <span className={globals.iconSmall}>group</span>

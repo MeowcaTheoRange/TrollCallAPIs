@@ -16,7 +16,7 @@ export async function ClanGET(
             ? existingClan
             : await getSingleClan(query);
     if (clan == null) return null;
-    const serverClan = await ServerClanToClientClan(clan);
+    const serverClan = await ServerClanToClientClan({ ...clan });
     serverClan.flairs = cutArray(
         await getManyFlairs(
             { _id: { $in: clan.flairs } },

@@ -17,6 +17,18 @@ if (process.env.MONGODB_DATABASE_NAME == null) {
     process.exit();
 }
 
-export const client = new MongoClient(process.env.MONGODB_DATABASE, {});
+let client;
+
+if (process.env.NODE_ENV === "development") {
+    //@ts-ignore
+    if (!global._mongoClient) {
+        //@ts-ignore
+        global._mongoClient = new MongoClient(process.env.MONGODB_DATABASE, {});
+    }
+    //@ts-ignore
+    client = global._mongoClient;
+} else {
+    client = new MongoClient(process.env.MONGODB_DATABASE, {});
+}
 
 export const mainDB = client.db(process.env.MONGODB_DATABASE_NAME);

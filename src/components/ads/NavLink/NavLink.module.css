@@ -1,0 +1,12 @@
+.NavLink {
+    margin-left: auto;
+    display: block;
+    margin-right: auto;
+    border: 1px solid var(--pri-fg);
+    border-radius: 2px;
+    opacity: 0.5;
+    transition: opacity 0.125s;
+}
+.NavLink:hover {
+    opacity: 1;
+}

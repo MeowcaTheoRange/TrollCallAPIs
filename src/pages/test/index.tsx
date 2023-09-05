@@ -11,7 +11,9 @@ import "@/styles/index.module.css";
 import { Color3 } from "@/types/assist/color";
 import { ThemerGetSet } from "@/types/generics";
 import { ClientTroll } from "@/types/troll";
+import { defaultTheme } from "@/utility/react/Themer";
 import { getCookies } from "cookies-next";
+import Link from "next/link";
 import { useEffect, useState } from "react";
 
 getCookies();
@@ -29,6 +31,7 @@ export default function Index({
             setFetchedTroll(json);
         }
         getTroll();
+        setTheme(defaultTheme);
     }, []);
 
     const [openCB, CelesteBoxInstance] = CelesteBox({
@@ -59,6 +62,24 @@ export default function Index({
                             ]
                         },
                         "I am very proud of myself for making this!"
+                    ]
+                },
+                {
+                    character: "madeline_lol",
+                    dialog: [
+                        "AAAAAWAWAWAWAWAWWAJJKKOGJNKASNGllgnwklwa klw kflfwajniopfNOKPFOIWANIOPWNWONGOKWALGNW gkwognwipngwgnwiakopgl,"
+                    ]
+                },
+                {
+                    character: "madeline_lol",
+                    dialog: [
+                        "The quick red girl jumped over the giant mountain."
+                    ]
+                },
+                {
+                    character: "madeline_lol",
+                    dialog: [
+                        "BABBABABABABABAB ab abal bla  balb/@?>@?>!? !.rm1//.r1m /lm2/.2 2 2 2222/22//2/2//???@?@?2/2/2/2/2/2/2"
                     ]
                 }
             ]
@@ -143,6 +164,65 @@ export default function Index({
                     }
                 }}
             >
+                <p className={globals.text}>
+                    Here you can select some themes to test what TrollCall looks
+                    like with ridiculous colors. It's pretty fun to try!
+                </p>
+                <p className={globals.text}>General themes</p>
+                <div className={globals.buttonRow}>
+                    <button
+                        className={globals.buttonLink}
+                        onClick={() =>
+                            setTheme([
+                                new Color3(0.9, 0.9, 0.8),
+                                new Color3(0.7, 0.7, 0.6),
+                                theme[2]
+                            ])
+                        }
+                    >
+                        Default theme
+                    </button>
+                    <span className={globals.text}>-</span>
+                    <button
+                        className={globals.buttonLink}
+                        onClick={() =>
+                            setTheme([
+                                new Color3(0.5, 0.5, 0.4),
+                                new Color3(0.1, 0.1, 0),
+                                theme[2]
+                            ])
+                        }
+                    >
+                        HC theme
+                    </button>
+                    <span className={globals.text}>-</span>
+                    <button
+                        className={globals.buttonLink}
+                        onClick={() =>
+                            setTheme([
+                                new Color3(0, 0, 0),
+                                new Color3(0, 0, 0),
+                                false
+                            ])
+                        }
+                    >
+                        AMOLED theme
+                    </button>
+                    <span className={globals.text}>-</span>
+                    <button
+                        className={globals.buttonLink}
+                        onClick={() =>
+                            setTheme([
+                                new Color3(1, 1, 1),
+                                new Color3(1, 1, 1),
+                                true
+                            ])
+                        }
+                    >
+                        DELOMA theme
+                    </button>
+                </div>
+                <p className={globals.text}>Coloured themes</p>
                 <div className={globals.buttonRow}>
                     <button
                         className={globals.button}
@@ -154,7 +234,7 @@ export default function Index({
                             ])
                         }
                     >
-                        Red theme
+                        Rust theme
                     </button>
                     <button
                         className={globals.button}
@@ -166,7 +246,7 @@ export default function Index({
                             ])
                         }
                     >
-                        Orange theme
+                        Bronze theme
                     </button>
                     <button
                         className={globals.button}
@@ -178,7 +258,7 @@ export default function Index({
                             ])
                         }
                     >
-                        Yellow theme
+                        Gold theme
                     </button>
                     <button
                         className={globals.button}
@@ -202,7 +282,7 @@ export default function Index({
                             ])
                         }
                     >
-                        Green theme
+                        Olive theme
                     </button>
                     <button
                         className={globals.button}
@@ -274,7 +354,7 @@ export default function Index({
                             ])
                         }
                     >
-                        Pink theme
+                        Violet theme
                     </button>
                     <button
                         className={globals.button}
@@ -289,56 +369,283 @@ export default function Index({
                         Fuchsia theme
                     </button>
                 </div>
+                <p className={globals.text}>Experimental themes</p>
                 <div className={globals.buttonRow}>
                     <button
                         className={globals.buttonLink}
                         onClick={() =>
                             setTheme([
-                                new Color3(0.9, 0.9, 0.8),
-                                new Color3(0.7, 0.7, 0.6),
+                                new Color3(0, 0.5, 0.6),
+                                new Color3(0, 0.1, 0.2),
                                 theme[2]
                             ])
                         }
                     >
-                        Default theme
+                        Celeste-ish
                     </button>
+                    <span className={globals.text}>-</span>
                     <button
                         className={globals.buttonLink}
                         onClick={() =>
                             setTheme([
-                                new Color3(0.5, 0.5, 0.4),
-                                new Color3(0.1, 0.1, 0),
+                                new Color3(0.6, 0, 0),
+                                new Color3(0.2, 0, 0),
                                 theme[2]
                             ])
                         }
                     >
-                        HC theme
+                        Time
+                    </button>
+                    <span className={globals.text}>-</span>
+                    <button
+                        className={globals.buttonLink}
+                        onClick={() =>
+                            setTheme([
+                                new Color3(0.5, 0, 0.6),
+                                new Color3(0.1, 0, 0.2),
+                                theme[2]
+                            ])
+                        }
+                    >
+                        Rage
+                    </button>
+                    <span className={globals.text}>-</span>
+                    <button
+                        className={globals.buttonLink}
+                        onClick={() =>
+                            setTheme([
+                                new Color3(0.5, 0.5, 0.6),
+                                new Color3(0, 0, 0.1),
+                                theme[2]
+                            ])
+                        }
+                    >
+                        Space
+                    </button>
+                    <span className={globals.text}>-</span>
+                    <button
+                        className={globals.buttonLink}
+                        onClick={() =>
+                            setTheme([
+                                new Color3(1, 1, 0),
+                                new Color3(0.5, 1, 0),
+                                theme[2]
+                            ])
+                        }
+                    >
+                        Citrus
+                    </button>
+                    <span className={globals.text}>-</span>
+                    <button
+                        className={globals.buttonLink}
+                        onClick={() =>
+                            setTheme([
+                                new Color3(1, 0, 0),
+                                new Color3(1, 0.75, 0),
+                                theme[2]
+                            ])
+                        }
+                    >
+                        Hotdog
+                    </button>
+                </div>
+                <p className={globals.text}>
+                    Spectacular Comment Chain-adjacent themes
+                </p>
+                <div className={globals.buttonRow}>
+                    <button
+                        className={globals.buttonLink}
+                        onClick={() =>
+                            setTheme([
+                                new Color3(0.6, 0, 1),
+                                new Color3(0, 0.5, 0.5),
+                                false
+                            ])
+                        }
+                    >
+                        Lunar1314
+                    </button>
+                    <span className={globals.text}>-</span>
+                    <button
+                        className={globals.buttonLink}
+                        onClick={() =>
+                            setTheme([
+                                new Color3(1, 0.6, 0),
+                                new Color3(0.5, 1, 1),
+                                true
+                            ])
+                        }
+                    >
+                        Solar1314
+                    </button>
+                    <span className={globals.text}>-</span>
+                    <button
+                        className={globals.buttonLink}
+                        onClick={() =>
+                            setTheme([
+                                new Color3(0, 1, 0),
+                                new Color3(1, 1, 1),
+                                theme[2]
+                            ])
+                        }
+                    >
+                        MrWaluigi
+                    </button>
+                    <span className={globals.text}>-</span>
+                    <button
+                        className={globals.buttonLink}
+                        onClick={() =>
+                            setTheme([
+                                new Color3(1, 0.5, 0.75),
+                                new Color3(0.5, 0.25, 0.375),
+                                theme[2]
+                            ])
+                        }
+                    >
+                        Madisongs
+                    </button>
+                    <span className={globals.text}>-</span>
+                    <button
+                        className={globals.buttonLink}
+                        onClick={() =>
+                            setTheme([
+                                new Color3(1, 0.25, 0.5),
+                                new Color3(0.5, 0.125, 0.25),
+                                theme[2]
+                            ])
+                        }
+                    >
+                        Badisongs
+                    </button>
+                    <span className={globals.text}>-</span>
+                    <button
+                        className={globals.buttonLink}
+                        onClick={() =>
+                            setTheme([
+                                new Color3(0.5, 0.9, 1),
+                                new Color3(0.25, 0.45, 0.5),
+                                theme[2]
+                            ])
+                        }
+                    >
+                        Addisongs
+                    </button>
+                </div>
+                <p className={globals.text}>Vine funny themes</p>
+                <div className={globals.buttonRow}>
+                    <button
+                        className={globals.button}
+                        onClick={() =>
+                            setTheme([
+                                new Color3(0.5, 1, 0.5),
+                                new Color3(1, 1, 1),
+                                true
+                            ])
+                        }
+                    >
+                        White people be like
+                    </button>
+                    <button
+                        className={globals.button}
+                        onClick={() =>
+                            setTheme([
+                                new Color3(0, 0.5, 0),
+                                new Color3(0, 0, 0),
+                                false
+                            ])
+                        }
+                    >
+                        Black people be like
                     </button>
                 </div>
                 <div className={globals.buttonRow}>
+                    <a
+                        className={globals.link}
+                        href="https://youtu.be/raUjQRHMHIo"
+                        target="_blank"
+                    >
+                        If you don't get the reference
+                    </a>
+                </div>
+                <p className={globals.text}>User utility</p>
+                <div className={globals.buttonRow}>
                     <button
-                        className={globals.buttonLink}
+                        className={globals.button}
                         onClick={() =>
                             setTheme([theme[0], theme[1], !theme[2]])
                         }
                     >
-                        Invert current theme
+                        Invert theme palette
                     </button>
                 </div>
             </Box>
             <Box
                 properties={{
                     title: {
-                        text: "Scroll module"
+                        text: "UI module"
                     }
                 }}
             >
-                <p className={globals.text}>Blah blah blah</p>
-                <p className={globals.text}>Blah blah blah</p>
-                <p className={globals.text}>Blah blah blah</p>
-                <p className={globals.text}>Blah blah blah</p>
-                <p className={globals.text}>Blah blah blah</p>
-                <p className={globals.text}>Blah blah blah</p>
+                <p className={globals.text}>Test all of the UI in TrollCall.</p>
+
+                <p className={globals.title}>globals.title applied to p</p>
+                <span className={globals.title}>
+                    globals.title applied to span
+                </span>
+                <p className={globals.titleSmall}>
+                    globals.titleSmall applied to p
+                </p>
+                <span className={globals.titleSmall}>
+                    globals.titleSmall applied to span
+                </span>
+                <p className={globals.blockText}>
+                    globals.blockText applied to p
+                </p>
+                <span className={globals.blockText}>
+                    globals.blockText applied to span
+                </span>
+                <p className={globals.small}>globals.small applied to p</p>
+                <span className={globals.small}>
+                    globals.small applied to span
+                </span>
+                <p className={globals.mono}>globals.mono applied to p</p>
+                <span className={globals.mono}>
+                    globals.mono applied to span
+                </span>
+                <p className={globals.text}>globals.icon applied to p</p>
+                <p className={globals.icon}>face</p>
+                <p className={globals.text}>globals.icon applied to span</p>
+                <span className={globals.icon}>face</span>
+                <p className={globals.text}>globals.iconSmall applied to p</p>
+                <p className={globals.iconSmall}>face</p>
+                <p className={globals.text}>
+                    globals.iconSmall applied to span
+                </p>
+                <span className={globals.iconSmall}>face</span>
+                <p className={globals.text}>globals.iconlike applied to p</p>
+                <p className={globals.iconlike}>HS</p>
+                <p className={globals.text}>globals.iconlike applied to span</p>
+                <span className={globals.iconlike}>HS</span>
+                <Link
+                    href="#link"
+                    className={globals.link}
+                    id="link"
+                >
+                    globals.link applied to a
+                </Link>
+                <button className={globals.button}>
+                    globals.button applied to button
+                </button>
+                <Link
+                    href="#linkButton"
+                    className={globals.linkButton}
+                    id="linkButton"
+                >
+                    globals.linkButton applied to a
+                </Link>
+                <button className={globals.buttonLink}>
+                    globals.buttonLink applied to button
+                </button>
             </Box>
         </>
     );

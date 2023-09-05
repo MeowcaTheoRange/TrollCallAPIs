@@ -17,11 +17,10 @@ export default function TrollCard({ troll }: { troll: ClientTroll }) {
     const [randomLove, setRandomLove] = useState("");
     const [randomHate, setRandomHate] = useState("");
     const [randomQuote, setRandomQuote] = useState("");
-    const trollColor =
-        troll.pageColor ??
-        troll.textColor ??
+    const trollColor = (troll.pageColor?.map(x => x / 255) ??
+        troll.textColor?.map(x => x / 255) ??
         troll.falseSign?.color.color ??
-        troll.trueSign?.color.color;
+        troll.trueSign?.color.color) as [number, number, number] | undefined;
     useEffect(() => {
         if (troll.preferences.love != null && troll.preferences.love.length > 0)
             setRandomLove(pickRandom(troll.preferences.love));
@@ -34,7 +33,7 @@ export default function TrollCard({ troll }: { troll: ClientTroll }) {
         <Box
             properties={{
                 class: styles.TrollCard,
-                theme: trollColor ? Color3.fromRGB(...trollColor) : undefined
+                theme: trollColor ? new Color3(...trollColor) : undefined
             }}
         >
             <div className={styles.top}>
@@ -48,7 +47,10 @@ export default function TrollCard({ troll }: { troll: ClientTroll }) {
                     </div>
                 </Conditional>
                 <div className={styles.gridItem + " " + styles.secondary}>
-                    <p className={globals.title}>
+                    <p
+                        className={globals.title}
+                        title={troll.name.join(" ")}
+                    >
                         <Link
                             href={`/troll/${troll.owner?.name ?? ""}/${
                                 troll.name[0]

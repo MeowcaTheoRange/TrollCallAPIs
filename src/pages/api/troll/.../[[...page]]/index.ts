@@ -18,6 +18,7 @@ export default async function handler(
                 thisTroll.owner = (await ClanGET({
                     _id: troll.owner
                 })) as ClientClan;
+                console.log(thisTroll.owner);
 
                 return thisTroll;
             },

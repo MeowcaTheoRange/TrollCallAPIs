@@ -2,7 +2,6 @@ import { ClanGET } from "@/lib/trollcall/api/clan";
 import { getSingleClan } from "@/lib/trollcall/clan";
 import { ServerTrollToClientTroll } from "@/lib/trollcall/convert/troll";
 import { getManyPagedTrolls } from "@/lib/trollcall/troll";
-import { ClientClan } from "@/types/clan";
 import { NextApiRequest, NextApiResponse } from "next";
 
 export default async function handler(
@@ -16,15 +15,15 @@ export default async function handler(
             name: query.clan
         });
         if (clan == null) return res.status(404).end();
+        const clientClan = await ClanGET(null, clan);
+        if (clientClan == null) return res.status(404).end();
         const trolls = await getManyPagedTrolls(
             {
                 "owner": clan._id
             },
             async (troll: any) => {
                 const thisTroll = await ServerTrollToClientTroll(troll);
-                thisTroll.owner = (await ClanGET({
-                    _id: troll.owner
-                })) as ClientClan;
+                thisTroll.owner = clientClan;
 
                 return thisTroll;
             },
