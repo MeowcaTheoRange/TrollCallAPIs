@@ -211,7 +211,8 @@ export const ClassValues = Object.values(Class);
 
 export const SwaySchema = yup.object({
     name: yup.string().required(),
-    description: yup.string().required()
+    description: yup.string().required(),
+    color: ColorSchema.required()
 });
 
 export type SwayType = {
@@ -238,7 +239,8 @@ export const SwayValues = Object.values(Sway);
 
 export const AspectSchema = yup.object({
     name: yup.string().required(),
-    description: yup.string().required()
+    description: yup.string().required(),
+    color: ColorSchema.required()
 });
 
 export type AspectType = {

@@ -1,7 +1,6 @@
+import Ads from "@/components/Ads/Ads";
 import Box from "@/components/Box/Box";
 import Nav from "@/components/Nav/Nav";
-import Mothvertising from "@/components/ads/Mothvertising/Mothvertising";
-import NavLink from "@/components/ads/NavLink/NavLink";
 import "@/styles/_app.css";
 import "@/styles/global.module.css";
 import globals from "@/styles/global.module.css";
@@ -11,7 +10,7 @@ import Themer, { ThemeModeContext } from "@/utility/react/Themer";
 import { getCookies } from "cookies-next";
 import type { AppProps } from "next/app";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 export default function App({ Component, pageProps }: AppProps) {
     const [theme, setTheme] = useState([
@@ -23,10 +22,6 @@ export default function App({ Component, pageProps }: AppProps) {
         TROLLCALL_NAME: string;
         TROLLCALL_CODE: string;
     };
-    const [adService, setAdService] = useState(false);
-    useEffect(() => {
-        setAdService(Math.random() > 0.5);
-    }, []);
     return (
         <main className={"App" + (theme[2] ? " " + "inverted" : "")}>
             <Themer
@@ -50,7 +45,7 @@ export default function App({ Component, pageProps }: AppProps) {
                                 theme: theme[1]
                             }}
                         >
-                            {adService ? <Mothvertising /> : <NavLink />}
+                            <Ads />
                             <p className={globals.horizontalList}>
                                 <Link
                                     className={globals.link}
