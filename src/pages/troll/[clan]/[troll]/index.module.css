@@ -1,0 +1,42 @@
+.unruly {
+    width: 100%;
+    left: 0;
+    top: 0;
+    object-fit: contain;
+    /* height: 600px; */
+}
+
+.imageBox {
+    display: inline-block;
+    width: 100%;
+    flex: 3 1;
+    /* height: 100%; */
+    min-height: 600px;
+    min-width: 400px;
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    align-self: stretch;
+}
+
+.boxbox {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: stretch;
+    gap: 8px;
+    width: 100%;
+    max-width: 100%;
+    overflow: hidden;
+    align-items: flex-start;
+}
+
+.trollBox {
+    display: flex;
+    flex-direction: column;
+    flex: 2 1;
+    gap: 8px;
+    min-width: 400px;
+    width: 100%;
+    /* max-width: 600px; */
+}

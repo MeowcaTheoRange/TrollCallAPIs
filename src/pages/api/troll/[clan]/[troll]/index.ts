@@ -19,7 +19,12 @@ export default async function handler(
 ) {
     const { query, cookies, method, body } = req;
     if (method === "GET") {
-        const troll = await TrollGET(query);
+        const troll = await TrollGET(
+            {
+                "name.0": query.troll
+            },
+            query.clan as string
+        );
         if (troll == null) return res.status(404).end();
         res.json(troll);
     } else if (method === "PUT") {

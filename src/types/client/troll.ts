@@ -120,7 +120,7 @@ export const SubmitTrollSchema = yup
             ])
             .notRequired(), // colors the page.
         quirks: SubmitQuirkHolderSchema.required(), // DO NOT HANDLE RIGHT NOW.
-        quotes: yup.array().of(yup.string().max(1000)).max(20),
+        quotes: yup.array().of(yup.string().max(1000).required()).max(20),
 
         // Physical stuff
         species: yup

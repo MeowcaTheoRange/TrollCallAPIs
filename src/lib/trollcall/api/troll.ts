@@ -10,6 +10,7 @@ import { ClanGET } from "./clan";
 
 export async function TrollGET(
     query?: Partial<{ [key: string]: string | string[] }> | null,
+    clanQuery?: string | null,
     existingOwner?: ServerClan,
     existingTroll?: ServerTroll
 ): Promise<ClientTroll | null> {
@@ -17,14 +18,14 @@ export async function TrollGET(
         existingOwner != null || query == null
             ? existingOwner
             : await getSingleClan({
-                  name: query.clan
+                  name: clanQuery
               });
     if (clan == null) return null;
     const troll =
         existingTroll != null || query == null
             ? existingTroll
             : await getSingleTroll({
-                  "name.0": query.troll,
+                  ...query,
                   "owner": clan._id
               });
     if (troll == null) return null;

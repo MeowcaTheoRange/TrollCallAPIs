@@ -5,15 +5,28 @@ import { Color3 } from "@/types/assist/color";
 import { TrueSignType } from "@/types/assist/extended_zodiac";
 import { ClientTroll } from "@/types/troll";
 import { pickRandom } from "@/utility/array";
-import { AgeConverter, PronounGrouper } from "@/utility/language";
+import {
+    AgeConverter,
+    HeightConverter,
+    PronounGrouper
+} from "@/utility/language";
 import { parseQuirk } from "@/utility/quirk";
-import Conditional from "@/utility/react/Conditional";
+import Conditional, { ConditionalParent } from "@/utility/react/Conditional";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import FlairCard from "../FlairCard/FlairCard";
 import SignCard from "../SignCard/SignCard";
 import styles from "./TrollCard.module.css";
 
-export default function TrollCard({ troll }: { troll: ClientTroll }) {
+export default function TrollCard({
+    troll,
+    link = true,
+    small = true
+}: {
+    troll: ClientTroll;
+    link?: boolean;
+    small?: boolean;
+}) {
     const [randomLove, setRandomLove] = useState("");
     const [randomHate, setRandomHate] = useState("");
     const [randomQuote, setRandomQuote] = useState("");
@@ -32,33 +45,39 @@ export default function TrollCard({ troll }: { troll: ClientTroll }) {
     return (
         <Box
             properties={{
-                class: styles.TrollCard,
+                class: `${styles.TrollCard} ${
+                    small ? "" : `${styles.TrollCardSmall} TrollCardSmall`
+                }`,
                 theme: trollColor ? new Color3(...trollColor) : undefined
             }}
         >
             <div className={styles.top}>
-                <Conditional condition={troll.images.length > 0}>
-                    <div className={styles.gridItem + " " + styles.primary}>
-                        <img
-                            src={troll.images[0]}
-                            className={styles.topImage}
-                            alt=""
-                        ></img>
-                    </div>
+                <Conditional condition={small && troll.images.length >= 1}>
+                    <div
+                        className={styles.gridItem + " " + styles.primary}
+                        style={{ backgroundImage: `url("${troll.images[0]}")` }}
+                    ></div>
                 </Conditional>
                 <div className={styles.gridItem + " " + styles.secondary}>
                     <p
                         className={globals.title}
                         title={troll.name.join(" ")}
                     >
-                        <Link
-                            href={`/troll/${troll.owner?.name ?? ""}/${
-                                troll.name[0]
-                            }`}
-                            className={globals.link}
+                        <ConditionalParent
+                            condition={link}
+                            parent={children => (
+                                <Link
+                                    href={`/troll/${troll.owner?.name ?? ""}/${
+                                        troll.name[0]
+                                    }`}
+                                    className={globals.link}
+                                >
+                                    {children}
+                                </Link>
+                            )}
                         >
                             {troll.name.join(" ")}
-                        </Link>
+                        </ConditionalParent>
                     </p>
                     <p className={globals.text}>
                         ({troll.pronunciation.join(" ")})
@@ -66,19 +85,42 @@ export default function TrollCard({ troll }: { troll: ClientTroll }) {
                     <p className={globals.text}>
                         Also known as <b>{troll.username}</b> online.
                     </p>
-                    <br />
-                    <p className={globals.horizontalListLeft}>
-                        <span className={globals.text}>
-                            {AgeConverter(troll.age, true)}
-                        </span>
-                        <span className={globals.text}>-</span>
+                    <div className={globals.horizontalListLeft}>
+                        {troll.flairs.map(flair => (
+                            <FlairCard flair={flair} />
+                        ))}
+                    </div>
+                    <hr className={globals.invisep} />
+                    <p className={globals.horizontalList}>
+                        <Conditional condition={troll.class != null}>
+                            <span className={globals.text}>
+                                {troll.class?.name} of{" "}
+                                {troll.trueSign?.aspect.name}
+                            </span>
+                            <span className={globals.text}>-</span>
+                        </Conditional>
                         <span className={globals.text}>{troll.gender}</span>
                         <span className={globals.text}>-</span>
                         <span className={globals.text}>
                             {PronounGrouper(troll.pronouns)}
                         </span>
                     </p>
-                    <br />
+                    <p className={globals.horizontalList}>
+                        <span className={globals.text}>
+                            {AgeConverter(troll.age, true)}
+                        </span>
+                        <span className={globals.text}>-</span>
+                        <span className={globals.text}>
+                            {HeightConverter(troll.height)}
+                        </span>
+                        <Conditional condition={troll.species != null}>
+                            <span className={globals.text}>-</span>
+                            <span className={globals.text}>
+                                {troll.species}
+                            </span>
+                        </Conditional>
+                    </p>{" "}
+                    <hr className={globals.invisep} />
                     <Conditional condition={troll.facts != null}>
                         <ul>
                             {troll.facts?.map((fact, index) => (
@@ -90,8 +132,8 @@ export default function TrollCard({ troll }: { troll: ClientTroll }) {
                                 </li>
                             ))}
                         </ul>
-                    </Conditional>
-                    <br />
+                    </Conditional>{" "}
+                    <hr className={globals.invisep} />
                     <Conditional condition={troll.trueSign != null}>
                         <div
                             className={
@@ -115,28 +157,37 @@ export default function TrollCard({ troll }: { troll: ClientTroll }) {
                     </Conditional>
                 </div>
             </div>
-            <div className={styles.bottom}>
-                <Conditional condition={randomLove != ""}>
-                    <p className={globals.iconText}>
-                        <span className={globals.iconSmall}>thumb_up</span>
-                        <span className={globals.text}>{randomLove}</span>
-                    </p>
-                </Conditional>
-                <Conditional condition={randomHate != ""}>
-                    <p className={globals.iconText}>
-                        <span className={globals.iconSmall}>thumb_down</span>
-                        <span className={globals.text}>{randomHate}</span>
-                    </p>
-                </Conditional>
-                <Conditional condition={randomQuote != ""}>
-                    <p className={globals.iconText}>
-                        <span className={globals.iconSmall}>format_quote</span>
-                        <span className={globals.text}>
-                            {parseQuirk(randomQuote, troll.quirks["default"])}
-                        </span>
-                    </p>
-                </Conditional>
-            </div>
+            <Conditional condition={small}>
+                <div className={styles.bottom}>
+                    <Conditional condition={randomLove != ""}>
+                        <p className={globals.iconText}>
+                            <span className={globals.iconSmall}>thumb_up</span>
+                            <span className={globals.text}>{randomLove}</span>
+                        </p>
+                    </Conditional>
+                    <Conditional condition={randomHate != ""}>
+                        <p className={globals.iconText}>
+                            <span className={globals.iconSmall}>
+                                thumb_down
+                            </span>
+                            <span className={globals.text}>{randomHate}</span>
+                        </p>
+                    </Conditional>
+                    <Conditional condition={randomQuote != ""}>
+                        <p className={globals.iconText}>
+                            <span className={globals.iconSmall}>
+                                format_quote
+                            </span>
+                            <span className={globals.text}>
+                                {parseQuirk(
+                                    randomQuote,
+                                    troll.quirks["default"]
+                                )}
+                            </span>
+                        </p>
+                    </Conditional>
+                </div>
+            </Conditional>
         </Box>
     );
 }

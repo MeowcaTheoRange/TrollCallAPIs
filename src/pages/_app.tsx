@@ -18,6 +18,7 @@ export default function App({ Component, pageProps }: AppProps) {
         new Color3(0.7, 0.7, 0.6),
         false
     ] as [Color3, Color3, boolean?]);
+    const [width, setWidth] = useState(768);
     const cookies = getCookies() as {
         TROLLCALL_NAME: string;
         TROLLCALL_CODE: string;
@@ -32,10 +33,16 @@ export default function App({ Component, pageProps }: AppProps) {
             <AuthContext.Provider value={cookies}>
                 <Nav />
                 <ThemeModeContext.Provider value={theme[2]}>
-                    <div className="mainContent">
+                    <div
+                        className={"mainContent"}
+                        style={{
+                            maxWidth: width
+                        }}
+                    >
                         <Component
                             {...pageProps}
                             themerVars={[theme, setTheme]}
+                            widthVars={[width, setWidth]}
                         />
                         <Box
                             properties={{

@@ -1,7 +1,10 @@
 import { ClanGET } from "@/lib/trollcall/api/clan";
 import { getSingleClan } from "@/lib/trollcall/clan";
+import { ServerFlairToClientFlair } from "@/lib/trollcall/convert/flair";
 import { ServerTrollToClientTroll } from "@/lib/trollcall/convert/troll";
+import { getManyFlairs } from "@/lib/trollcall/flair";
 import { getManyPagedTrolls } from "@/lib/trollcall/troll";
+import { cutArray } from "@/lib/trollcall/utility/merge";
 import { NextApiRequest, NextApiResponse } from "next";
 
 export default async function handler(
@@ -24,6 +27,12 @@ export default async function handler(
             async (troll: any) => {
                 const thisTroll = await ServerTrollToClientTroll(troll);
                 thisTroll.owner = clientClan;
+                thisTroll.flairs = cutArray(
+                    await getManyFlairs(
+                        { _id: { $in: troll.flairs } },
+                        ServerFlairToClientFlair
+                    )
+                );
 
                 return thisTroll;
             },

@@ -27,7 +27,7 @@ export default function Index({
                         className={globals.link}
                         href="https://www.gnu.org/licenses/agpl-3.0.en.html"
                     >
-                        GNU General Public License
+                        GNU Affero General Public License
                     </Link>
                     . You can find the source code on Github in the{" "}
                     <Link
@@ -37,6 +37,39 @@ export default function Index({
                         MeowcaTheoRange/TrollCallAPIs
                     </Link>{" "}
                     repository.
+                </p>
+                <p
+                    className={globals.text}
+                    style={{ margin: "0 8px" }}
+                >
+                    TrollCall - A cool place to store characters.
+                    <br />
+                    Copyright (C) 2023 MeowcaTheoRange
+                    <br />
+                    <br />
+                    This program is free software: you can redistribute it
+                    and/or modify it under the terms of the GNU Affero General
+                    Public License as published by the Free Software Foundation,
+                    either version 3 of the License, or (at your option) any
+                    later version.
+                    <br />
+                    <br />
+                    This program is distributed in the hope that it will be
+                    useful, but WITHOUT ANY WARRANTY; without even the implied
+                    warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR
+                    PURPOSE. See the GNU Affero General Public License for more
+                    details.
+                    <br />
+                    <br />
+                    You should have received a copy of the GNU Affero General
+                    Public License along with this program. If not, see{" "}
+                    <Link
+                        className={globals.link}
+                        href="https://www.gnu.org/licenses/"
+                    >
+                        https://www.gnu.org/licenses/
+                    </Link>
+                    .
                 </p>
             </Box>
             <Box
@@ -329,6 +362,13 @@ export default function Index({
                     (beware popups).
                 </p>
                 <hr className={globals.sep} />
+                <p className={globals.titleSmall}>
+                    <span
+                        className={globals.headerPG}
+                        id="adblock"
+                    ></span>
+                    Advertisements
+                </p>
                 <p className={globals.text}>
                     Mothvertisements served by{" "}
                     <Link
@@ -348,6 +388,45 @@ export default function Index({
                     </Link>
                 </p>
                 <p className={globals.text}>
+                    NeoLink Ads served by{" "}
+                    <Link
+                        className={globals.link}
+                        href={"https://googol.neocities.org/neolink/"}
+                    >
+                        googol.neocities.org
+                    </Link>
+                </p>
+                <p className={globals.text}>
+                    johnvertisements served by{" "}
+                    <Link
+                        className={globals.link}
+                        href={"https://john.citrons.xyz/"}
+                    >
+                        john.citrons.xyz
+                    </Link>
+                </p>
+                <p className={globals.text}>
+                    BannerLink Ads served by{" "}
+                    <Link
+                        className={globals.link}
+                        href={"https://wsmz.gay/#misc-bannerlink"}
+                    >
+                        wsmz.gay
+                    </Link>
+                </p>
+                <p className={globals.text}>
+                    ~&gt;{" "}
+                    <button
+                        onClick={() => {
+                            window.localStorage.setItem("hideAds", "true");
+                            window.location.reload();
+                        }}
+                        className={globals.buttonLink}
+                    >
+                        Hide ads forever
+                    </button>
+                </p>
+                <p className={globals.text}>
                     ~&gt;{" "}
                     <button
                         onClick={() => {
@@ -358,6 +437,11 @@ export default function Index({
                     >
                         Give me back my ads!
                     </button>
+                </p>
+                <p className={globals.small}>
+                    Consider whitelisting us on your ad-blocker - these ad
+                    services <b>do not track</b> and are run by{" "}
+                    <b>local webmasters</b>!
                 </p>
             </Box>
             <Box

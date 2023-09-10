@@ -10,9 +10,14 @@
 
 .TrollCard .top {
     display: grid;
-    grid-template-columns: max-content auto;
-    justify-content: center;
+    grid-template-columns: 33% 66%;
+    justify-content: space-around;
     gap: 8px;
+}
+
+.TrollCardSmall .top {
+    justify-content: left;
+    grid-template-columns: 100%;
 }
 
 .TrollCard .top .gridItem {
@@ -25,17 +30,19 @@
 .TrollCard .top .primary {
     align-items: center;
     justify-content: center;
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
 }
 
 .TrollCard .top .secondary {
     gap: 4px;
     padding: 4px;
+    max-width: 100%;
 }
 
-.TrollCard .top .topImage {
-    width: 150px;
-    height: 200px;
-    object-fit: contain;
+.TrollCardSmall .top .secondary {
+    padding: 0;
 }
 
 .TrollCard .bottom {

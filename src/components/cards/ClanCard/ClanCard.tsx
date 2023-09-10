@@ -6,6 +6,7 @@ import { ClientClan } from "@/types/clan";
 import { PronounGrouper } from "@/utility/language";
 import Conditional, { ConditionalParent } from "@/utility/react/Conditional";
 import Link from "next/link";
+import FlairCard from "../FlairCard/FlairCard";
 import styles from "./ClanCard.module.css";
 
 export default function ClanCard({
@@ -60,6 +61,12 @@ export default function ClanCard({
                             {clan.displayName ?? clan.name}
                         </ConditionalParent>
                     </p>
+                    <div className={globals.horizontalListLeft}>
+                        {clan.flairs.map(flair => (
+                            <FlairCard flair={flair} />
+                        ))}
+                    </div>
+                    <hr className={globals.invisep} />
                     <p className={globals.iconText}>
                         <span className={globals.iconSmall}>group</span>
                         <span className={globals.text}>

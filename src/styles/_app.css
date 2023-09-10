@@ -55,3 +55,36 @@ ul,
 ol {
     list-style-position: inside;
 }
+
+:target {
+    overflow: visible !important;
+    width: 24px !important;
+}
+
+@keyframes move {
+    0% {
+        left: 0;
+    }
+    100% {
+        left: -4px;
+    }
+}
+
+:target:after {
+    display: inline-block;
+    content: "";
+    height: 8px;
+    width: 16px;
+    border-radius: 3px 8px 8px 3px;
+    margin-right: 8px;
+    background-color: currentColor;
+    position: relative;
+    top: 128px;
+    vertical-align: middle;
+    box-shadow: 0 0 4px currentColor;
+    animation-name: move;
+    animation-duration: 0.25s;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+    animation-timing-function: ease-out;
+}
