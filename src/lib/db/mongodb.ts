@@ -1,11 +1,5 @@
 import { MongoClient } from "mongodb";
 
-if (process.env.ENCRYPT_CODE == null) {
-    console.log(
-        "You need to write an encryption code to run a TrollCall server!"
-    );
-    process.exit();
-}
 if (process.env.MONGODB_DATABASE == null) {
     console.log("You need a MongoDB Database URI to run a TrollCall server!");
     process.exit();
