@@ -24,15 +24,22 @@ export default function TrollSkeleton() {
                     <p className={globals.text}>
                         Also known as ffjfjjfjjfjfjjjjjfjjf online.
                     </p>
-                    <br />
-                    <p className={globals.horizontalListLeft}>
+                    <hr className={globals.invisep} />
+                    <p className={globals.horizontalList}>
                         <span className={globals.text}>fj</span>
                         <span className={globals.text}>-</span>
                         <span className={globals.text}>ffjfj</span>
                         <span className={globals.text}>-</span>
                         <span className={globals.text}>fj/fjj/fjjjf</span>
                     </p>
-                    <br />
+                    <p className={globals.horizontalList}>
+                        <span className={globals.text}>fj</span>
+                        <span className={globals.text}>-</span>
+                        <span className={globals.text}>ffjfj</span>
+                        <span className={globals.text}>-</span>
+                        <span className={globals.text}>fj/fjj/fjjjf</span>
+                    </p>
+                    <hr className={globals.invisep} />
                     <ul>
                         <li className={globals.text}>fjjfjjfjffj</li>
                         <li className={globals.text}>fjjjjfjffjjfffjfj</li>

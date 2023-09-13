@@ -17,12 +17,12 @@ export default function Ads() {
                 <iframe
                     src="https://mothvertising.moth.monster/embed"
                     className={styles.Mothvertisement}
-                    // key={Math.random()}
+                    key={Math.random()}
                 ></iframe>
             ) : adService < 0.4 ? (
                 <iframe
                     src="https://dimden.neocities.org/navlink/"
-                    // key={Math.random()}
+                    key={Math.random()}
                     className={styles.NavLink}
                     width="180"
                     height="180"
@@ -33,12 +33,12 @@ export default function Ads() {
                     width="300"
                     height="250"
                     src="https://googol.neocities.org/neolink/embed.html"
-                    // key={Math.random()}
+                    key={Math.random()}
                 ></iframe>
             ) : adService < 0.8 ? (
                 <iframe
                     src="https://john.citrons.xyz/embed?ref=example.com"
-                    // key={Math.random()}
+                    key={Math.random()}
                     className={styles.Johnvertisement}
                     width="732"
                     height="90"

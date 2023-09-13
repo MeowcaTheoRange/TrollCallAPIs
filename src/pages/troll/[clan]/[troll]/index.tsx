@@ -1,4 +1,5 @@
 import Box from "@/components/Box/Box";
+import ClanCard from "@/components/cards/ClanCard/ClanCard";
 import TrollCard from "@/components/cards/TrollCard/TrollCard";
 import { TrollGET } from "@/lib/trollcall/api/troll";
 import { getSingleClan } from "@/lib/trollcall/clan";
@@ -55,6 +56,20 @@ export default function Index({
                         link={false}
                         small={false}
                     />
+                    <Box
+                        properties={{
+                            title: {
+                                text: "More..."
+                            }
+                        }}
+                    >
+                        <Link
+                            className={globals.linkButton}
+                            href={`/gallery/${troll.owner.name}/${troll.name[0]}/`}
+                        >
+                            Gallery
+                        </Link>
+                    </Box>
                     <Box
                         properties={{
                             title: {
@@ -205,7 +220,7 @@ export default function Index({
                                 ))}
                                 <Link
                                     className={globals.linkButton}
-                                    href={`/testQuirk/troll/${troll.owner.name}/${troll.name[0]}/`}
+                                    href={`/quirk/${troll.owner.name}/${troll.name[0]}/`}
                                 >
                                     Quirk Tester
                                 </Link>
@@ -218,8 +233,22 @@ export default function Index({
                     style={{ backgroundImage: `url("${troll.images[0]}")` }}
                 ></div>
             </div>
-            <Box>
-                <p className={globals.title}>Description</p>
+            <Box
+                properties={{
+                    title: {
+                        text: "Owned by"
+                    }
+                }}
+            >
+                <ClanCard clan={troll.owner} />
+            </Box>
+            <Box
+                properties={{
+                    title: {
+                        text: "Description"
+                    }
+                }}
+            >
                 <p className={globals.blockText}>{troll.description}</p>
             </Box>
         </>

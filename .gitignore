@@ -38,5 +38,6 @@ next-env.d.ts
 
 # Renogare font, until further licensing agreement
 public/fonts/Renogare/Renogare*
+src/styles/licensed/
 # Celeste assets (ripped)
 public/assets/celeste/
