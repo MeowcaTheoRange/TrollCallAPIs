@@ -1,0 +1,9 @@
+.showOnHover {
+    filter: blur(8px);
+    transition: filter 1s, user-select 1s step-end;
+    user-select: none;
+}
+.showOnHover:hover {
+    filter: none;
+    user-select: text;
+}

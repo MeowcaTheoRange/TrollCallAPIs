@@ -1,7 +1,9 @@
 /* eslint-disable @next/next/no-img-element */
 import { Color3 } from "@/types/assist/color";
 import { ClientFlair } from "@/types/flair";
+import { ConditionalParent } from "@/utility/react/Conditional";
 import { ThemeModeContext } from "@/utility/react/Themer";
+import Link from "next/link";
 import { useContext } from "react";
 import styles from "./FlairCard.module.css";
 
@@ -20,12 +22,25 @@ export default function FlairCard({ flair }: { flair: ClientFlair }) {
               }
     ) as React.CSSProperties;
     return (
-        <div
-            className={styles.FlairCard}
-            style={style}
-            title={flair.alt}
+        <ConditionalParent
+            condition={flair.link != null}
+            parent={children => (
+                <Link
+                    className={styles.FlairLink}
+                    href={flair.link ?? ""}
+                    target="_blank"
+                >
+                    {children}
+                </Link>
+            )}
         >
-            {flair.name}
-        </div>
+            <div
+                className={styles.FlairCard}
+                style={style}
+                title={flair.alt}
+            >
+                {flair.name}
+            </div>
+        </ConditionalParent>
     );
 }

@@ -23,6 +23,10 @@
     max-width: 100%;
 }
 
+.Box.ltr {
+    direction: ltr;
+}
+
 .Box .innerContent {
     padding: 6px 4px;
     display: inline-flex;

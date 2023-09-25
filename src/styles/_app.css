@@ -22,10 +22,12 @@ main.App {
     color: var(--sec-fg);
     background-image: url("/assets/pattern/pattern.png");
     background-blend-mode: hard-light;
+    --darken: linear-gradient(#0008, #0008);
 }
 
 main.App.inverted {
     background-image: url("/assets/pattern/pattern_inv.png");
+    --darken: linear-gradient(#fff8, #fff8);
 }
 
 main.App div.mainContent {

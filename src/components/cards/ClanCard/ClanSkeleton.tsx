@@ -14,29 +14,22 @@ export default function ClanSkeleton() {
             <div className={styles.horizontal}>
                 <div className={styles.horizontalLeft}></div>
                 <div className={styles.horizontalRight}>
-                    <p className={globals.title}>
-                        fjfjfjf fjf fjfjfjfjfjfj fj fj fjfjfj
-                    </p>
+                    <p className={globals.title}>Epic Megagames</p>
                     <p className={globals.iconText}>
                         <span className={globals.iconSmall}>group</span>
                         <span className={globals.text}>
-                            jjffjf j f fjfjfjfjjjjff jffff
+                            Tim Sweeney (88/12)
                         </span>
                     </p>
                     <p className={globals.iconText}>
                         <span className={globals.iconSmall}>link</span>
                         <span className={globals.text}>
-                            https://fjfjfjfjfjfjfjfjfjfjf.fjf/fjfjfjfj
+                            https://trollcall.xyz/
                         </span>
                     </p>
                     <p className={globals.iconText}>
                         <span className={globals.iconSmall}>description</span>
-                        <span className={globals.text}>
-                            ffffffffffffffffffjjjfjf fj j jjffjf
-                            jfjfjfjfjfjjfffjffjjjjfjfjffjfjj ffjfjf fj j fj
-                            fjfjjfjfj jjffjjjfjfjfjfjfjjfj fj fj jf jf jf jf
-                            fjjfjffjfjfj fjffjf fjfj
-                        </span>
+                        <span className={globals.text}>Tim Sweeney</span>
                     </p>
                 </div>
             </div>

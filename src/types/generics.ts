@@ -6,9 +6,8 @@ export type AnyObjectAnd<T> = T & { [key: string]: any };
 
 // Color
 
-export type ThemerGetSet = [
-    [Color3, Color3, boolean?],
-    (x: [Color3, Color3, boolean?]) => void
-];
+export type ThemeGet = [Color3, Color3, number?, boolean?];
+export type ThemeGetOpt = [Color3?, Color3?, number?, boolean?];
+export type ThemeSet = (x: ThemeGetOpt) => void;
 
-export type WidthGetSet = [number, (x: number) => void];
+export type ThemerGetSet = [ThemeGet, ThemeSet];

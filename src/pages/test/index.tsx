@@ -85,6 +85,8 @@ export default function Index({
             ]
         }
     });
+
+    const [statusHolder, setStatusHolder] = useState("");
     return (
         <>
             <Box
@@ -176,7 +178,8 @@ export default function Index({
                             setTheme([
                                 new Color3(0.9, 0.9, 0.8),
                                 new Color3(0.7, 0.7, 0.6),
-                                theme[2]
+                                undefined,
+                                undefined
                             ])
                         }
                     >
@@ -189,7 +192,8 @@ export default function Index({
                             setTheme([
                                 new Color3(0.5, 0.5, 0.4),
                                 new Color3(0.1, 0.1, 0),
-                                theme[2]
+                                undefined,
+                                undefined
                             ])
                         }
                     >
@@ -202,6 +206,7 @@ export default function Index({
                             setTheme([
                                 new Color3(0, 0, 0),
                                 new Color3(0, 0, 0),
+                                undefined,
                                 false
                             ])
                         }
@@ -215,6 +220,7 @@ export default function Index({
                             setTheme([
                                 new Color3(1, 1, 1),
                                 new Color3(1, 1, 1),
+                                undefined,
                                 true
                             ])
                         }
@@ -230,7 +236,8 @@ export default function Index({
                             setTheme([
                                 new Color3(1, 0, 0),
                                 new Color3(0.5, 0, 0),
-                                theme[2]
+                                undefined,
+                                undefined
                             ])
                         }
                     >
@@ -242,7 +249,8 @@ export default function Index({
                             setTheme([
                                 new Color3(1, 0.5, 0),
                                 new Color3(0.5, 0.25, 0),
-                                theme[2]
+                                undefined,
+                                undefined
                             ])
                         }
                     >
@@ -254,7 +262,8 @@ export default function Index({
                             setTheme([
                                 new Color3(1, 1, 0),
                                 new Color3(0.5, 0.5, 0),
-                                theme[2]
+                                undefined,
+                                undefined
                             ])
                         }
                     >
@@ -266,7 +275,8 @@ export default function Index({
                             setTheme([
                                 new Color3(0.5, 1, 0),
                                 new Color3(0.25, 0.5, 0),
-                                theme[2]
+                                undefined,
+                                undefined
                             ])
                         }
                     >
@@ -278,7 +288,8 @@ export default function Index({
                             setTheme([
                                 new Color3(0, 1, 0),
                                 new Color3(0, 0.5, 0),
-                                theme[2]
+                                undefined,
+                                undefined
                             ])
                         }
                     >
@@ -290,7 +301,8 @@ export default function Index({
                             setTheme([
                                 new Color3(0, 1, 0.5),
                                 new Color3(0, 0.5, 0.25),
-                                theme[2]
+                                undefined,
+                                undefined
                             ])
                         }
                     >
@@ -302,7 +314,8 @@ export default function Index({
                             setTheme([
                                 new Color3(0, 1, 1),
                                 new Color3(0, 0.5, 0.5),
-                                theme[2]
+                                undefined,
+                                undefined
                             ])
                         }
                     >
@@ -314,7 +327,8 @@ export default function Index({
                             setTheme([
                                 new Color3(0, 0.5, 1),
                                 new Color3(0, 0.25, 0.5),
-                                theme[2]
+                                undefined,
+                                undefined
                             ])
                         }
                     >
@@ -326,7 +340,8 @@ export default function Index({
                             setTheme([
                                 new Color3(0, 0, 1),
                                 new Color3(0, 0, 0.5),
-                                theme[2]
+                                undefined,
+                                undefined
                             ])
                         }
                     >
@@ -338,7 +353,8 @@ export default function Index({
                             setTheme([
                                 new Color3(0.5, 0, 1),
                                 new Color3(0.25, 0, 0.5),
-                                theme[2]
+                                undefined,
+                                undefined
                             ])
                         }
                     >
@@ -350,7 +366,8 @@ export default function Index({
                             setTheme([
                                 new Color3(1, 0, 1),
                                 new Color3(0.5, 0, 0.5),
-                                theme[2]
+                                undefined,
+                                undefined
                             ])
                         }
                     >
@@ -362,7 +379,8 @@ export default function Index({
                             setTheme([
                                 new Color3(1, 0, 0.5),
                                 new Color3(0.5, 0, 0.25),
-                                theme[2]
+                                undefined,
+                                undefined
                             ])
                         }
                     >
@@ -377,7 +395,8 @@ export default function Index({
                             setTheme([
                                 new Color3(0, 0.5, 0.6),
                                 new Color3(0, 0.1, 0.2),
-                                theme[2]
+                                undefined,
+                                undefined
                             ])
                         }
                     >
@@ -390,7 +409,8 @@ export default function Index({
                             setTheme([
                                 new Color3(0.6, 0, 0),
                                 new Color3(0.2, 0, 0),
-                                theme[2]
+                                undefined,
+                                undefined
                             ])
                         }
                     >
@@ -403,7 +423,8 @@ export default function Index({
                             setTheme([
                                 new Color3(0.5, 0, 0.6),
                                 new Color3(0.1, 0, 0.2),
-                                theme[2]
+                                undefined,
+                                undefined
                             ])
                         }
                     >
@@ -416,7 +437,8 @@ export default function Index({
                             setTheme([
                                 new Color3(0.5, 0.5, 0.6),
                                 new Color3(0, 0, 0.1),
-                                theme[2]
+                                undefined,
+                                undefined
                             ])
                         }
                     >
@@ -429,7 +451,8 @@ export default function Index({
                             setTheme([
                                 new Color3(1, 1, 0),
                                 new Color3(0.5, 1, 0),
-                                theme[2]
+                                undefined,
+                                undefined
                             ])
                         }
                     >
@@ -442,7 +465,8 @@ export default function Index({
                             setTheme([
                                 new Color3(1, 0, 0),
                                 new Color3(1, 0.75, 0),
-                                theme[2]
+                                undefined,
+                                undefined
                             ])
                         }
                     >
@@ -459,6 +483,7 @@ export default function Index({
                             setTheme([
                                 new Color3(0.6, 0, 1),
                                 new Color3(0, 0.5, 0.5),
+                                undefined,
                                 false
                             ])
                         }
@@ -472,6 +497,7 @@ export default function Index({
                             setTheme([
                                 new Color3(1, 0.6, 0),
                                 new Color3(0.5, 1, 1),
+                                undefined,
                                 true
                             ])
                         }
@@ -485,7 +511,8 @@ export default function Index({
                             setTheme([
                                 new Color3(0, 1, 0),
                                 new Color3(1, 1, 1),
-                                theme[2]
+                                undefined,
+                                undefined
                             ])
                         }
                     >
@@ -498,7 +525,8 @@ export default function Index({
                             setTheme([
                                 new Color3(1, 0.5, 0.75),
                                 new Color3(0.5, 0.25, 0.375),
-                                theme[2]
+                                undefined,
+                                undefined
                             ])
                         }
                     >
@@ -511,7 +539,8 @@ export default function Index({
                             setTheme([
                                 new Color3(1, 0.25, 0.5),
                                 new Color3(0.5, 0.125, 0.25),
-                                theme[2]
+                                undefined,
+                                undefined
                             ])
                         }
                     >
@@ -524,7 +553,8 @@ export default function Index({
                             setTheme([
                                 new Color3(0.5, 0.9, 1),
                                 new Color3(0.25, 0.45, 0.5),
-                                theme[2]
+                                undefined,
+                                undefined
                             ])
                         }
                     >
@@ -539,6 +569,7 @@ export default function Index({
                             setTheme([
                                 new Color3(0.5, 1, 0.5),
                                 new Color3(1, 1, 1),
+                                undefined,
                                 true
                             ])
                         }
@@ -551,6 +582,7 @@ export default function Index({
                             setTheme([
                                 new Color3(0, 0.5, 0),
                                 new Color3(0, 0, 0),
+                                undefined,
                                 false
                             ])
                         }
@@ -572,7 +604,12 @@ export default function Index({
                     <button
                         className={globals.button}
                         onClick={() =>
-                            setTheme([theme[0], theme[1], !theme[2]])
+                            setTheme([
+                                undefined,
+                                undefined,
+                                undefined,
+                                !theme[3]
+                            ])
                         }
                     >
                         Invert theme palette
@@ -646,6 +683,18 @@ export default function Index({
                 <button className={globals.buttonLink}>
                     globals.buttonLink applied to button
                 </button>
+            </Box>
+            <Box properties={{ title: { text: "Auth test module" } }}>
+                <button
+                    className={globals.button}
+                    onClick={async () => {
+                        const status = await fetch("/api/test/signin");
+                        setStatusHolder(await status.text());
+                    }}
+                >
+                    Test auth
+                </button>
+                <span className={globals.text}>{statusHolder}</span>
             </Box>
         </>
     );

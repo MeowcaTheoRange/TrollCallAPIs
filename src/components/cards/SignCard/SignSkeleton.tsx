@@ -12,18 +12,12 @@ export default function SignSkeleton() {
             }}
         >
             <div className={styles.gridItem}>
-                <img
-                    src={"/assets/signs/Lime/Cancer.svg"}
-                    className={styles.topImage}
-                    alt=""
-                ></img>
+                <span className={styles.topImagePlaceholder}>λ</span>
             </div>
             <div className={styles.gridItem + " " + styles.secondary}>
-                <p className={globals.title}>jjjjfjfjffjfjjffj</p>
+                <p className={globals.title}>half-life</p>
                 <p className={globals.horizontalList}>
-                    <span className={globals.text}>jjjfjfj</span>
-                    <span className={globals.text}>+</span>
-                    <span className={globals.text}>jjjfjfj</span>
+                    <span className={globals.text}>born.</span>
                 </p>
             </div>
         </Box>

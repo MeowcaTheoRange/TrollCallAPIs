@@ -3,33 +3,39 @@ import ClanCard from "@/components/cards/ClanCard/ClanCard";
 import TrollCard from "@/components/cards/TrollCard/TrollCard";
 import { TrollGET } from "@/lib/trollcall/api/troll";
 import { getSingleClan } from "@/lib/trollcall/clan";
+import { cutObject } from "@/lib/trollcall/utility/merge";
 import globals from "@/styles/global.module.css";
 import { Color3 } from "@/types/assist/color";
-import { ThemerGetSet, WidthGetSet } from "@/types/generics";
+import { ThemerGetSet } from "@/types/generics";
 import { ClientTroll } from "@/types/troll";
+import { ProperNounCase } from "@/utility/language";
 import { parseQuirk } from "@/utility/quirk";
+import AuthContext from "@/utility/react/AuthContext";
 import Conditional from "@/utility/react/Conditional";
 import { GetServerSideProps, GetStaticPropsContext } from "next";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import styles from "./index.module.css";
 
 export default function Index({
     themerVars: [theme, setTheme],
-    widthVars: [width, setWidth],
     troll
 }: {
     themerVars: ThemerGetSet;
-    widthVars: WidthGetSet;
     troll: ClientTroll;
 }) {
-    const [fetchedTrolls, setFetchedTrolls] = useState<ClientTroll[] | null>(
-        null
-    );
+    // Get user creds
+    const userCredentials = useContext(AuthContext);
+    const [isClient, setIsClient] = useState(false);
+    useEffect(() => setIsClient(true), []);
+
+    // Stack troll colors
     const trollColor = (troll.pageColor?.map(x => x / 255) ??
         troll.textColor?.map(x => x / 255) ??
         troll.falseSign?.color.color ??
         troll.trueSign?.color.color) as [number, number, number] | undefined;
+
+    // Merge policies
     const policies = {
         fanart: troll.policies?.fanart ?? troll.owner.policies.fanart,
         fanartOthers:
@@ -43,10 +49,10 @@ export default function Index({
         if (trollColor != null)
             setTheme([
                 new Color3(...trollColor),
-                new Color3(...trollColor).darken(50)
+                new Color3(...trollColor).darken(50),
+                1024
             ]);
     }, []);
-    setWidth(1024);
     return (
         <>
             <div className={styles.boxbox}>
@@ -56,20 +62,6 @@ export default function Index({
                         link={false}
                         small={false}
                     />
-                    <Box
-                        properties={{
-                            title: {
-                                text: "More..."
-                            }
-                        }}
-                    >
-                        <Link
-                            className={globals.linkButton}
-                            href={`/gallery/${troll.owner.name}/${troll.name[0]}/`}
-                        >
-                            Gallery
-                        </Link>
-                    </Box>
                     <Box
                         properties={{
                             title: {
@@ -211,19 +203,15 @@ export default function Index({
                                             format_quote
                                         </span>
                                         <span className={globals.text}>
-                                            {parseQuirk(
-                                                quote,
-                                                troll.quirks["default"]
-                                            )}
+                                            {troll.quirks != null
+                                                ? parseQuirk(
+                                                      quote,
+                                                      troll.quirks["default"]
+                                                  )
+                                                : quote}
                                         </span>
                                     </div>
                                 ))}
-                                <Link
-                                    className={globals.linkButton}
-                                    href={`/quirk/${troll.owner.name}/${troll.name[0]}/`}
-                                >
-                                    Quirk Tester
-                                </Link>
                             </Box>
                         </Conditional>
                     </Box>
@@ -233,6 +221,43 @@ export default function Index({
                     style={{ backgroundImage: `url("${troll.images[0]}")` }}
                 ></div>
             </div>
+            <Conditional condition={troll.description != ""}>
+                <Box
+                    properties={{
+                        title: {
+                            text: "Description"
+                        }
+                    }}
+                >
+                    <p className={globals.blockText}>{troll.description}</p>
+                </Box>
+            </Conditional>
+            <Box
+                properties={{
+                    title: {
+                        text: "More..."
+                    }
+                }}
+            >
+                <p>
+                    Some more stuff you can do with{" "}
+                    <b>{ProperNounCase(troll.name[0])}</b>.
+                </p>
+                <Link
+                    className={globals.linkButton}
+                    href={`/troll/${troll.owner.name}/${troll.name[0]}/gallery/`}
+                >
+                    Gallery
+                </Link>
+                <Conditional condition={troll.quirks != null}>
+                    <Link
+                        className={globals.linkButton}
+                        href={`/troll/${troll.owner.name}/${troll.name[0]}/quirk/`}
+                    >
+                        Quirk Tester
+                    </Link>
+                </Conditional>
+            </Box>
             <Box
                 properties={{
                     title: {
@@ -242,15 +267,29 @@ export default function Index({
             >
                 <ClanCard clan={troll.owner} />
             </Box>
-            <Box
-                properties={{
-                    title: {
-                        text: "Description"
-                    }
-                }}
-            >
-                <p className={globals.blockText}>{troll.description}</p>
-            </Box>
+            {isClient && userCredentials.TROLLCALL_NAME == troll.owner.name ? (
+                <Box
+                    properties={{
+                        title: {
+                            text: "Admin"
+                        },
+                        theme: theme[1]
+                    }}
+                >
+                    <p>
+                        Well, it seems you can manage{" "}
+                        <b>{ProperNounCase(troll.name[0])}</b>! Have this menu.
+                    </p>
+                    <Link
+                        className={globals.linkButton}
+                        href={`/edit/troll/${troll.owner.name}/${troll.name[0]}/`}
+                    >
+                        Edit Troll
+                    </Link>
+                </Box>
+            ) : (
+                <></>
+            )}
         </>
     );
 }
@@ -274,7 +313,7 @@ export const getServerSideProps: GetServerSideProps<{
         };
     return {
         props: {
-            troll
+            troll: cutObject(troll)
         }
     };
 };

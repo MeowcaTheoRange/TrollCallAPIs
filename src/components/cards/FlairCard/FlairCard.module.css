@@ -1,3 +1,7 @@
+.FlairLink {
+    text-decoration: none;
+}
+
 .FlairCard {
     background-color: var(--pri-bg);
     color: var(--pri-fg);

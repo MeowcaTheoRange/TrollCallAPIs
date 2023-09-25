@@ -27,12 +27,13 @@ export default async function handler(
             async (troll: any) => {
                 const thisTroll = await ServerTrollToClientTroll(troll);
                 thisTroll.owner = clientClan;
-                thisTroll.flairs = cutArray(
-                    await getManyFlairs(
-                        { _id: { $in: troll.flairs } },
-                        ServerFlairToClientFlair
-                    )
-                );
+                if (troll.flairs != null)
+                    thisTroll.flairs = cutArray(
+                        await getManyFlairs(
+                            { _id: { $in: troll.flairs } },
+                            ServerFlairToClientFlair
+                        )
+                    );
 
                 return thisTroll;
             },

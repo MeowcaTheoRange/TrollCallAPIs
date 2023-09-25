@@ -21,23 +21,25 @@ export default function Index({
 }: {
     themerVars: ThemerGetSet;
 }) {
-    const [fetchedTrolls, setFetchedTrolls] = useState<ClientTroll[] | null>(
-        null
-    );
-    const [fetchedClans, setFetchedClans] = useState<ClientClan[] | null>(null);
+    const [fetchedTrolls, setFetchedTrolls] = useState<ClientTroll[]>([]);
+    const [fetchedClans, setFetchedClans] = useState<ClientClan[]>([]);
+    async function getTroll(page?: number) {
+        const res = await fetch(
+            page ? "/api/troll/.../" + page : "/api/troll/..."
+        );
+        const json = await res.json();
+        setFetchedTrolls(json);
+    }
+    async function getClan(page?: number) {
+        const res = await fetch(
+            page ? "/api/clan/.../" + page : "/api/clan/..."
+        );
+        const json = await res.json();
+        setFetchedClans(json);
+    }
     useEffect(() => {
-        async function getTroll() {
-            const res = await fetch("/api/troll/...");
-            const json = await res.json();
-            setFetchedTrolls(json);
-        }
-        getTroll();
-        async function getClan() {
-            const res = await fetch("/api/clan/...");
-            const json = await res.json();
-            setFetchedClans(json);
-        }
-        getClan();
+        getTroll(0);
+        getClan(0);
         setTheme(defaultTheme);
     }, []);
     return (
@@ -73,7 +75,8 @@ export default function Index({
             <Box
                 properties={{
                     title: {
-                        text: "List of characters",
+                        text: "Current characters",
+                        link: "/troll/s",
                         small: true
                     }
                 }}
@@ -96,7 +99,8 @@ export default function Index({
             <Box
                 properties={{
                     title: {
-                        text: "List of clans",
+                        text: "Current clans",
+                        link: "/clan/s",
                         small: true
                     }
                 }}

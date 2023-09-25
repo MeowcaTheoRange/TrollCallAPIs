@@ -29,7 +29,11 @@ export default function Box({
     ) as React.CSSProperties;
     return (
         <div
-            className={styles.Box + (!properties?.nfw ? " " + styles.fw : "")}
+            className={
+                styles.Box +
+                (!properties?.nfw ? " " + styles.fw : "") +
+                (properties?.ltr ? " " + styles.ltr : "")
+            }
             style={style}
         >
             <Conditional condition={properties?.title != null}>

@@ -10,7 +10,14 @@ export const SubmitClanSchema = yup
             .min(3)
             .max(50)
             .lowercase(),
-        displayName: yup.string().notRequired().min(3).max(100),
+        displayName: yup
+            .string()
+            .notRequired()
+            .min(3)
+            .max(100)
+            .transform(v => {
+                return v.length <= 0 ? undefined : v;
+            }),
         members: yup
             .array()
             .of(

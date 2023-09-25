@@ -61,11 +61,13 @@ export default function ClanCard({
                             {clan.displayName ?? clan.name}
                         </ConditionalParent>
                     </p>
-                    <div className={globals.horizontalListLeft}>
-                        {clan.flairs.map(flair => (
-                            <FlairCard flair={flair} />
-                        ))}
-                    </div>
+                    <Conditional condition={clan.flairs != null}>
+                        <div className={globals.horizontalListLeft}>
+                            {clan.flairs?.map(flair => (
+                                <FlairCard flair={flair} />
+                            ))}
+                        </div>
+                    </Conditional>
                     <hr className={globals.invisep} />
                     <p className={globals.iconText}>
                         <span className={globals.iconSmall}>group</span>
@@ -93,10 +95,16 @@ export default function ClanCard({
                             </span>
                         </p>
                     </Conditional>
-                    <p className={globals.iconText}>
-                        <span className={globals.iconSmall}>description</span>
-                        <span className={globals.text}>{clan.description}</span>
-                    </p>
+                    <Conditional condition={clan.description.length > 0}>
+                        <p className={globals.iconText}>
+                            <span className={globals.iconSmall}>
+                                description
+                            </span>
+                            <span className={globals.text}>
+                                {clan.description}
+                            </span>
+                        </p>
+                    </Conditional>
                 </div>
             </div>
         </Box>

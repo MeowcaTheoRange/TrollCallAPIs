@@ -15,8 +15,8 @@ export default function Index({
     useEffect(() => setTheme(hiveswapTheme), []);
     return (
         <>
-            <Box properties={{}}>
-                <p className={globals.iconText}>
+            <Box>
+                <p className={`${globals.iconText} ${globals.forceLTR}`}>
                     <span className={globals.icon}>arrow_back</span>
                     <span className={globals.text}>hiveswap</span>
                 </p>

@@ -1,48 +1,56 @@
 import Ads from "@/components/Ads/Ads";
 import Box from "@/components/Box/Box";
 import Nav from "@/components/Nav/Nav";
+import Credits from "@/components/template/credits";
 import "@/styles/_app.css";
 import "@/styles/global.module.css";
 import globals from "@/styles/global.module.css";
-import { Color3 } from "@/types/assist/color";
+import { ThemeGet, ThemeGetOpt } from "@/types/generics";
 import AuthContext from "@/utility/react/AuthContext";
-import Themer, { ThemeModeContext } from "@/utility/react/Themer";
+import Themer, { ThemeModeContext, defaultTheme } from "@/utility/react/Themer";
 import { getCookies } from "cookies-next";
 import type { AppProps } from "next/app";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import { useState } from "react";
 
 export default function App({ Component, pageProps }: AppProps) {
-    const [theme, setTheme] = useState([
-        new Color3(0.9, 0.9, 0.8),
-        new Color3(0.7, 0.7, 0.6),
-        false
-    ] as [Color3, Color3, boolean?]);
-    const [width, setWidth] = useState(768);
+    const router = useRouter();
+    const [theme, setTheme] = useState(defaultTheme as ThemeGet);
+    function themeSetWrapper(themeSetter: ThemeGetOpt) {
+        setTheme([
+            themeSetter[0] ?? theme[0],
+            themeSetter[1] ?? theme[1],
+            themeSetter[2] ?? theme[2],
+            themeSetter[3] ?? theme[3]
+        ] as ThemeGet);
+    }
     const cookies = getCookies() as {
         TROLLCALL_NAME: string;
         TROLLCALL_CODE: string;
     };
+    // useEffect(() => {
+    //     setTheme(defaultTheme);
+    // }, [router.asPath]);
     return (
-        <main className={"App" + (theme[2] ? " " + "inverted" : "")}>
+        <main className={"App" + (theme[3] ? " " + "inverted" : "")}>
             <Themer
                 pri={theme[0]}
                 sec={theme[1]}
-                inverted={theme[2]}
+                inverted={theme[3]}
             />
             <AuthContext.Provider value={cookies}>
                 <Nav />
-                <ThemeModeContext.Provider value={theme[2]}>
+                <ThemeModeContext.Provider value={theme[3]}>
                     <div
                         className={"mainContent"}
                         style={{
-                            maxWidth: width
+                            maxWidth: theme[2]
                         }}
                     >
                         <Component
                             {...pageProps}
-                            themerVars={[theme, setTheme]}
-                            widthVars={[width, setWidth]}
+                            themerVars={[theme, themeSetWrapper]}
                         />
                         <Box
                             properties={{
@@ -81,81 +89,7 @@ export default function App({ Component, pageProps }: AppProps) {
                                     </span>
                                 </Link>
                             </p>
-                            <p className={globals.text}>
-                                TrollCall rev. 4 created by MeowcaTheoRange.
-                            </p>
-                            <p className={globals.text}>
-                                <b>trollcall.xyz</b> domain owned by Redact.
-                            </p>
-                            <p className={globals.text}>
-                                The TrollCall name is derived from the original
-                                Hiveswap Troll Call. The name may be used in an
-                                entity context or a project context.
-                            </p>
-                            <p className={globals.text}>
-                                The textboxes found in the [INSERT PAGE HERE]
-                                are inspired by those from the game{" "}
-                                <b>Celeste</b>.
-                            </p>
-                            <p>
-                                <span className={globals.blockText}>
-                                    <Link
-                                        className={globals.link}
-                                        href="https://github.com/MeowcaTheoRange/Fonts"
-                                    >
-                                        TrollCall Display
-                                    </Link>{" "}
-                                    font by MeowcaTheoRange.
-                                </span>
-                                <span className={globals.blockText}>
-                                    <Link
-                                        className={globals.link}
-                                        href="https://fonts.google.com/specimen/Space+Grotesk"
-                                    >
-                                        Space Grotesk
-                                    </Link>{" "}
-                                    font by Florian Karsten.
-                                </span>
-                                <span className={globals.blockText}>
-                                    <Link
-                                        className={globals.link}
-                                        href="https://fonts.google.com/specimen/Space+Mono"
-                                    >
-                                        Space Mono
-                                    </Link>{" "}
-                                    font by Colophon Foundry.
-                                </span>
-                                <span className={globals.blockText}>
-                                    <Link
-                                        className={globals.link}
-                                        href="https://fonts.google.com/specimen/Poppins"
-                                    >
-                                        Poppins
-                                    </Link>{" "}
-                                    font by Indian Type Foundry.
-                                </span>
-                                <span className={globals.blockText}>
-                                    <Link
-                                        className={globals.link}
-                                        href="https://fonts.google.com/specimen/Flow+Circular"
-                                    >
-                                        Flow Circular
-                                    </Link>{" "}
-                                    font by Dan Ross.
-                                </span>
-                                <span className={globals.blockText}>
-                                    <Link
-                                        className={globals.link}
-                                        href="https://www.creativefabrica.com/product/renogare/"
-                                    >
-                                        Renogare
-                                    </Link>{" "}
-                                    font by Deepak Dogra.
-                                </span>
-                            </p>
-                            <p className={globals.text}>
-                                Homestuck and HIVESWAP © Homestuck Inc.
-                            </p>
+                            <Credits />
                         </Box>
                     </div>
                 </ThemeModeContext.Provider>

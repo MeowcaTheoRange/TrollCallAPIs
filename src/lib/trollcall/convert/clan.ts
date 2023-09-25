@@ -14,6 +14,13 @@ export async function ServerClanToClientClan(
     return clientClan;
 }
 
+export function ClientClanToSubmitClan(clientClan: ClientClan): SubmitClan {
+    let serverClan: SubmitClan = {
+        ...clientClan
+    };
+    return serverClan;
+}
+
 export function SubmitClanToServerClan(
     submitClan: Partial<SubmitClan>
 ): Omit<Partial<ServerClan>, "_id"> {

@@ -10,7 +10,10 @@ export async function ServerTrollToClientTroll(
 
     let clientTroll: Partial<ClientTroll> = {
         ...sanitizedTroll,
-        trueSign: TrueSign[serverTroll.trueSign],
+        trueSign:
+            serverTroll.trueSign != null
+                ? TrueSign[serverTroll.trueSign]
+                : null,
         falseSign:
             serverTroll.falseSign != null
                 ? TrueSign[serverTroll.falseSign]
@@ -22,6 +25,24 @@ export async function ServerTrollToClientTroll(
     };
 
     return clientTroll;
+}
+
+export function ClientTrollToSubmitTroll(
+    clientTroll: ClientTroll
+): SubmitTroll {
+    let submitTroll: SubmitTroll = {
+        ...clientTroll,
+        quirks: clientTroll.quirks
+            ? Object.entries(clientTroll.quirks)
+            : undefined,
+        trueSign: clientTroll.trueSign ? clientTroll.trueSign.name : undefined,
+        falseSign: clientTroll.falseSign
+            ? clientTroll.falseSign.name
+            : undefined,
+        class: clientTroll.class ? clientTroll.class.name : undefined
+    };
+
+    return submitTroll;
 }
 
 export function SubmitTrollToServerTroll(

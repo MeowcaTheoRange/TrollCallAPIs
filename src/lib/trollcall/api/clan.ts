@@ -17,11 +17,12 @@ export async function ClanGET(
             : await getSingleClan(query);
     if (clan == null) return null;
     const serverClan = await ServerClanToClientClan({ ...clan });
-    serverClan.flairs = cutArray(
-        await getManyFlairs(
-            { _id: { $in: clan.flairs } },
-            ServerFlairToClientFlair
-        )
-    );
+    if (clan.flairs != null)
+        serverClan.flairs = cutArray(
+            await getManyFlairs(
+                { _id: { $in: clan.flairs } },
+                ServerFlairToClientFlair
+            )
+        );
     return serverClan as ClientClan;
 }

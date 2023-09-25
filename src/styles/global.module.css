@@ -31,12 +31,18 @@
     transition: box-shadow 0.125s;
 }
 
-.linkButton:hover {
+.linkButton:hover:not(:disabled) {
     text-decoration: none;
     box-shadow: 0 0 8px currentColor;
 }
 
-.button {
+.linkButton:disabled {
+    opacity: 0.5;
+    cursor: default;
+}
+
+.button,
+.buttonIcon {
     color: inherit;
     box-shadow: 0 0 2px currentColor;
     background-color: transparent;
@@ -52,8 +58,20 @@
     transition: box-shadow 0.125s;
 }
 
-.button:hover {
+.button:hover:not(:disabled),
+.buttonIcon:hover:not(:disabled) {
     box-shadow: 0 0 8px currentColor;
+}
+
+.button:disabled,
+.buttonIcon:disabled {
+    opacity: 0.5;
+    cursor: default;
+}
+
+.buttonIcon {
+    font-family: "Material Symbols Outlined";
+    font-variation-settings: "FILL" 1, "opsz" 24, "GRAD" 0, "wght" 400;
 }
 
 .buttonLink {
@@ -107,6 +125,14 @@
     white-space: pre-line;
 }
 
+.blockTextKeepTabs {
+    display: block;
+    font-size: 16px;
+    line-height: 20px;
+    font-family: "Space Grotesk";
+    white-space: pre-wrap;
+}
+
 .small {
     font-size: 12px;
     line-height: 14px;
@@ -124,6 +150,7 @@
     font-size: 24px;
     line-height: 24px;
     height: 24px;
+    vertical-align: middle;
     font-family: "Material Symbols Outlined";
     font-variation-settings: "FILL" 1, "opsz" 24, "GRAD" 0, "wght" 400;
     user-select: none;
@@ -162,14 +189,15 @@
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 0 8px;
+    gap: 8px;
 }
+
 .horizontalListLeft {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: flex-start;
-    gap: 0 8px;
+    gap: 8px;
 }
 .verticalListTop {
     display: flex;
@@ -276,4 +304,8 @@
     height: 0;
     width: 0;
     overflow: hidden;
+}
+
+.forceLTR {
+    direction: ltr;
 }

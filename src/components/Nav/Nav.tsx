@@ -23,6 +23,7 @@ export default function Nav(elementProps: AnyObject) {
                             href="/"
                         >
                             TrollCall
+                            <span className={globals.small}> r4 Beta</span>
                         </Link>
                     </span>
                     <span className={globals.title + " " + styles.shortTitle}>
@@ -30,10 +31,18 @@ export default function Nav(elementProps: AnyObject) {
                             className={globals.link}
                             href="/"
                         >
-                            TC
+                            TC<span className={globals.small}> Beta</span>
                         </Link>
                     </span>
                 </div>
+                <span className={globals.icon}>
+                    <Link
+                        className={globals.link}
+                        href="https://github.com/MeowcaTheoRange/TrollCallAPIs/issues"
+                    >
+                        bug_report
+                    </Link>
+                </span>
                 <span className={globals.icon}>
                     <Link
                         className={globals.link}
@@ -82,7 +91,7 @@ export default function Nav(elementProps: AnyObject) {
                         </span>
                         <span className={globals.icon}>
                             <Link
-                                href={`/logout`}
+                                href={`/manage`}
                                 className={globals.link}
                             >
                                 logout
@@ -90,7 +99,24 @@ export default function Nav(elementProps: AnyObject) {
                         </span>
                     </>
                 ) : (
-                    <></>
+                    <>
+                        <span className={globals.icon}>
+                            <Link
+                                href={`/add/clan`}
+                                className={globals.link}
+                            >
+                                group_add
+                            </Link>
+                        </span>
+                        <span className={globals.icon}>
+                            <Link
+                                href={`/manage`}
+                                className={globals.link}
+                            >
+                                login
+                            </Link>
+                        </span>
+                    </>
                 )}
             </div>
         </div>

@@ -34,7 +34,7 @@ export default function Index({
     return (
         <>
             <Box properties={{}}>
-                <p className={globals.iconText}>
+                <p className={`${globals.iconText} ${globals.forceLTR}`}>
                     <span className={globals.icon}>arrow_back</span>
                     <Link
                         className={globals.link}
@@ -110,7 +110,7 @@ export const getStaticPaths: GetStaticPaths = () => {
                 name: sway.name
             }
         })),
-        fallback: true
+        fallback: false
     };
 };
 

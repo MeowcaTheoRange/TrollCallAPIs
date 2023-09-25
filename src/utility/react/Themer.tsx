@@ -1,4 +1,5 @@
 import { Color3 } from "@/types/assist/color";
+import { ThemeGet } from "@/types/generics";
 import { createContext } from "react";
 
 export default function Themer({
@@ -37,11 +38,14 @@ export default function Themer({
 
 export const ThemeModeContext = createContext(false as boolean | undefined);
 
-export const defaultTheme: [Color3, Color3] = [
+export const defaultTheme: ThemeGet = [
     new Color3(0.9, 0.9, 0.8),
-    new Color3(0.7, 0.7, 0.6)
+    new Color3(0.7, 0.7, 0.6),
+    768
 ];
-export const hiveswapTheme: [Color3, Color3] = [
+export const hiveswapTheme: ThemeGet = [
     new Color3(0.5, 0, 1),
-    new Color3(0.25, 0, 0.5)
+    new Color3(0.25, 0, 0.5),
+    768,
+    undefined
 ];

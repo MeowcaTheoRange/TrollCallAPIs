@@ -26,3 +26,5 @@ if (process.env.NODE_ENV === "development") {
 }
 
 export const mainDB = client.db(process.env.MONGODB_DATABASE_NAME);
+
+export const firstDB = client.db("trollcall");

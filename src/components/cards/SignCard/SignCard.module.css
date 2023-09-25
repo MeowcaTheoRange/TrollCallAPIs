@@ -31,3 +31,14 @@
         drop-shadow(1px -1px 0 currentcolor)
         drop-shadow(-1px 1px 0 currentcolor);
 }
+.SignCard.Skeleton .topImagePlaceholder {
+    font-family: "Renogare", "Poppins", "Space Grotesk", "Fira Code",
+        "Courier New", monospace;
+    font-size: 52px;
+    width: 52px;
+    color: var(--pri-bg);
+    filter: drop-shadow(1px 1px 0 var(--pri-fg))
+        drop-shadow(-1px -1px 0 var(--pri-fg))
+        drop-shadow(1px -1px 0 var(--pri-fg))
+        drop-shadow(-1px 1px 0 var(--pri-fg));
+}

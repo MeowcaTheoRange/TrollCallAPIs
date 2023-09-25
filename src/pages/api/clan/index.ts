@@ -33,11 +33,18 @@ export default async function handler(
         >;
         if (serverClan.code == null) serverClan.code = nanoid(16);
 
-        // Encrypt code lole
-        serverClan.code = hash(serverClan.code).toString();
+        const currentcode = serverClan.code;
 
-        if (!compareLevels(getLevel(serverClan), "SUPPORTER"))
+        // Encrypt code lole
+        serverClan.code = await hash(serverClan.code).toString();
+
+        if (
+            serverClan.flairs != null &&
+            !compareLevels(getLevel(serverClan), "SUPPORTER")
+        ) {
             serverClan.bgimage = null;
+            serverClan.css = null;
+        }
         const newClan = await createClan(serverClan);
         if (newClan == null) return res.status(503).end();
         // Give cookies
@@ -46,11 +53,7 @@ export default async function handler(
                 path: "/",
                 maxAge: 31540000
             }),
-            serialize("TROLLCALL_CODE", newClan.code, {
-                path: "/",
-                maxAge: 31540000
-            }),
-            serialize("TROLLCALL_PFP", newClan.pfp ?? "", {
+            serialize("TROLLCALL_CODE", currentcode, {
                 path: "/",
                 maxAge: 31540000
             })

@@ -21,12 +21,13 @@ export default async function handler(
                 thisTroll.owner = (await ClanGET({
                     _id: troll.owner
                 })) as ClientClan;
-                thisTroll.flairs = cutArray(
-                    await getManyFlairs(
-                        { _id: { $in: troll.flairs } },
-                        ServerFlairToClientFlair
-                    )
-                );
+                if (troll.flairs != null)
+                    thisTroll.flairs = cutArray(
+                        await getManyFlairs(
+                            { _id: { $in: troll.flairs } },
+                            ServerFlairToClientFlair
+                        )
+                    );
 
                 return thisTroll;
             },

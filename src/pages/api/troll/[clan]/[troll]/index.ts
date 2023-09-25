@@ -34,6 +34,7 @@ export default async function handler(
                 stripUnknown: true
             })) as Partial<SubmitTroll>;
         } catch (err) {
+            console.log(err);
             return res.status(400).send(err);
         }
         const checkClan = await getSingleClan({

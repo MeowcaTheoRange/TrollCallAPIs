@@ -11,10 +11,10 @@ export const SubmitQuirkHolderSchema = yup
             ])
             .required()
     )
-    .required()
-    .test("has-default", 'Needs "default" Quirk Mode', v =>
-        v.some(([k, v]) => k === "default" || k === "Default")
-    );
+    .test("has-default", 'Needs "default" Quirk Mode', v => {
+        if (v == undefined) return true;
+        return v.some(([k, v]) => k === "default" || k === "Default");
+    });
 
 export type SubmitQuirkHolder = yup.InferType<typeof SubmitQuirkHolderSchema>;
 

@@ -30,12 +30,13 @@ export async function TrollGET(
               });
     if (troll == null) return null;
     const serverTroll = await ServerTrollToClientTroll(troll);
-    serverTroll.flairs = cutArray(
-        await getManyFlairs(
-            { _id: { $in: troll.flairs } },
-            ServerFlairToClientFlair
-        )
-    );
+    if (troll.flairs != null)
+        serverTroll.flairs = cutArray(
+            await getManyFlairs(
+                { _id: { $in: troll.flairs } },
+                ServerFlairToClientFlair
+            )
+        );
     // we know this is not null, as we passed in our own clan
     serverTroll.owner = (await ClanGET(null, clan)) as ClientClan;
     return serverTroll as ClientTroll;
