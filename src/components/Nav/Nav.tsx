@@ -75,6 +75,14 @@ export default function Nav(elementProps: AnyObject) {
                     <>
                         <span className={globals.icon}>
                             <Link
+                                className={globals.link}
+                                href="/add/message/"
+                            >
+                                send
+                            </Link>
+                        </span>
+                        <span className={globals.icon}>
+                            <Link
                                 href={`/clan/${userCredentials.TROLLCALL_NAME}`}
                                 className={globals.link}
                             >

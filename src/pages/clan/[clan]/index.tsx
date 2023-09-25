@@ -1,5 +1,6 @@
 import Box from "@/components/Box/Box";
 import ClanCard from "@/components/cards/ClanCard/ClanCard";
+import MessageCard from "@/components/cards/MessageCard/MessageCard";
 import TrollCard from "@/components/cards/TrollCard/TrollCard";
 import TrollSkeleton from "@/components/cards/TrollCard/TrollSkeleton";
 import { ClanGET } from "@/lib/trollcall/api/clan";
@@ -8,6 +9,7 @@ import globals from "@/styles/global.module.css";
 import { Color3 } from "@/types/assist/color";
 import { ClientClan } from "@/types/clan";
 import { ThemerGetSet } from "@/types/generics";
+import { ClientMessage } from "@/types/message";
 import { ClientTroll } from "@/types/troll";
 import AuthContext from "@/utility/react/AuthContext";
 import Conditional from "@/utility/react/Conditional";
@@ -31,7 +33,19 @@ export default function Index({
     const [fetchedTrolls, setFetchedTrolls] = useState<ClientTroll[] | null>(
         null
     );
-
+    const [fetchedMessages, setFetchedMessages] = useState<ClientMessage[]>([]);
+    const [messagePageNum, setMessagePageNum] = useState(0);
+    const [noMore, setNoMore] = useState(false);
+    async function getMessage(page?: number) {
+        const res = await fetch(
+            page
+                ? "/api/message/" + clan.name + "/.../" + page
+                : "/api/message/" + clan.name + "/..."
+        );
+        const json = await res.json();
+        setFetchedMessages(fetchedMessages.concat(json));
+        setNoMore(json.length < 5);
+    }
     async function getTroll(page?: number) {
         const res = await fetch(
             page
@@ -43,6 +57,7 @@ export default function Index({
     }
     useEffect(() => {
         getTroll(0);
+        getMessage(messagePageNum);
         const color = clan.color?.map(x => x / 255) as [number, number, number];
         if (color != null)
             setTheme([
@@ -115,6 +130,35 @@ ${clan.css ?? ""}
                     ))
                 )}
             </Box>
+            {fetchedMessages.length > 0 ? (
+                <Box
+                    properties={{
+                        title: {
+                            text: "Messages",
+                            small: true
+                        }
+                    }}
+                >
+                    {fetchedMessages.map((message: ClientMessage, idx) => (
+                        <MessageCard
+                            message={message}
+                            recipient={clan}
+                            key={idx + "clan"}
+                        />
+                    ))}
+                    <button
+                        className={globals.button}
+                        onClick={() => {
+                            setMessagePageNum(messagePageNum + 1);
+                        }}
+                        disabled={noMore}
+                    >
+                        Load more
+                    </button>
+                </Box>
+            ) : (
+                <></>
+            )}
         </>
     );
 }

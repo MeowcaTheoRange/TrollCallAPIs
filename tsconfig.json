@@ -19,6 +19,11 @@
             "@/*": ["./src/*"]
         }
     },
-    "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
+    "include": [
+        "next-env.d.ts",
+        "**/*.ts",
+        "**/*.tsx",
+        "src/pages/api/message/[clan]/.../index.ts"
+    ],
     "exclude": ["node_modules"]
 }

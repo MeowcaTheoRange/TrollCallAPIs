@@ -47,7 +47,7 @@ export async function updateOne(collection: string, find: any, update: any) {
 
 export async function deleteOne(collection: string, find: any) {
     const selectedCollection = mainDB.collection(collection);
-    return await selectedCollection.findOneAndDelete(find);
+    return await selectedCollection.deleteOne(find);
 }
 
 export async function cursorToArray<T>(

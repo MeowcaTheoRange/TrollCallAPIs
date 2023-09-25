@@ -73,7 +73,10 @@ export default function Index({
                             <p className={globals.titleSmall}>Policies</p>
                             <div className={globals.verticalListTop}>
                                 <div className={globals.iconText}>
-                                    <span className={globals.icon}>
+                                    <span
+                                        className={globals.icon}
+                                        title={policies.fanart}
+                                    >
                                         {policies.fanart === "yes"
                                             ? "check"
                                             : policies.fanart === "ask"
@@ -83,7 +86,10 @@ export default function Index({
                                     <span className={globals.text}>Fanart</span>
                                 </div>
                                 <div className={globals.iconText}>
-                                    <span className={globals.icon}>
+                                    <span
+                                        className={globals.icon}
+                                        title={policies.fanartOthers}
+                                    >
                                         {policies.fanartOthers === "yes"
                                             ? "check"
                                             : policies.fanartOthers === "ask"
@@ -95,7 +101,10 @@ export default function Index({
                                     </span>
                                 </div>
                                 <div className={globals.iconText}>
-                                    <span className={globals.icon}>
+                                    <span
+                                        className={globals.icon}
+                                        title={policies.fanfiction}
+                                    >
                                         {policies.fanfiction === "yes"
                                             ? "check"
                                             : policies.fanfiction === "ask"
@@ -107,7 +116,10 @@ export default function Index({
                                     </span>
                                 </div>
                                 <div className={globals.iconText}>
-                                    <span className={globals.icon}>
+                                    <span
+                                        className={globals.icon}
+                                        title={policies.kinning}
+                                    >
                                         {policies.kinning === "yes"
                                             ? "check"
                                             : policies.kinning === "ask"
@@ -119,7 +131,10 @@ export default function Index({
                                     </span>
                                 </div>
                                 <div className={globals.iconText}>
-                                    <span className={globals.icon}>
+                                    <span
+                                        className={globals.icon}
+                                        title={policies.shipping}
+                                    >
                                         {policies.shipping === "yes"
                                             ? "check"
                                             : policies.shipping === "ask"

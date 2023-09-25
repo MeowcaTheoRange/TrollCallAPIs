@@ -101,8 +101,8 @@ export default function TrollCard({
                     <hr className={globals.invisep} />
                     <Conditional
                         condition={
-                            troll.class != null &&
-                            troll.gender != null &&
+                            troll.class != null ||
+                            troll.gender != null ||
                             troll.species != null
                         }
                     >
