@@ -9,6 +9,7 @@ import { ClientClan } from "@/types/clan";
 import { ThemerGetSet } from "@/types/generics";
 import AuthContext from "@/utility/react/AuthContext";
 import { defaultTheme } from "@/utility/react/Themer";
+import { getCookie } from "cookies-next";
 import { GetServerSideProps, GetStaticPropsContext } from "next";
 import { useRouter } from "next/router";
 import { useContext, useEffect, useState } from "react";
@@ -38,7 +39,10 @@ export default function AddTroll({
                 router={router}
                 method="PUT"
                 onSubmitURI={`/api/clan/${clan.name}`}
-                initialValues={ClientClanToSubmitClan(clan)}
+                initialValues={{
+                    ...ClientClanToSubmitClan(clan),
+                    code: getCookie("TROLLCALL_CODE")
+                }}
             />
         </>
     ) : (

@@ -4,6 +4,7 @@ import globals from "@/styles/global.module.css";
 import form_globals from "@/styles/global_form.module.css";
 import { Color3 } from "@/types/assist/color";
 import { SubmitClan, SubmitClanSchema } from "@/types/client/clan";
+import { getCookie } from "cookies-next";
 import { ArrayHelpers, ErrorMessage, Field, FieldArray, Form, Formik } from "formik";
 import { NextRouter } from "next/router";
 import { useState } from "react";
@@ -34,7 +35,8 @@ export default function ClanFormTemplate({
                             name: "",
                             pronouns: [["", "", ""]]
                         }
-                    ]
+                    ],
+                    code: getCookie("TROLLCALL_CODE")
                 } as SubmitClan)
             }
             validationSchema={SubmitClanSchema}
