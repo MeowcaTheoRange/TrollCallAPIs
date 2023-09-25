@@ -55,7 +55,7 @@ export default function MessageCard({
                     </Conditional>
                 </div>
             </div>
-            <div className={globals.horizontalListLeft}>
+            <div className={globals.iconText}>
                 <Conditional
                     condition={
                         message.from.name === userCredentials.TROLLCALL_NAME ||
