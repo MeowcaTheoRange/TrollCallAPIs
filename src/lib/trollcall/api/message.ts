@@ -1,4 +1,4 @@
-import { ClientClan, ServerClan } from "@/types/clan";
+import { ServerClan } from "@/types/clan";
 import { ClientMessage } from "@/types/message";
 import { getSingleClan } from "../clan";
 import { ServerMessageToClientMessage } from "../convert/message";
@@ -26,8 +26,12 @@ export async function MessageGET(
         _id: message.from
     });
     if (from == null) return null;
-    const serverMessage = await ServerMessageToClientMessage(message);
+    const fullClan = await ClanGET(null, from);
+    if (fullClan == null) return null;
+    const endMessage: ClientMessage = {
+        ...(await ServerMessageToClientMessage(message)),
+        from: fullClan
+    };
     // we know this is not null, as we passed in our own clan
-    serverMessage.from = (await ClanGET(null, from)) as ClientClan;
-    return serverMessage as ClientMessage;
+    return endMessage;
 }
