@@ -387,7 +387,7 @@ export default function ClanFormTemplate({
                                 <span className={globals.text}>The color that represents your clan the most.</span>
                             </div>
                             <div className={globals.verticalListTop}>
-                                {values.color != null && errors.color == null ? (
+                                {values.color != null ? (
                                     <>
                                         <div className={globals.horizontalListLeft}>
                                             <span className={globals.text}>Red</span>

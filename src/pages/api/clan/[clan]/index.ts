@@ -59,15 +59,20 @@ export default async function handler(
 
         // Encrypt code lole
         serverClan.code = await hash(serverClan.code);
-
-        if (
-            serverClan.flairs != null &&
-            !compareLevels(getLevel(checkExistingClan), "SUPPORTER")
-        ) {
-            serverClan.bgimage = null;
-            serverClan.css = null;
-        }
         const bothClans = MergeServerClans(checkExistingClan, serverClan);
+        if (
+            bothClans.flairs == null ||
+            !(
+                bothClans.flairs != null &&
+                compareLevels(getLevel(checkExistingClan), "SUPPORTER")
+            )
+        ) {
+            bothClans.bgimage = null;
+            bothClans.css = null;
+        }
+        if (bothClans.bgimage === "") bothClans.bgimage = null;
+        if (bothClans.css === "") bothClans.css = null;
+
         const newClan = await changeClan(bothClans);
         if (newClan == null) return res.status(503).end();
         // Give cookies, redundant style

@@ -790,7 +790,7 @@ export default function TrollFormTemplate({
                                 </span>
                             </div>
                             <div className={globals.verticalListTop}>
-                                {values.textColor != null && errors.textColor == null ? (
+                                {values.textColor != null ? (
                                     <>
                                         <div className={globals.horizontalListLeft}>
                                             <span className={globals.text}>Red</span>
