@@ -59,7 +59,13 @@ export const SubmitClanSchema = yup
             .min(1)
             .max(20),
         description: yup.string().max(10000).ensure(),
-        url: yup.string().notRequired().url(),
+        url: yup
+            .string()
+            .notRequired()
+            .url()
+            .transform(v => {
+                return v.length <= 0 ? undefined : v;
+            }),
         color: yup
             .tuple([
                 yup.number().min(0).max(255).required(),
@@ -76,9 +82,26 @@ export const SubmitClanSchema = yup
                 fanfiction: PolicySchema.required()
             })
             .required(),
-        pfp: yup.string().notRequired().url(),
-        bgimage: yup.string().notRequired().url(),
-        css: yup.string().notRequired(),
+        pfp: yup
+            .string()
+            .notRequired()
+            .url()
+            .transform(v => {
+                return v.length <= 0 ? undefined : v;
+            }),
+        bgimage: yup
+            .string()
+            .notRequired()
+            .url()
+            .transform(v => {
+                return v.length <= 0 ? undefined : v;
+            }),
+        css: yup
+            .string()
+            .notRequired()
+            .transform(v => {
+                return v.length <= 0 ? undefined : v;
+            }),
         code: yup.string().notRequired().max(256, "Too secure!!")
         // flairs: yup.array().of(ClientFlairSchema).required(),
     })

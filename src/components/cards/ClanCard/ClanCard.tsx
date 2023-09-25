@@ -24,7 +24,9 @@ export default function ClanCard({
                 theme: clan.color ? Color3.fromRGB(...clan.color) : undefined
             }}
         >
-            <Conditional condition={link && clan.bgimage != null}>
+            <Conditional
+                condition={link && clan.bgimage != null && clan.bgimage != ""}
+            >
                 <div className={styles.headerImage}>
                     <img
                         src={clan.bgimage as string}
@@ -33,7 +35,7 @@ export default function ClanCard({
                 </div>
             </Conditional>
             <div className={styles.horizontal}>
-                <Conditional condition={clan.pfp != null}>
+                <Conditional condition={clan.pfp != null && clan.pfp != ""}>
                     <div className={styles.horizontalLeft}>
                         <img
                             src={clan.pfp as string}
@@ -87,7 +89,7 @@ export default function ClanCard({
                                 .join(", ")}
                         </span>
                     </p>
-                    <Conditional condition={clan.url != null}>
+                    <Conditional condition={clan.url != null && clan.url != ""}>
                         <p className={globals.iconText}>
                             <span className={globals.iconSmall}>link</span>
                             <span className={globals.text}>
