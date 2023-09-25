@@ -16,6 +16,7 @@ export default function ClanCard({
     clan: ClientClan;
     link?: boolean;
 }) {
+    console.log(clan);
     return (
         <Box
             properties={{
@@ -61,7 +62,11 @@ export default function ClanCard({
                             {clan.displayName ?? clan.name}
                         </ConditionalParent>
                     </p>
-                    <Conditional condition={clan.flairs != null}>
+                    <Conditional
+                        condition={
+                            clan.flairs != null && clan.flairs.length > 0
+                        }
+                    >
                         <div className={globals.horizontalListLeft}>
                             {clan.flairs?.map(flair => (
                                 <FlairCard flair={flair} />

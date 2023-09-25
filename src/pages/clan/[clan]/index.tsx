@@ -34,7 +34,9 @@ export default function Index({
 
     async function getTroll(page?: number) {
         const res = await fetch(
-            page ? "/api/troll/.../" + page : "/api/troll/..."
+            page
+                ? "/api/troll/" + clan.name + "/.../" + page
+                : "/api/troll/" + clan.name + "/..."
         );
         const json = await res.json();
         setFetchedTrolls(json);

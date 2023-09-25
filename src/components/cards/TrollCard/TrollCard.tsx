@@ -87,7 +87,11 @@ export default function TrollCard({
                             Also known as <b>{troll.username}</b> online.
                         </p>
                     </Conditional>
-                    <Conditional condition={troll.flairs != null}>
+                    <Conditional
+                        condition={
+                            troll.flairs != null && troll.flairs.length > 0
+                        }
+                    >
                         <div className={globals.horizontalListLeft}>
                             {troll.flairs?.map(flair => (
                                 <FlairCard flair={flair} />
