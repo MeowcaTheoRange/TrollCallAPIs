@@ -51,7 +51,7 @@ export default function MessageCard({
                         <p className={globals.titleSmall}>{message.subject}</p>
                     </Conditional>
                     <Conditional condition={message.body != ""}>
-                        <p className={globals.text}>{message.body}</p>
+                        <p className={globals.blockText}>{message.body}</p>
                     </Conditional>
                 </div>
             </div>
