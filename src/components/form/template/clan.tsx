@@ -30,6 +30,7 @@ export default function ClanFormTemplate({
                 ({
                     name: "",
                     description: "",
+                    url: "",
                     members: [
                         {
                             name: "",
@@ -480,7 +481,7 @@ export default function ClanFormTemplate({
                             <div className={form_globals.horizlist}>
                                 <span className={globals.icon}>image</span>
                                 <Field
-                                    type="text"
+                                    type="url"
                                     name="pfp"
                                     placeholder="https://example.com/"
                                     className={`
@@ -491,6 +492,29 @@ export default function ClanFormTemplate({
                             </div>
                             <ErrorMessage
                                 name="pfp"
+                                render={ErrorHandler}
+                            />
+                        </div>
+                        <hr className={globals.invisep} />
+                        <div className={globals.verticalListTop}>
+                            <div className={form_globals.verticalListCrunch}>
+                                <p className={globals.titleSmall}>URL</p>
+                                <span className={globals.text}>A link to your clan's main resource on the interwebs.</span>
+                            </div>
+                            <div className={form_globals.horizlist}>
+                                <span className={globals.icon}>link</span>
+                                <Field
+                                    type="url"
+                                    name="url"
+                                    placeholder="https://example.com/"
+                                    className={`
+                                        ${form_globals.textLikeInput}
+                                        ${form_globals.textLikeInputTight}
+                                    `}
+                                />
+                            </div>
+                            <ErrorMessage
+                                name="url"
                                 render={ErrorHandler}
                             />
                         </div>
