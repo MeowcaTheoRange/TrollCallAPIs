@@ -4,7 +4,7 @@ import { ServerFlairToClientFlair } from "@/lib/trollcall/convert/flair";
 import { ServerTrollToClientTroll } from "@/lib/trollcall/convert/troll";
 import { getManyFlairs } from "@/lib/trollcall/flair";
 import { getManyPagedTrolls } from "@/lib/trollcall/troll";
-import { cutArray } from "@/lib/trollcall/utility/merge";
+import { cutArray, cutObjectBlank } from "@/lib/trollcall/utility/merge";
 import { NextApiRequest, NextApiResponse } from "next";
 
 export default async function handler(
@@ -35,7 +35,7 @@ export default async function handler(
                         )
                     );
 
-                return thisTroll;
+                return cutObjectBlank(thisTroll);
             },
             5,
             page

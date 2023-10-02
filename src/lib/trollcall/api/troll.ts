@@ -5,7 +5,7 @@ import { ServerFlairToClientFlair } from "../convert/flair";
 import { ServerTrollToClientTroll } from "../convert/troll";
 import { getManyFlairs } from "../flair";
 import { getSingleTroll } from "../troll";
-import { cutArray } from "../utility/merge";
+import { cutArray, cutObjectBlank } from "../utility/merge";
 import { ClanGET } from "./clan";
 
 export async function TrollGET(
@@ -39,5 +39,5 @@ export async function TrollGET(
         );
     // we know this is not null, as we passed in our own clan
     serverTroll.owner = (await ClanGET(null, clan)) as ClientClan;
-    return serverTroll as ClientTroll;
+    return cutObjectBlank(serverTroll) as ClientTroll;
 }

@@ -1,6 +1,7 @@
 import { ClanGET } from "@/lib/trollcall/api/clan";
 import { getManyPagedClans } from "@/lib/trollcall/clan";
 import { ServerClanToClientClan } from "@/lib/trollcall/convert/clan";
+import { cutObjectBlank } from "@/lib/trollcall/utility/merge";
 import { ClientClan } from "@/types/clan";
 import { NextApiRequest, NextApiResponse } from "next";
 
@@ -22,7 +23,7 @@ export default async function handler(
                 //         ServerFlairToClientFlair
                 //     )
                 // );
-                return thisClan;
+                return cutObjectBlank(thisClan);
             },
             5,
             page

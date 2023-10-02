@@ -3,7 +3,7 @@ import { getSingleClan } from "../clan";
 import { ServerClanToClientClan } from "../convert/clan";
 import { ServerFlairToClientFlair } from "../convert/flair";
 import { getManyFlairs } from "../flair";
-import { cutArray } from "../utility/merge";
+import { cutArray, cutObjectBlank } from "../utility/merge";
 
 export async function ClanGET(
     query?: Partial<{
@@ -24,5 +24,5 @@ export async function ClanGET(
                 ServerFlairToClientFlair
             )
         );
-    return serverClan as ClientClan;
+    return cutObjectBlank(serverClan) as ClientClan;
 }

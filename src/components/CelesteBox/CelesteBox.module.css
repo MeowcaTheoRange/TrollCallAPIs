@@ -59,7 +59,8 @@
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    font-family: "Renogare", "Poppins";
+    font-family: "Renogare", "Lexend";
+    /* font-weight: 700; */
     color: white;
     font-size: 28px;
     line-height: 35px;

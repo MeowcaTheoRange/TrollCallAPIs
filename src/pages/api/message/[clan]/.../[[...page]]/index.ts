@@ -2,6 +2,7 @@ import { ClanGET } from "@/lib/trollcall/api/clan";
 import { getSingleClan } from "@/lib/trollcall/clan";
 import { ServerMessageToClientMessage } from "@/lib/trollcall/convert/message";
 import { getManyPagedMessages } from "@/lib/trollcall/message";
+import { cutObjectBlank } from "@/lib/trollcall/utility/merge";
 import { NextApiRequest, NextApiResponse } from "next";
 
 export default async function handler(
@@ -40,7 +41,7 @@ export default async function handler(
                 }
                 thisMessage.from = clientFrom;
 
-                return thisMessage;
+                return cutObjectBlank(thisMessage);
             },
             5,
             page

@@ -66,6 +66,15 @@ export default function Credits() {
                 <span className={globals.blockText}>
                     <Link
                         className={globals.link}
+                        href="https://fonts.google.com/specimen/Lexend+Deca"
+                    >
+                        Lexend (Deca)
+                    </Link>{" "}
+                    font by Superunion.
+                </span>
+                <span className={globals.blockText}>
+                    <Link
+                        className={globals.link}
                         href="https://fonts.google.com/specimen/Flow+Circular"
                     >
                         Flow Circular

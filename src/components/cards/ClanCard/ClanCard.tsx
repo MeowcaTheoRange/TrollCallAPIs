@@ -24,9 +24,7 @@ export default function ClanCard({
                 theme: clan.color ? Color3.fromRGB(...clan.color) : undefined
             }}
         >
-            <Conditional
-                condition={link && clan.bgimage != null && clan.bgimage != ""}
-            >
+            <Conditional condition={link && clan.bgimage != null}>
                 <div className={styles.headerImage}>
                     <img
                         src={clan.bgimage as string}
@@ -35,7 +33,7 @@ export default function ClanCard({
                 </div>
             </Conditional>
             <div className={styles.horizontal}>
-                <Conditional condition={clan.pfp != null && clan.pfp != ""}>
+                <Conditional condition={clan.pfp != null}>
                     <div className={styles.horizontalLeft}>
                         <img
                             src={clan.pfp as string}
@@ -64,11 +62,7 @@ export default function ClanCard({
                             {clan.displayName ?? clan.name}
                         </ConditionalParent>
                     </p>
-                    <Conditional
-                        condition={
-                            clan.flairs != null && clan.flairs.length > 0
-                        }
-                    >
+                    <Conditional condition={clan.flairs != null}>
                         <div className={globals.horizontalListLeft}>
                             {clan.flairs?.map(flair => (
                                 <FlairCard flair={flair} />
@@ -89,7 +83,7 @@ export default function ClanCard({
                                 .join(", ")}
                         </span>
                     </p>
-                    <Conditional condition={clan.url != null && clan.url != ""}>
+                    <Conditional condition={clan.url != null}>
                         <p className={globals.iconText}>
                             <span className={globals.iconSmall}>link</span>
                             <span className={globals.text}>
@@ -102,7 +96,7 @@ export default function ClanCard({
                             </span>
                         </p>
                     </Conditional>
-                    <Conditional condition={clan.description.length > 0}>
+                    <Conditional condition={clan.description != null}>
                         <p className={globals.iconText}>
                             <span className={globals.iconSmall}>
                                 description

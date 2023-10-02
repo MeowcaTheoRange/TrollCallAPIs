@@ -8,7 +8,7 @@
             format("opentype");
 }
 
-/* ANY usage of the Renogare font should also specify a fallback! Try the Poppins font. */
+/* ANY usage of the Renogare font should also specify a fallback! Try the Lexend font. */
 /* @font-face {
     font-family: "Renogare";
     src: url("../../public/fonts/Renogare/Renogare.woff") format("woff"),
@@ -19,6 +19,11 @@
 @font-face {
     font-family: "Poppins";
     src: url("../../public/fonts/Poppins/Poppins.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: "Lexend";
+    src: url("../../public/fonts/Lexend/Lexend.ttf") format("truetype");
 }
 
 @font-face {

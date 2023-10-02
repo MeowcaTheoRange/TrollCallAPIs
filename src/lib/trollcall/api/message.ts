@@ -3,6 +3,7 @@ import { ClientMessage } from "@/types/message";
 import { getSingleClan } from "../clan";
 import { ServerMessageToClientMessage } from "../convert/message";
 import { getSingleMessage } from "../message";
+import { cutObjectBlank } from "../utility/merge";
 import { ClanGET } from "./clan";
 
 export async function MessageGET(
@@ -33,5 +34,5 @@ export async function MessageGET(
         from: fullClan
     };
     // we know this is not null, as we passed in our own clan
-    return endMessage;
+    return cutObjectBlank(endMessage);
 }
