@@ -17,6 +17,14 @@
     border-radius: 2px;
     box-sizing: border-box;
     padding: 8px 12px;
+    background-image: linear-gradient(180deg, transparent, var(--pri-bg) 50%),
+        repeating-linear-gradient(
+            45deg,
+            #ff04,
+            #ff04 10px,
+            #0004 10px,
+            #0004 20px
+        );
 }
 
 .Nav .left {
