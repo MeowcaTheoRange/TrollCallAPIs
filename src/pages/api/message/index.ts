@@ -11,7 +11,7 @@ export default async function handler(
     res: NextApiResponse
 ) {
     const { body, method, cookies, query } = req;
-    if (method?.toUpperCase() === "POST") {
+    if (method === "POST") {
         let validatedMessage;
         try {
             validatedMessage = await SubmitMessageSchema.validate(body, {

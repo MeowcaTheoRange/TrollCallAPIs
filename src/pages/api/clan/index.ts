@@ -13,7 +13,7 @@ export default async function handler(
     res: NextApiResponse
 ) {
     const { body, method } = req;
-    if (method?.toUpperCase() === "POST") {
+    if (method === "POST") {
         let validatedClan;
         try {
             validatedClan = await SubmitClanSchema.validate(body, {
@@ -36,7 +36,7 @@ export default async function handler(
         const currentcode = serverClan.code;
 
         // Encrypt code lole
-        serverClan.code = await hash(serverClan.code).toString();
+        serverClan.code = (await hash(serverClan.code)).toString();
 
         if (
             serverClan.flairs != null &&
