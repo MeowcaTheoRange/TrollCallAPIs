@@ -11,7 +11,7 @@ export default async function handler(
     res: NextApiResponse
 ) {
     const { body, method, cookies } = req;
-    if (method === "POST") {
+    if (method?.toUpperCase() === "POST") {
         let validatedTroll;
         try {
             validatedTroll = await SubmitTrollSchema.validate(body, {

@@ -13,7 +13,7 @@ export default async function handler(
     res: NextApiResponse
 ) {
     const { body, method } = req;
-    if (method === "POST") {
+    if (method?.toUpperCase() === "POST") {
         let validatedClan;
         try {
             validatedClan = await SubmitClanSchema.validate(body, {
