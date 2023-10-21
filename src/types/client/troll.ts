@@ -21,6 +21,9 @@ export const SubmitTrollSchema = yup
                     .matches(/^[A-z]+$/, "Letters only")
                     .max(24)
                     .lowercase()
+                    .transform(v => {
+                        return v.length <= 0 ? undefined : v;
+                    })
             ])
             .required(),
         description: yup.string().max(10000).ensure(),
@@ -38,6 +41,9 @@ export const SubmitTrollSchema = yup
                     .matches(/^[A-z-]+$/, "Letters only")
                     .lowercase()
                     .max(50)
+                    .transform(v => {
+                        return v.length <= 0 ? undefined : v;
+                    })
             ])
             .required(),
         pronouns: yup
