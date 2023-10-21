@@ -18,7 +18,7 @@ export const SubmitTrollSchema = yup
                 yup
                     .string()
                     .notRequired()
-                    .matches(/^[A-z]+$/, "Letters only")
+                    .matches(/^[A-z]*$/, "Letters only")
                     .max(24)
                     .lowercase()
             ])
@@ -35,7 +35,7 @@ export const SubmitTrollSchema = yup
                 yup
                     .string()
                     .notRequired()
-                    .matches(/^[A-z-]+$/, "Letters only")
+                    .matches(/^[A-z-]*$/, "Letters only")
                     .lowercase()
                     .max(50)
             ])
@@ -218,7 +218,7 @@ export const PartialTrollSchema = yup
                 .lowercase(),
             yup
                 .string()
-                .matches(/^[A-z]+$/, "Letters only")
+                .matches(/^[A-z]*$/, "Letters only")
                 .max(24)
                 .lowercase()
         ]),
@@ -230,7 +230,7 @@ export const PartialTrollSchema = yup
                 .lowercase(),
             yup
                 .string()
-                .matches(/^[A-z-]+$/, "Letters only")
+                .matches(/^[A-z-]*$/, "Letters only")
                 .lowercase()
         ]),
         pronouns: yup
