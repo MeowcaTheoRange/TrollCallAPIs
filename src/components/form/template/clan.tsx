@@ -26,8 +26,7 @@ export default function ClanFormTemplate({
     return (
         <Formik
             initialValues={
-                initialValues ??
-                ({
+                {
                     name: "",
                     description: "",
                     url: "",
@@ -37,8 +36,9 @@ export default function ClanFormTemplate({
                             pronouns: [["", "", ""]]
                         }
                     ],
-                    code: getCookie("TROLLCALL_CODE")
-                } as SubmitClan)
+                    code: getCookie("TROLLCALL_CODE"),
+                    ...(initialValues ?? {})
+                } as SubmitClan
             }
             validationSchema={SubmitClanSchema}
             onSubmit={async (values, { setSubmitting, setErrors, setFieldError }) => {

@@ -24,12 +24,12 @@ export default function MessageFormTemplate({
     return (
         <Formik
             initialValues={
-                initialValues ??
-                ({
+                {
                     to: "",
                     body: "",
-                    subject: ""
-                } as SubmitMessage)
+                    subject: "",
+                    ...(initialValues ?? {})
+                } as SubmitMessage
             }
             validationSchema={SubmitMessageSchema}
             onSubmit={async (values, { setSubmitting, setErrors, setFieldError }) => {

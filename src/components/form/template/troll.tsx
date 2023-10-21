@@ -33,8 +33,7 @@ export default function TrollFormTemplate({
     return (
         <Formik
             initialValues={
-                initialValues ??
-                ({
+                {
                     name: ["", ""],
                     description: "",
                     pronunciation: ["", ""],
@@ -44,8 +43,9 @@ export default function TrollFormTemplate({
                         ["they", "them", "theirs"]
                     ],
                     gender: "",
-                    images: [""]
-                } as SubmitTroll)
+                    images: [""],
+                    ...(initialValues ?? {})
+                } as SubmitTroll
             }
             validationSchema={SubmitTrollSchema}
             onSubmit={async (values, { setSubmitting, setErrors, setFieldError }) => {
