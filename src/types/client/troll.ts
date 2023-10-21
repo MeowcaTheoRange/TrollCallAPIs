@@ -19,7 +19,6 @@ export const SubmitTrollSchema = yup
                     .string()
                     .notRequired()
                     .matches(/^[A-z]+$/, "Letters only")
-                    .min(3)
                     .max(24)
                     .lowercase()
             ])
@@ -214,13 +213,12 @@ export const PartialTrollSchema = yup
             yup
                 .string()
                 .matches(/^[A-z0-9-_]+$/, "Alphanumeric characters only")
-                .min(1)
+                .min(3)
                 .max(24)
                 .lowercase(),
             yup
                 .string()
                 .matches(/^[A-z]+$/, "Letters only")
-                .min(1)
                 .max(24)
                 .lowercase()
         ]),
