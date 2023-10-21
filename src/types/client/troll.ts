@@ -11,13 +11,13 @@ export const SubmitTrollSchema = yup
                 yup
                     .string()
                     .required()
-                    .matches(/^[A-z]+$/, "Letters only")
+                    .matches(/^[A-z0-9-_]+$/, "Alphanumeric characters only")
                     .min(3)
                     .max(24)
                     .lowercase(),
                 yup
                     .string()
-                    .required()
+                    .notRequired()
                     .matches(/^[A-z]+$/, "Letters only")
                     .min(3)
                     .max(24)
@@ -213,7 +213,7 @@ export const PartialTrollSchema = yup
         name: yup.tuple([
             yup
                 .string()
-                .matches(/^[A-z]+$/, "Letters only")
+                .matches(/^[A-z0-9-_]+$/, "Alphanumeric characters only")
                 .min(1)
                 .max(24)
                 .lowercase(),
